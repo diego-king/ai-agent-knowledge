@@ -1,10 +1,25 @@
-# Data Structures & Algorithms — Python
+# Python 数据结构与算法（Data Structures & Algorithms）
 
-> 维护一个可背诵的规范版本；新增题型直接更新本文件。
+> **唯一维护文件**：Python 算法常见模板及复杂度。普通 Python 语言特性请更新 [python-interview.md](python-interview.md)。
 
-## Union Find / Disjoint Set Union
+## 学习索引
 
-用途：判断连通性、动态合并集合、无向图连通分量。路径压缩 + 按大小合并的均摊单次操作复杂度为 `O(α(n))`，其中 α 为反 Ackermann 函数。
+- [x] Union Find / Disjoint Set Union
+- [x] Priority Queue / Binary Heap (`heapq`)
+- [ ] Array / Hash Map / Hash Set
+- [ ] Two Pointers / Sliding Window
+- [ ] Stack / Monotonic Stack / Queue
+- [ ] Linked List / Fast & Slow Pointers
+- [ ] Binary Search
+- [ ] Tree DFS / BFS
+- [ ] Graph Traversal / Topological Sort
+- [ ] Backtracking
+- [ ] Dynamic Programming
+- [ ] Greedy / Intervals
+
+## 1. Union Find / Disjoint Set Union
+
+用途：动态集合合并、判断连通性、计算连通分量。路径压缩 + 按大小合并，均摊单次操作 `O(α(n))`。
 
 ```python
 class UnionFind:
@@ -30,11 +45,13 @@ class UnionFind:
         return True
 ```
 
-**记忆点**：初始化 → find 路径压缩 → union 按 size → count 减一。
+**记忆法**：初始化 parent/size/count → find 路径压缩 → union 比较 size → count 减一。
 
-## Priority Queue / Heap — `heapq`
+**练习题**：Number of Connected Components、Redundant Connection、Accounts Merge。
 
-Python 内置 `heapq` 默认是 **min-heap**；push/pop 是 `O(log n)`，读取最小值 `heap[0]` 是 `O(1)`。
+## 2. Priority Queue / Heap — `heapq`
+
+Python `heapq` 默认是 min-heap。入堆 / 出堆 `O(log n)`；查看最小值 `heap[0]` 为 `O(1)`；`heapq.heapify(items)` 是 `O(n)`。
 
 ```python
 import heapq
@@ -42,17 +59,34 @@ import heapq
 pq = []
 heapq.heappush(pq, (2, "low"))
 heapq.heappush(pq, (1, "high"))
-priority, job = heapq.heappop(pq)  # (1, "high")
+priority, job = heapq.heappop(pq)   # (1, "high")
 ```
 
-最大堆常用负数优先级：`heapq.heappush(pq, (-priority, item))`。相同优先级且 item 不可比较时，增加单调递增的序号作为第二个 tuple 元素。
+最大堆的通用兼容写法（适合优先级为数字时）：
 
-## 面试复习
+```python
+max_pq = []
+heapq.heappush(max_pq, (-10, "highest"))
+heapq.heappush(max_pq, (-5, "lower"))
+neg_priority, task = heapq.heappop(max_pq)  # (-10, "highest")
+```
 
-- [ ] Number of Connected Components
-- [ ] Redundant Connection
-- [ ] Top K Elements
-- [ ] Merge K Sorted Lists
-- [ ] Meeting Rooms / Task Scheduling
+有相同优先级且任务对象不可比较时，使用单调计数器避免 tuple 比较错误：
 
-可运行演示见 [../code/examples.py](../code/examples.py)。
+```python
+from itertools import count
+
+counter = count()
+pq = []
+heapq.heappush(pq, (1, next(counter), {"task": "A"}))
+heapq.heappush(pq, (1, next(counter), {"task": "B"}))
+```
+
+**练习题**：Top K Frequent Elements、Kth Largest、Merge K Sorted Lists、Meeting Rooms II。
+
+## 3. 面试答题检查
+
+1. 先说思路、边界情况和复杂度。
+2. Python 内置容器选型：`dict` / `set` / `deque` / `heapq`。
+3. 检查空数组、重复元素、负数、大输入和索引范围。
+4. 写出复杂度并解释来源，不只报答案。

@@ -1,33 +1,26 @@
-# AI Agent Knowledge — Repository Instructions
+# Repository AI Editing Rules
 
-## Mission
-Maintain ONE canonical GitHub copy of each topic across ChatGPT mobile/web/desktop, Work, and Codex. This file guides tools that read repository instructions; ChatGPT Project Instructions must also be configured separately.
+## Single source of truth
+- Repository: `diego-king/ai-agent-knowledge`
+- Branch: `main`
+- Three canonical study documents only:
+  - General Python interviews: `docs/python-interview.md`
+  - Python data structures and algorithms: `docs/data-structures.md`
+  - University AI Agent courses summarized by topic: `docs/university-ai-agent-courses.md`
+- `README.md` and `AGENTS.md` are repository-maintenance files, not study documents.
 
-## Canonical file map
-- Python interview concepts: `docs/python-interview.md`
-- Data structures and algorithms: `docs/data-structures.md`
-- Agent frameworks, MCP, architecture: `docs/agent-frameworks.md`
-- Interactive presentations: `notes/python-interview.html`, `notes/langgraph.html`, `notes/rag-evaluation.html`
-- Machine-readable study progress: `data/learning-progress.json`
-- Shared HTML styles: `assets/styles.css`
-- Runnable Python examples: `code/examples.py`
+## Update policy
+1. On a request to save, revise, or add learning notes, identify one of the three canonical files.
+2. Read the newest contents of the target file from `main` first. For API writes, fetch its blob SHA; for Git clients, pull/rebase.
+3. Merge changes without deleting useful existing notes or creating duplicate versions.
+4. Use the same path and commit directly when permitted. Handle concurrent changes via a fresh read and merge; never force-push.
+5. Confirm the GitHub write completed. Give a real commit URL and changed paths, not just a local copy.
+6. If GitHub write access is unavailable, explicitly state that the change is **not saved** and suggest a supported route.
+7. Do not reintroduce extra directories such as `data/`, `assets/`, `code/`, or `notes/` without explicit user direction.
+8. Only add new files/rename canonical files with the user's permission.
 
-## Mandatory edit protocol
-1. Only save when the user requests persistence (e.g. “保存”, “更新项目”, “add to project”, or explicitly asks for an edit).
-2. Before reading or editing, fetch the latest file from `main`; do not trust a prior conversation's cached copy.
-3. Match the established canonical path; update it in place. Do not produce duplicate names such as `-v2`, `-updated`, `-new`, `-final`, or timestamp copies.
-4. Preserve existing sections and manually merge new facts. When updating through GitHub Contents API, use the fetched blob SHA to prevent overwriting concurrent edits. In a Git workspace, pull/rebase before pushing.
-5. If the remote changed or push fails, refetch, inspect the diff, reconcile, and retry safely. Never force-push over another writer.
-6. Commit with a specific message; only claim the save succeeded after confirmation, and give the exact file path and commit link.
-7. When making material conceptual changes to an HTML presentation, align its related Markdown reference, if applicable.
-8. If the current client lacks a GitHub write tool, state the limitation and offer a supported Work/Codex or manual workflow. Never silently save only to a temporary sandbox or ChatGPT Project attachment.
-
-## Content conventions
-- Chinese explanations with accurate English technical terms.
-- Prefer concise notes, reproducible examples, and links to authoritative sources.
-- For code, prioritize runnable Python examples and lightweight tests. Avoid fictitious benchmarks or unverified API details.
-- No secrets, API keys, passwords, personal/sensitive information, or copyrighted course material copied without permission.
-- Do not publish private HTML through GitHub Pages without explicitly checking access restrictions.
-
-## Format roles
-Markdown in `docs/` is the canonical prose knowledge source. HTML in `notes/` is presentation/interactive content; CSS is shared, and JSON is structured progress. A topic may have both a doc and a view, but edits must not create uncontrolled duplicate sources.
+## Content style
+- Explanations in Chinese with precise English technical terms, short runnable Python snippets where helpful.
+- For university materials: organize by **topic**, list source courses and official URLs, distinguish verified source facts from personal synthesis, and link to course slides/lectures only when available.
+- Keep original notes under the same file path, never generate `-v2`, `-final`, etc.
+- Do not copy restricted university course materials or store secrets and personal/sensitive data.

@@ -1,46 +1,74 @@
-# Python 面试知识主笔记
+# Python 常规面试（General Python Interview）
 
-> 本文件是 Python 面试主题的规范文字源。新增笔记直接补充本文件，而不是生成新版本文件。
+> **唯一维护文件**：涵盖 Python 语言特性、常见 Karat screening 考点、Python 与 Java/Kotlin 的区别。数据结构与算法题归入 [data-structures.md](data-structures.md)。
 
-## 核心考点清单
+## 复习清单
 
-- [ ] 类型与类型转换：`str`、`int`、`float`、`bool`
-- [ ] List / Dict / Set Comprehension
-- [ ] 可变对象、浅拷贝、深拷贝、默认参数
-- [ ] `==` 与 `is`，引用和哈希
-- [ ] Iterator / Generator 与 `yield`
-- [ ] Exceptions 与 context manager
-- [ ] `heapq` / `collections.deque` / `Counter`
-- [ ] GIL、threading、multiprocessing、asyncio 的适用场景
-- [ ] 常见算法复杂度与边界条件
+- [ ] 基础类型、显式转换、Truthiness、`None`
+- [ ] List/Dict/Set/Tuple、Comprehension、切片与排序
+- [ ] `==` / `is`、hashable、mutable / immutable
+- [ ] 函数参数、`*args`、`**kwargs`、mutable default argument
+- [ ] 作用域、闭包、Decorator
+- [ ] Iterator / Iterable / Generator (`yield`)
+- [ ] Exceptions、`try/except/else/finally`、`with` context manager
+- [ ] GIL、threading、multiprocessing、asyncio、I/O-bound vs CPU-bound
+- [ ] OOP、`dataclass`、类型注解、运行时动态类型
 
-## 小题 1：字符串与数字
+## 典型 Karat 快问快答
+
+### 1. 字符串与数字拼接
 
 ```python
 age = 36
-message = "Age: " + str(age)  # 显式转换
-message2 = f"Age: {age}"       # 更推荐的格式化
+# "Age: " + age  # TypeError
+message = "Age: " + str(age)
+message2 = f"Age: {age}"
 ```
 
-Python 不会自动把 `int` 拼接成 `str`。
+**考点**：Python 不会为字符串拼接隐式转换 `int`。Java/Kotlin 的字符串拼接直觉不能直接套到 Python。
 
-## 小题 2：List Comprehension
+### 2. List Comprehension
 
 ```python
 squares_of_even = [x * x for x in range(10) if x % 2 == 0]
 # [0, 4, 16, 36, 64]
 ```
 
-## 小题 3：线程、进程与 async
+**考点**：先遍历 `range(10)`，筛选偶数，再映射为平方。
 
-- **线程**：I/O-bound 任务常可受益于并发执行。
-- **进程**：在传统 CPython GIL 条件下，CPU-bound 纯 Python 并行计算通常考虑多进程。
-- **asyncio**：适合大量可等待的异步 I/O；不是自动的 CPU 并行计算方案。
-- 具体行为与 Python 实现、版本及 free-threaded 配置有关，面试时要说明前提。
+### 3. `==` vs `is`
 
-## 代码模板
+```python
+a = [1, 2]
+b = [1, 2]
+assert a == b
+assert a is not b
+```
 
-见 [data-structures.md](data-structures.md) 和 [../code/examples.py](../code/examples.py)。
+**考点**：`==` 判断值相等；`is` 判断对象标识是否相同。判断 `None` 使用 `is None`。
 
-## 待补充
-按“概念 → 面试问题 → 最小示例 → 复杂度 / 陷阱 → 复习状态”的格式持续增补。
+### 4. Mutable default argument
+
+```python
+def add_item(value, items=None):
+    if items is None:
+        items = []
+    items.append(value)
+    return items
+```
+
+**考点**：默认参数在函数定义时求值；共享的可变默认对象可导致意外状态泄漏。
+
+### 5. GIL / Thread / Process / Async
+
+| 模式 | 常见用途 | 面试表述 |
+| --- | --- | --- |
+| `threading` | Blocking I/O | 线程可在等待 I/O 时并发处理其他工作 |
+| `multiprocessing` | CPU 密集型计算 | 独立进程可利用多个 CPU 核心，代价是进程间通信 |
+| `asyncio` | 大量异步 I/O | 单线程也可通过 `await` 合作式调度，不能自动并行 CPU 运算 |
+
+**版本注意**：GIL 结论需说明 CPython 版本及是否启用 free-threaded Python。
+
+## 后续统一补充模板
+
+新考点采用：**概念 → 最小运行示例 → 输出和原因 → 陷阱 → Java/Kotlin 类比 → 面试追问**。
