@@ -1,26 +1,29 @@
-# Repository AI Editing Rules
+# AI Agent Knowledge — Editing Rules
 
-## Single source of truth
-- Repository: `diego-king/ai-agent-knowledge`
+## Canonical repository
+- GitHub: `diego-king/ai-agent-knowledge`
 - Branch: `main`
-- Three canonical study documents only:
-  - General Python interviews: `docs/python-interview.md`
-  - Python data structures and algorithms: `docs/data-structures.md`
-  - University AI Agent courses summarized by topic: `docs/university-ai-agent-courses.md`
-- `README.md` and `AGENTS.md` are repository-maintenance files, not study documents.
+- Only three persistent study files:
+  - Python language/general interview: `docs/python-interview.html`
+  - Python data structures and algorithms: `docs/data-structures.html`
+  - University AI Agent / LLM Engineering course material index, organized by topic: `docs/university-ai-agent-courses.md`
+- `README.md` and this `AGENTS.md` are maintenance metadata, not additional knowledge sources.
 
-## Update policy
-1. On a request to save, revise, or add learning notes, identify one of the three canonical files.
-2. Read the newest contents of the target file from `main` first. For API writes, fetch its blob SHA; for Git clients, pull/rebase.
-3. Merge changes without deleting useful existing notes or creating duplicate versions.
-4. Use the same path and commit directly when permitted. Handle concurrent changes via a fresh read and merge; never force-push.
-5. Confirm the GitHub write completed. Give a real commit URL and changed paths, not just a local copy.
-6. If GitHub write access is unavailable, explicitly state that the change is **not saved** and suggest a supported route.
-7. Do not reintroduce extra directories such as `data/`, `assets/`, `code/`, or `notes/` without explicit user direction.
-8. Only add new files/rename canonical files with the user's permission.
+## Required read / write workflow
+1. Save only when the user requests a persistent update, revision or addition. Identify the relevant canonical path above.
+2. Fetch latest content and blob SHA from GitHub `main` before writing; for Codex/Git workspaces, synchronize the branch first.
+3. Merge into the SAME path while keeping all useful existing information, working links, headings, examples, code, styles and interactive behavior.
+4. Do not create `-v2`, `-final`, timestamp copies, new folders or parallel versions of a canonical note.
+5. Resolve concurrent changes by fetching again and reconciling. Never force-push or silently overwrite another writer.
+6. Commit changes and return the actual GitHub commit URL only after verifying the write.
+7. If the current environment cannot read or write GitHub, clearly state the limitation instead of claiming an update is saved.
 
-## Content style
-- Explanations in Chinese with precise English technical terms, short runnable Python snippets where helpful.
-- For university materials: organize by **topic**, list source courses and official URLs, distinguish verified source facts from personal synthesis, and link to course slides/lectures only when available.
-- Keep original notes under the same file path, never generate `-v2`, `-final`, etc.
-- Do not copy restricted university course materials or store secrets and personal/sensitive data.
+## Format requirements
+- The two Python sources are FULL HTML guides; preserve their inline CSS/JavaScript, diagrams, responsive styling, interactive exercises, and mutual links:
+  - `python-interview.html` → `data-structures.html`
+  - `data-structures.html` → `python-interview.html`
+- University courses remain ONE comprehensive Markdown file, organized by Topic, with official lecture / PDF / PPTX / notes links, course-and-semester labels, cross-topic indexing and original verification status. Do not replace it with a brief course summary.
+- Explain in Chinese with original technical terminology in English. Avoid introducing unsupported factual claims into sourced course notes.
+- No secrets, personal/sensitive data or unauthorized copyrighted full-text resources.
+
+Do not reintroduce `data/`, `assets/`, `code/` or `notes/` folders unless the user explicitly asks.

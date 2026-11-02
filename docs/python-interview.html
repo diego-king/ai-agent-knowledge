@@ -1,0 +1,1531 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Python Interview Prep Guide · Python 面试准备指南</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#f6f7fb; --panel:#ffffff; --ink:#1f2430; --muted:#5b6472; --line:#e6e8ef;
+  --accent:#4f46e5; --accent-soft:#eef0ff; --accent-ink:#3730a3;
+  --code-bg:#282a36; --ok:#0f9d58; --warn:#d9822b; --key:#7c3aed;
+  --tip-bg:#eafaf1; --tip-bd:#bfe7cf; --warn-bg:#fff4e6; --warn-bd:#ffd8a8;
+  --key-bg:#f5f0ff; --key-bd:#e0d0ff;
+  --radius:12px; --sidebar:280px;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  --mono:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.7;font-size:16px}
+a{color:var(--accent);text-decoration:none}
+code{font-family:var(--mono);font-size:.88em}
+
+/* layout */
+.layout{display:flex;align-items:flex-start}
+.sidebar{
+  position:sticky;top:0;height:100vh;width:var(--sidebar);flex:0 0 var(--sidebar);
+  overflow-y:auto;background:var(--panel);border-right:1px solid var(--line);padding:22px 16px 60px;
+}
+.sidebar h1{font-size:15px;margin:6px 8px 4px;letter-spacing:.2px}
+.sidebar .sub{font-size:12px;color:var(--muted);margin:0 8px 16px}
+.nav a{display:block;padding:7px 10px;border-radius:8px;color:var(--muted);font-size:14px;font-weight:500}
+.nav a:hover{background:var(--accent-soft);color:var(--accent-ink)}
+.nav a.active{background:var(--accent);color:#fff}
+.nav .grp{margin-top:10px;padding:6px 10px 2px;font-size:11px;text-transform:uppercase;letter-spacing:.9px;color:#9aa2b1}
+.nav a.child{padding-left:22px;font-size:13px}
+.sidebar .xlink{display:block;margin:14px 8px 0;padding:9px 11px;border:1px dashed var(--line);border-radius:9px;font-size:12.5px;color:var(--muted);line-height:1.45}
+.sidebar .xlink b{color:var(--accent-ink)}
+
+.main{flex:1 1 auto;min-width:0;padding:46px 54px 120px;max-width:940px;margin:0 auto}
+.hero{margin-bottom:30px}
+.hero .tag{display:inline-block;background:var(--accent-soft);color:var(--accent-ink);font-size:12px;font-weight:700;padding:4px 12px;border-radius:999px;letter-spacing:.4px}
+.hero h1{font-size:32px;margin:14px 0 6px;line-height:1.25}
+.hero p{color:var(--muted);margin:0;font-size:15px}
+
+section{margin-bottom:52px;scroll-margin-top:20px}
+section>h2{font-size:24px;margin:0 0 4px;padding-bottom:12px;border-bottom:2px solid var(--line);display:flex;align-items:center;gap:10px}
+section>h2 .n{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;background:var(--accent);color:#fff;border-radius:8px;font-size:15px;flex:0 0 auto}
+h3{font-size:19px;margin:30px 0 8px}
+h4{font-size:15.5px;margin:20px 0 6px;color:var(--accent-ink)}
+p{margin:10px 0}
+ul,ol{margin:10px 0;padding-left:22px}
+li{margin:5px 0}
+hr{border:none;border-top:1px solid var(--line);margin:26px 0}
+
+/* callouts */
+.box{border-radius:var(--radius);padding:14px 16px;margin:16px 0;border:1px solid var(--line);background:var(--panel)}
+.box .bt{font-weight:700;font-size:13px;letter-spacing:.3px;margin-bottom:4px;display:flex;align-items:center;gap:7px}
+.tip{background:var(--tip-bg);border-color:var(--tip-bd)} .tip .bt{color:#0f7a43}
+.warn{background:var(--warn-bg);border-color:var(--warn-bd)} .warn .bt{color:#b5651d}
+.key{background:var(--key-bg);border-color:var(--key-bd)} .key .bt{color:var(--key)}
+.say{background:#e9f3ff;border-color:#c4ddff} .say .bt{color:#1667c9}
+.say p{font-size:14.5px}.say .en{font-style:normal}
+.box p:first-of-type{margin-top:0}.box p:last-child{margin-bottom:0}
+
+/* diagrams */
+.diagram{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px 14px;margin:20px 0}
+.diagram .dt{font-weight:700;font-size:13px;letter-spacing:.3px;margin-bottom:12px;color:var(--accent-ink);display:flex;align-items:center;gap:7px}
+.diagram svg{display:block;width:100%;height:auto}
+.diagram .cap{font-size:12.5px;color:var(--muted);margin-top:10px;text-align:center;line-height:1.5}
+
+/* tables */
+.tablewrap{overflow-x:auto;margin:16px 0}
+table{border-collapse:collapse;width:100%;font-size:14px;background:var(--panel);border-radius:10px;overflow:hidden;border:1px solid var(--line)}
+th,td{text-align:left;padding:9px 13px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:#f0f1f7;font-weight:700;font-size:13px;color:#3a4051}
+tr:last-child td{border-bottom:none}
+td code{background:#f0f1f7;padding:1px 5px;border-radius:4px}
+.mono-col code{white-space:nowrap}
+
+/* inline code */
+p code,li code,td code,h4 code{background:#eef0f5;color:#b5316f;padding:1.5px 5px;border-radius:5px;font-size:.85em}
+
+/* code blocks */
+pre[class*="language-"]{border-radius:10px;padding:16px 18px;margin:14px 0;font-size:13.5px;line-height:1.55;overflow:auto;background:var(--code-bg)}
+pre.plain{background:var(--code-bg);color:#f8f8f2;border-radius:10px;padding:16px 18px;margin:14px 0;font-size:13.5px;line-height:1.55;overflow:auto;font-family:var(--mono)}
+
+/* problem cards / accordion */
+.prob{border:1px solid var(--line);border-radius:var(--radius);margin:18px 0;background:var(--panel);overflow:hidden}
+.prob>.head{padding:14px 18px;background:linear-gradient(0deg,#fafbff,#fff)}
+.prob .plabel{display:inline-block;font-size:11px;font-weight:700;color:var(--accent-ink);background:var(--accent-soft);padding:3px 9px;border-radius:999px;letter-spacing:.3px}
+.prob .diff{font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;margin-left:6px}
+.d-easy{background:#e7f7ee;color:#0f8a4d}.d-med{background:#fff2e0;color:#c47712}.d-hard{background:#fde8e8;color:#c0392b}
+.prob h3{margin:10px 0 4px;font-size:18px}
+.prob .body{padding:2px 18px 16px}
+.tags{font-size:12px;color:var(--muted);margin-top:2px}
+.sol-toggle{cursor:pointer;user-select:none;display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;border:none;font-size:13.5px;font-weight:600;padding:8px 16px;border-radius:8px;margin:8px 0}
+.sol-toggle:hover{background:#4338ca}
+.sol-toggle .caret{transition:transform .2s}
+.sol-toggle.open .caret{transform:rotate(90deg)}
+.sol{display:none;border-top:1px dashed var(--line);margin-top:6px;padding-top:6px}
+.sol.open{display:block}
+.controls{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 4px}
+.controls button{cursor:pointer;background:#fff;border:1px solid var(--line);color:var(--muted);font-size:13px;font-weight:600;padding:7px 14px;border-radius:8px}
+.controls button:hover{border-color:var(--accent);color:var(--accent)}
+
+/* misc */
+.pill{display:inline-block;background:#eef0f5;color:#3a4051;border-radius:6px;padding:2px 8px;font-size:12.5px;margin:2px 3px 2px 0;font-weight:600}
+.qa{border-left:3px solid var(--accent);padding:2px 0 2px 14px;margin:14px 0}
+.qa .q{font-weight:700}
+.backtop{position:fixed;right:22px;bottom:22px;background:var(--accent);color:#fff;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:0 6px 18px rgba(79,70,229,.35);opacity:0;pointer-events:none;transition:opacity .25s}
+.backtop.show{opacity:1;pointer-events:auto}
+.mobile-bar{display:none}
+.mobile-nav{display:none}
+
+@media(max-width:960px){
+  .sidebar{display:none}
+  .main{padding:20px 18px 90px}
+  .mobile-bar{display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:20;background:var(--panel);border-bottom:1px solid var(--line);padding:12px 16px}
+  .mobile-bar b{font-size:15px}
+  .mobile-nav{background:var(--panel);border-bottom:1px solid var(--line);padding:8px 12px;display:none}
+  .mobile-nav.open{display:block}
+  .mobile-nav a{display:block;padding:8px 10px;color:var(--muted);font-size:14px;border-radius:6px}
+}
+@media print{
+  .sidebar,.backtop,.controls,.mobile-bar{display:none!important}
+  .sol{display:block!important}.sol-toggle{display:none!important}
+  .main{max-width:none;padding:0}
+  section{page-break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="mobile-bar">
+<b>Python 面试备考 · Prep Guide</b>
+<button onclick="document.getElementById('mnav').classList.toggle('open')" style="background:var(--accent);color:#fff;border:none;padding:6px 12px;border-radius:6px;font-weight:600">目录</button>
+</div>
+<nav class="mobile-nav" id="mnav"></nav>
+<div class="layout">
+<aside class="sidebar">
+<h1>🎯 Python 面试备考</h1>
+<div class="sub">Python Interview Prep Guide · 中英对照</div>
+<div class="nav" id="nav">
+<div class="grp">Python 知识点 · Knowledge</div>
+<a class="child" href="#knowledge">知识速查总览 · Overview</a>
+<a class="child" href="#k-types">数据类型与可变性 · Types</a>
+<a class="child" href="#k-func">函数 · 装饰器 · 生成器</a>
+<a class="child" href="#k-oop">OOP · MRO · Dunder</a>
+<a class="child" href="#k-concur">并发与异步 · Concurrency</a>
+<a class="child" href="#k-async">asyncio 核心机制 · Internals</a>
+<a class="child" href="#k-ratelimit">限流三件套 · Rate Limiting</a>
+<a class="child" href="#k-stdlib">标准库利器 · Stdlib</a>
+<a class="child" href="#k-ops">常用操作与方法 · Ops &amp; Methods</a>
+<a class="child" href="#k-traps">高频陷阱题 · Gotchas</a>
+</div>
+<a class="xlink" href="data-structures.html">🧮 算法与数据结构在隔壁：<b>Algorithms &amp; Data Structures Prep</b>（复杂度 · 18 个模式 · 12 道高频题）</a>
+</aside>
+<main class="main">
+<div class="hero">
+<span class="tag">技术面试 · 中英对照 Bilingual 备考指南</span>
+<h1>Python Interview Prep Guide<br/>Python 面试准备指南</h1>
+<p>覆盖 Python 核心知识速查：数据类型与可变性、函数与装饰器、OOP 与 MRO、并发与 asyncio、标准库、常用操作方法，以及高频陷阱题。中文帮你<b>理解</b>，英文帮你<b>开口作答</b>。祝面试顺利 💪</p>
+<p style="font-size:13.5px;color:var(--muted);margin-top:8px">🧮 算法与数据结构（复杂度、18 个模式模板、12 道高频题）已独立成册 → <a href="data-structures.html"><b>Python 算法与数据结构备考</b></a></p>
+<p style="font-size:13.5px;color:var(--muted);margin-top:8px">Chinese for understanding, English for what you'll actually say in the interview. Look for the <span style="background:#e9f3ff;color:#1667c9;padding:1px 7px;border-radius:5px;font-weight:600">🗣️ Say it in English</span> boxes.</p>
+</div>
+<section id="knowledge">
+<h2><span class="n">1</span>Python 知识点速查 · Knowledge Cheatsheet</h2>
+<p>这些是 Python 岗<b>知识问答 (knowledge questions)</b> 的高频题。面试官要的是<b>准确、简洁、能举例</b>——不是背诵。每条给"一句话答案 + 关键细节"，重点题附 <span class="pill">🗣️ English</span> 作答参考。</p>
+<h3 id="k-types">数据类型与可变性 · Types &amp; Mutability</h3>
+<div class="qa">
+<p class="q">Q. 可变 vs 不可变？ / Mutable vs immutable</p>
+<p><b>不可变 immutable:</b> <code>int, float, bool, str, tuple, frozenset, bytes</code>。<b>可变 mutable:</b> <code>list, dict, set, bytearray</code> 及大多数自定义对象。</p>
+<p>意义：不可变对象<b>可哈希 (hashable)</b>，能做 <code>dict</code> 键 / <code>set</code> 元素；作为函数参数更安全。可变对象作默认参数或类属性会有共享陷阱（见 <a href="#k-traps">陷阱题</a>）。</p>
+</div>
+<h4>常用结构底层与复杂度 · Built-ins under the hood</h4>
+<div class="tablewrap">
+<table>
+<tr><th>结构</th><th>底层 Implementation</th><th>典型操作复杂度</th></tr>
+<tr><td><code>list</code></td><td>动态数组 dynamic array</td><td>索引/尾部 append <code>O(1)</code>；<code>insert</code>/<code>pop(0)</code>/<code>in</code> <code>O(n)</code></td></tr>
+<tr><td><code>dict</code></td><td>哈希表 hash table（3.7+ 保持插入顺序）</td><td>get/set/del/in 平均 <code>O(1)</code></td></tr>
+<tr><td><code>set</code></td><td>哈希表</td><td>add/in/del 平均 <code>O(1)</code>；交并差 <code>O(len)</code></td></tr>
+<tr><td><code>tuple</code></td><td>定长数组</td><td>索引 <code>O(1)</code>；不可变、可哈希</td></tr>
+<tr><td><code>collections.deque</code></td><td>双向链表 / 块</td><td>两端 append/pop <code>O(1)</code>；随机索引 <code>O(n)</code></td></tr>
+<tr><td><code>str</code></td><td>不可变字符序列</td><td><code>+</code> 拼接 <code>O(n)</code>；用 <code>''.join(...)</code> 拼接列表 <code>O(n)</code> 总量</td></tr>
+</table>
+</div>
+<div class="qa">
+<p class="q">Q. <code>list</code> vs <code>tuple</code>？何时用哪个？</p>
+<p><code>list</code> 可变、用于同类元素的集合；<code>tuple</code> 不可变、更省内存、可作字典键、常表达"固定字段的记录"。经验法则：<b>异构且固定 → tuple；同构且会变 → list。</b></p>
+</div>
+<div class="qa">
+<p class="q">Q. 深拷贝 vs 浅拷贝？ / Deep vs shallow copy</p>
+<p><b>浅拷贝 (shallow)</b>：<code>list(x)</code> / <code>x[:]</code> / <code>copy.copy</code> 只复制最外层，内部嵌套对象仍<b>共享引用</b>。<b>深拷贝 (deep)</b>：<code>copy.deepcopy</code> 递归复制所有层级。</p>
+</div>
+<script type="sourcecode">
+import copy
+a = [[1, 2], [3, 4]]
+shallow = a[:]                 # 浅拷贝: 外层新, 内层共享
+shallow[0].append(99)
+print(a)                       # [[1, 2, 99], [3, 4]] —— 原对象被改了!
+
+deep = copy.deepcopy(a)        # 深拷贝: 完全独立
+deep[0].append(77)
+print(a)                       # 不受影响
+</script>
+<h3 id="k-func">函数 · 装饰器 · 生成器 · Functions, Decorators &amp; Generators</h3>
+<div class="qa">
+<p class="q">Q. 什么是闭包？作用域规则 LEGB？ / Closures &amp; scope</p>
+<p><b>闭包 (closure)</b>：内层函数捕获并"记住"外层作用域的变量，即使外层已返回。名字解析遵循 <b>LEGB</b>：Local → Enclosing → Global → Built-in。修改外层变量用 <code>nonlocal</code>，修改全局用 <code>global</code>。</p>
+</div>
+<div class="qa">
+<p class="q">Q. 装饰器是什么？ / What is a decorator?</p>
+<p>装饰器本质是<b>接收函数、返回新函数的高阶函数</b>，用来在不改原函数代码的前提下增加行为（日志、计时、缓存、鉴权）。用 <code>functools.wraps</code> 保留原函数的名字/文档。</p>
+</div>
+<script type="sourcecode">
+import functools, time
+
+def timed(func):
+    @functools.wraps(func)          # 保留 func 的 __name__/__doc__
+    def wrapper(*args, **kwargs):
+        start = time.perf_counter()
+        result = func(*args, **kwargs)
+        print(f"{func.__name__} took {time.perf_counter()-start:.4f}s")
+        return result
+    return wrapper
+
+@timed
+def work(n):
+    return sum(range(n))
+# @timed 等价于 work = timed(work)
+</script>
+<div class="box say">
+<div class="bt">🗣️ Say it in English — decorators</div>
+<p class="en">“A decorator is a higher-order function that takes a function and returns a new function wrapping it, so I can add behavior — logging, timing, caching, auth — without touching the original code. I always use <code>functools.wraps</code> so the wrapper keeps the original function's name and docstring. Under the hood, <code>@decorator</code> is just <code>func = decorator(func)</code>.”</p>
+</div>
+<div class="qa">
+<p class="q">Q. 生成器 vs 普通函数？<code>yield</code> 有什么用？ / Generators</p>
+<p>含 <code>yield</code> 的函数是<b>生成器 (generator)</b>：调用时不立即执行，返回一个<b>惰性 (lazy)</b> 迭代器，每次 <code>next()</code> 执行到下一个 <code>yield</code> 并<b>暂停、保留状态</b>。好处是<b>常数内存</b>处理大/无限数据流，而不是一次性构建整个列表。</p>
+</div>
+<script type="sourcecode">
+def read_large_file(path):
+    """逐行 yield, 不把整个文件读进内存 (constant memory)"""
+    with open(path) as f:
+        for line in f:
+            yield line.rstrip("\n")
+
+# 生成器表达式: 和列表推导式类似, 但惰性、省内存
+squares = (x * x for x in range(1_000_000))   # () 而非 []
+total = sum(squares)                          # 边算边消费
+</script>
+<div class="qa">
+<p class="q">Q. 迭代器 (iterator) vs 可迭代对象 (iterable)？</p>
+<p><b>iterable</b> 实现 <code>__iter__</code>（能被 <code>for</code> 遍历，如 list/dict/str）；<b>iterator</b> 额外实现 <code>__next__</code> 且是一次性的（如生成器、<code>iter(list)</code> 的结果）。<code>for</code> 循环先对 iterable 调 <code>iter()</code> 拿到 iterator，再反复 <code>next()</code> 直到 <code>StopIteration</code>。</p>
+</div>
+<div class="qa">
+<p class="q">Q. 上下文管理器与 <code>with</code>？ / Context managers</p>
+<p><code>with</code> 语句用<b>上下文管理器</b>保证资源被正确获取和释放（文件、锁、连接），即使发生异常也会执行清理。实现 <code>__enter__</code> / <code>__exit__</code>，或用 <code>@contextlib.contextmanager</code> 装饰生成器。</p>
+</div>
+<script type="sourcecode">
+from contextlib import contextmanager
+
+@contextmanager
+def opened(path, mode="r"):
+    f = open(path, mode)
+    try:
+        yield f                 # yield 之前=__enter__, 之后=__exit__
+    finally:
+        f.close()               # 即使异常也会关闭
+
+with opened("data.txt") as f:
+    data = f.read()
+</script>
+<h3 id="k-oop">面向对象 · MRO · 魔术方法 · OOP, MRO &amp; Dunder Methods</h3>
+<div class="qa">
+<p class="q">Q. 类属性 vs 实例属性？<code>__slots__</code>？</p>
+<p><b>类属性</b>被所有实例共享；<b>实例属性</b>存于每个对象的 <code>__dict__</code>。定义 <code>__slots__</code> 可取消 <code>__dict__</code>、<b>省内存并加速属性访问</b>，代价是不能动态加属性——适合大量小对象。</p>
+</div>
+<div class="qa">
+<p class="q">Q. <code>super()</code> 与 MRO？菱形继承怎么解析？ / Method Resolution Order</p>
+<p><b>MRO (Method Resolution Order)</b> 决定多继承时方法查找顺序，CPython 用 <b>C3 线性化</b>算法，保证一致且单调。<code>super()</code> 按 MRO 找"下一个"类，而非字面意义的父类——这正是<b>菱形继承 (diamond)</b> 下每个基类只被调用一次的关键。用 <code>Cls.__mro__</code> 查看顺序。</p>
+</div>
+<script type="sourcecode">
+class A:
+    def go(self): print("A")
+class B(A):
+    def go(self): print("B"); super().go()
+class C(A):
+    def go(self): print("C"); super().go()
+class D(B, C):          # 菱形继承 diamond
+    def go(self): print("D"); super().go()
+
+D().go()                # D -> B -> C -> A  (每个只调一次)
+print([c.__name__ for c in D.__mro__])   # ['D','B','C','A','object']
+</script>
+<h4>C3 线性化：MRO 到底怎么算出来的</h4>
+<p>C3 的目标是同时满足三条：<b>子类排在父类前面</b>；<b>多个父类之间保留声明顺序</b>；<b>每个类只出现一次</b>。公式是 <code>L[D] = D + merge(L[B], L[C], [B, C])</code>——<code>merge</code> 每次从各列表<b>表头</b>挑一个候选，条件是这个类<b>不能出现在任何其他列表的非表头位置</b>（即不能还是别人的祖先），选中就从所有列表里删掉它，重复直到取完。</p>
+<script type="sourcecode">
+# 手动展开上面 D(B, C) 的例子
+L[A] = [A, object]
+L[B] = [B, A, object]
+L[C] = [C, A, object]
+
+merge([B,A,object], [C,A,object], [B,C])
+# ① 取 B —— 是第一个列表表头，且没在其他列表的非表头位置出现  -> 剩 merge([A,object],[C,A,object],[C])
+# ② 想取 A，但 A 出现在第二个列表的非表头位置 -> 不合法，改看下一个列表表头 C
+#    C 合法 -> 取 C  -> 剩 merge([A,object],[A,object],[])
+# ③ 取 A -> 剩 merge([object],[object],[])
+# ④ 取 object
+
+# 结果: D + [B, C, A, object] = [D, B, C, A, object]  <- 和 D.__mro__ 完全一致
+</script>
+<div class="box warn">
+<div class="bt">⚠️ 常见误区：以为 <code>super()</code> 是"调用父类"</div>
+<p><code>super()</code> 找的不是字面意义上的父类，而是 <b>MRO 链上当前类的下一个</b>。<code>B.go</code> 里的 <code>super()</code> 解析到的是 <code>C</code>（MRO 里排在 B 后面的那个），不是 <code>A</code>；<code>C.go</code> 里的 <code>super()</code> 才轮到 <code>A</code>。如果把它换成硬编码的 <code>A.go(self)</code>，<code>B</code> 和 <code>C</code> 就会各自独立调一次 <code>A</code>，<code>A</code> 被执行两次——这是面试里最常见的追问陷阱。</p>
+</div>
+<script type="sourcecode">
+class A:
+    def go(self): print("A")
+class B(A):
+    def go(self): print("B"); A.go(self)     # ❌ 硬编码父类，不用 super()
+class C(A):
+    def go(self): print("C"); A.go(self)     # ❌ 同上
+class D(B, C):
+    def go(self): print("D"); B.go(self); C.go(self)
+
+D().go()   # D -> B -> A -> C -> A   A 被调用了两次！
+</script>
+<div class="box warn">
+<div class="bt">⚠️ MRO 冲突会直接报错，不是"随便选一个顺序"</div>
+<p>如果两个类以互相矛盾的顺序声明基类，C3 算法找不出一个能同时满足两边约束的线性顺序，Python 会在<b>类定义时</b>直接抛错，而不是悄悄选一个顺序运行。</p>
+</div>
+<script type="sourcecode">
+class X(A, B): ...
+class Y(B, A): ...          # 与 X 的顺序相反
+class Z(X, Y): ...          # TypeError: Cannot create a consistent MRO
+</script>
+<div class="box tip">
+<div class="bt">💡 比方法覆盖更常踩的坑：<code>__init__</code> 链式调用</div>
+<p>多继承下 <code>__init__</code> 同样要靠 <code>super().__init__(**kwargs)</code> 沿 MRO 传递。只要有一环忘了调 <code>super().__init__()</code>，或者干脆写成硬编码的 <code>Base.__init__(self)</code>，链条就在那一环断掉——后面基类的初始化会被<b>直接跳过</b>，往往在运行很久后才因为某个属性没初始化而报错，比方法覆盖问题更隐蔽。</p>
+</div>
+<div class="box say">
+<div class="bt">🗣️ Say it in English — diamond inheritance &amp; MRO</div>
+<p class="en">“Python resolves multiple inheritance with C3 linearization: it builds an order where every subclass comes before its parents, sibling classes keep their declared order, and each class appears exactly once. The formula is roughly <i>L[D] = D + merge(L[B], L[C], [B, C])</i> — at each step you take the head of a list only if it doesn't appear in the tail of any other list, which is what prevents a shared ancestor from being picked too early.”</p>
+<p class="en">“The part people get wrong is thinking <i>super()</i> calls 'the parent class.' It actually calls whatever comes next in the MRO for the current class, which is why each class in a diamond only runs once — if you hardcode the parent instead of using <i>super()</i>, the shared base class gets called twice. The same rule applies to <i>__init__</i>: if one class in the chain skips <i>super().__init__()</i>, everything after it in the MRO silently never gets initialized.”</p>
+</div>
+<div class="qa">
+<p class="q">Q. <code>@staticmethod</code> vs <code>@classmethod</code> vs 实例方法？</p>
+<p>实例方法收 <code>self</code>（操作实例）；<code>@classmethod</code> 收 <code>cls</code>（操作类，常用作<b>替代构造器</b>如 <code>from_json</code>）；<code>@staticmethod</code> 不收 self/cls（只是放在类命名空间里的普通函数）。<code>@property</code> 把方法伪装成属性访问。</p>
+</div>
+<p><b><code>@classmethod</code> vs <code>@staticmethod</code>：继承时的关键差异。</b>唯一本质区别是——classmethod 自动收到 <code>cls</code>（实际调用的那个类），staticmethod 什么都不收、只能硬编码类名。两个方法干"同一件事"，结果却分道扬镳：</p>
+<script type="sourcecode">
+class Base:
+    name = "Base"
+    @classmethod
+    def via_cls(cls):
+        return f"{cls.name} made this"      # cls -> 跟随实际调用的类
+    @staticmethod
+    def via_static():
+        return f"{Base.name} made this"     # 只能硬编码 Base -> 写死了
+
+class Child(Base):
+    name = "Child"
+
+Base.via_cls()      # 'Base made this'
+Child.via_cls()     # 'Child made this'   <- cls 就是 Child, 认子类
+Base.via_static()   # 'Base made this'
+Child.via_static()  # 'Base made this'    <- 写死 Base, 子类失效
+</script>
+<p><code>Child.via_cls()</code> 里 <code>cls</code> 就是 <code>Child</code>，于是拿到 <code>Child.name</code>；而 staticmethod 拿不到类，只能写死 <code>Base</code>，子类一调就错。<b>这正是为什么替代构造器 / 工厂方法必须用 classmethod</b>——<code>return cls(...)</code> 才能让子类返回子类实例，天然支持多态。</p>
+<div class="box key">
+<div class="bt">👑 判断标准 · Which one?</div>
+<p>问自己："这个方法需要<b>引用类</b>吗？" 需要（<code>cls(...)</code> 构造、读写类属性、按子类分派）→ <b><code>@classmethod</code></b>；<code>self</code> 和 <code>cls</code> 都不用（纯工具/校验函数）→ <b><code>@staticmethod</code></b>（甚至可以直接做成模块级函数）。</p>
+</div>
+<div class="qa">
+<p class="q">Q. <code>__eq__</code> 与 <code>__hash__</code> 的联动规则？（高频！）</p>
+<p>若重写 <code>__eq__</code>，对象默认变得<b>不可哈希</b>（<code>__hash__</code> 被设为 None），因为"相等的对象必须有相同 hash"这个约束不再自动成立。若要放进 set/dict，需同时正确实现 <code>__hash__</code>。<code>@dataclass(frozen=True)</code> 会自动帮你生成二者。</p>
+</div>
+<div class="qa">
+<p class="q">Q. 常用魔术方法 (dunder) 有哪些？</p>
+<p><code>__init__</code>(初始化) / <code>__new__</code>(创建实例) / <code>__repr__</code>(调试字符串) / <code>__str__</code>(可读字符串) / <code>__eq__</code> / <code>__hash__</code> / <code>__len__</code> / <code>__getitem__</code>(下标) / <code>__iter__</code> / <code>__call__</code>(像函数一样调用) / <code>__enter__</code>+<code>__exit__</code>(with)。<code>dataclass</code>、<code>namedtuple</code>、<code>Enum</code> 能自动生成很多样板代码。</p>
+</div>
+<script type="sourcecode">
+from dataclasses import dataclass
+
+@dataclass(frozen=True)          # 自动生成 __init__/__repr__/__eq__/__hash__
+class Point:
+    x: int
+    y: int
+
+p = Point(1, 2)
+print(p)                         # Point(x=1, y=2)
+s = {p, Point(1, 2)}             # frozen -> 可哈希, 二者相等
+print(len(s))                    # 1
+</script>
+<div class="qa">
+<p class="q">Q. 什么是元类 (metaclass)？<code>__new__</code> 何时触发？</p>
+<p><b>元类是"类的类"</b>——普通对象由类创建，而类本身由元类创建，默认元类是 <code>type</code>。自定义元类可以在<b>类定义时</b>介入类的创建（注册、日志、注入方法、统一校验）。元类的 <code>__new__(mcls, name, bases, namespace)</code> 在<b>定义类的那一刻</b>被调用（不是创建实例时）：<code>name</code> 是<b>类名字符串</b>，<code>bases</code> 是基类元组，<code>namespace</code> 是类体字典。而且<b>元类会被继承</b>，子类不写 <code>metaclass=</code> 也沿用。</p>
+</div>
+<script type="sourcecode">
+class LoggingMeta(type):
+    def __new__(mcls, name, bases, namespace):
+        print("创建类:", name)                  # 定义类时触发, name 是类名
+        return super().__new__(mcls, name, bases, namespace)
+
+class User(metaclass=LoggingMeta):     # -> 打印 "User"
+    pass
+
+class Admin(User):                     # 元类被继承 -> 打印 "Admin"
+    pass
+
+User()                                 # 创建实例不再打印 (那走 __init__)
+# 关系链: 实例 -> 类(User) -> 元类(LoggingMeta) -> type
+# type(User) is LoggingMeta ;  type(User()) is User
+</script>
+<div class="box tip"><div class="bt">💡 面试要点</div><p>类只被创建一次，所以元类 <code>__new__</code> 只在<b>定义时</b>跑一次；记住 <code>type(obj)</code> 是它的类，<code>type(类)</code> 是它的元类。实践中元类很少用——能用<b>类装饰器</b>或 <code>__init_subclass__</code> 钩子解决的就别上元类。</p></div>
+<h3 id="k-concur">并发与异步 · Concurrency &amp; Async</h3>
+<div class="tablewrap">
+<table>
+<tr><th>模型</th><th>并行?</th><th>适合</th><th>要点</th></tr>
+<tr><td><code>threading</code><br/>多线程</td><td>受 GIL 限制<br/>不能并行跑 Python</td><td>IO 密集</td><td>共享内存、切换开销小；需锁避免竞态；CPU 任务无提速。</td></tr>
+<tr><td><code>multiprocessing</code><br/>多进程</td><td>✅ 真并行</td><td>CPU 密集</td><td>各自 GIL；进程开销大，数据靠 <code>pickle</code> 传递。</td></tr>
+<tr><td><code>asyncio</code><br/>协程</td><td>单线程并发<br/>非并行</td><td>海量 IO 连接</td><td>事件循环 + <code>async/await</code>；在 <code>await</code> 点让出控制；不能有阻塞调用。</td></tr>
+</table>
+</div>
+<p><code>concurrent.futures</code> 提供统一的高层接口：<code>ThreadPoolExecutor</code>（IO）和 <code>ProcessPoolExecutor</code>（CPU），用 <code>executor.map</code> / <code>submit</code> + <code>as_completed</code>。</p>
+<div class="diagram">
+<div class="dt">📊 三种并发模型对比 · threading vs multiprocessing vs asyncio</div>
+<svg font-family="-apple-system,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" viewbox="0 0 900 300" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="arrow1" markerheight="7" markerwidth="7" orient="auto-start-reverse" refx="8" refy="5" viewbox="0 0 10 10">
+<path d="M0,0 L10,5 L0,10 z" fill="#9aa2b1"></path>
+</marker>
+</defs>
+<!-- Card 1: threading -->
+<g>
+<rect fill="#ffffff" height="272" rx="14" stroke="#e6e8ef" stroke-width="1.5" width="260" x="20" y="14"></rect>
+<text fill="#3730a3" font-size="15" font-weight="700" text-anchor="middle" x="150" y="38">threading 多线程</text>
+<text fill="#5b6472" font-size="11" text-anchor="middle" x="150" y="56">1 Process · shared memory</text>
+<rect fill="#eef0ff" height="160" rx="10" stroke="#c7cbf0" width="210" x="45" y="70"></rect>
+<text fill="#3730a3" font-size="11" font-weight="700" text-anchor="middle" x="150" y="88">Process</text>
+<rect fill="#fff4e6" height="20" rx="10" stroke="#ffd8a8" width="56" x="112" y="98"></rect>
+<text fill="#b5651d" font-size="10.5" font-weight="700" text-anchor="middle" x="140" y="112">GIL</text>
+<!-- switching arrow between threads -->
+<path d="M195,108 C 225,120 225,150 205,164" fill="none" marker-end="url(#arrow1)" stroke="#d9822b" stroke-dasharray="3 2" stroke-width="1.4"></path>
+<rect fill="#4f46e5" height="24" rx="6" width="176" x="62" y="138"></rect>
+<text fill="#ffffff" font-size="10.5" font-weight="600" text-anchor="middle" x="150" y="154">T1 · running</text>
+<rect fill="#ffffff" height="24" rx="6" stroke="#c7cbd6" stroke-dasharray="4 2" width="176" x="62" y="168"></rect>
+<text fill="#8a92a3" font-size="10.5" text-anchor="middle" x="150" y="184">T2 · waiting (GIL)</text>
+<rect fill="#ffffff" height="24" rx="6" stroke="#c7cbd6" stroke-dasharray="4 2" width="176" x="62" y="198"></rect>
+<text fill="#8a92a3" font-size="10.5" text-anchor="middle" x="150" y="214">T3 · waiting (GIL)</text>
+<text fill="#5b6472" font-size="11" text-anchor="middle" x="150" y="258">IO 密集 · CPU 任务无提速</text>
+</g>
+<!-- Card 2: multiprocessing -->
+<g>
+<rect fill="#ffffff" height="272" rx="14" stroke="#e6e8ef" stroke-width="1.5" width="260" x="320" y="14"></rect>
+<text fill="#3730a3" font-size="15" font-weight="700" text-anchor="middle" x="450" y="38">multiprocessing 多进程</text>
+<text fill="#5b6472" font-size="11" text-anchor="middle" x="450" y="56">N Processes · separate memory</text>
+<rect fill="#e7f7ee" height="150" rx="10" stroke="#bfe7cf" width="100" x="335" y="80"></rect>
+<text fill="#0f7a43" font-size="10.5" font-weight="700" text-anchor="middle" x="385" y="98">Process A</text>
+<rect fill="#fff4e6" height="18" rx="9" stroke="#ffd8a8" width="66" x="352" y="108"></rect>
+<text fill="#b5651d" font-size="9.5" font-weight="700" text-anchor="middle" x="385" y="121">own GIL</text>
+<rect fill="#0f9d58" height="24" rx="6" width="74" x="348" y="185"></rect>
+<text fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle" x="385" y="201">running</text>
+<rect fill="#e7f7ee" height="150" rx="10" stroke="#bfe7cf" width="100" x="465" y="80"></rect>
+<text fill="#0f7a43" font-size="10.5" font-weight="700" text-anchor="middle" x="515" y="98">Process B</text>
+<rect fill="#fff4e6" height="18" rx="9" stroke="#ffd8a8" width="66" x="482" y="108"></rect>
+<text fill="#b5651d" font-size="9.5" font-weight="700" text-anchor="middle" x="515" y="121">own GIL</text>
+<rect fill="#0f9d58" height="24" rx="6" width="74" x="478" y="185"></rect>
+<text fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle" x="515" y="201">running</text>
+<path d="M437,150 L463,150" fill="none" marker-end="url(#arrow1)" stroke="#9aa2b1" stroke-width="1.6"></path>
+<path d="M463,158 L437,158" fill="none" marker-end="url(#arrow1)" stroke="#9aa2b1" stroke-width="1.6"></path>
+<text fill="#5b6472" font-size="9.5" text-anchor="middle" x="450" y="142">pickle</text>
+<text fill="#5b6472" font-size="11" text-anchor="middle" x="450" y="258">真并行 · CPU 密集</text>
+</g>
+<!-- Card 3: asyncio -->
+<g>
+<rect fill="#ffffff" height="272" rx="14" stroke="#e6e8ef" stroke-width="1.5" width="260" x="620" y="14"></rect>
+<text fill="#3730a3" font-size="15" font-weight="700" text-anchor="middle" x="750" y="38">asyncio 协程</text>
+<text fill="#5b6472" font-size="11" text-anchor="middle" x="750" y="56">1 Thread · event loop</text>
+<rect fill="#f5f0ff" height="160" rx="10" stroke="#e0d0ff" width="210" x="645" y="70"></rect>
+<text fill="#5b21b6" font-size="11" font-weight="700" text-anchor="middle" x="750" y="88">Thread</text>
+<circle cx="750" cy="150" fill="none" r="30" stroke="#7c3aed" stroke-dasharray="14 6" stroke-width="3"></circle>
+<path d="M765,177 l7,10 l-11,3 z" fill="#7c3aed"></path>
+<text fill="#5b21b6" font-size="9.5" font-weight="700" text-anchor="middle" x="750" y="155">loop</text>
+<rect fill="#4f46e5" height="20" rx="10" width="56" x="722" y="96"></rect>
+<text fill="#ffffff" font-size="10" font-weight="600" text-anchor="middle" x="750" y="110">C1 running</text>
+<line stroke="#7c3aed" stroke-width="1.4" x1="750" x2="750" y1="116" y2="122"></line>
+<rect fill="#ffffff" height="20" rx="10" stroke="#c7bce6" stroke-dasharray="4 2" width="66" x="662" y="196"></rect>
+<text fill="#8a92a3" font-size="9.5" text-anchor="middle" x="695" y="210">C2 queued</text>
+<line stroke="#c7bce6" stroke-dasharray="3 2" stroke-width="1.2" x1="695" x2="728" y1="196" y2="172"></line>
+<rect fill="#ffffff" height="20" rx="10" stroke="#c7bce6" stroke-dasharray="4 2" width="66" x="772" y="196"></rect>
+<text fill="#8a92a3" font-size="9.5" text-anchor="middle" x="805" y="210">C3 queued</text>
+<line stroke="#c7bce6" stroke-dasharray="3 2" stroke-width="1.2" x1="805" x2="772" y1="196" y2="172"></line>
+<text fill="#5b6472" font-size="11" text-anchor="middle" x="750" y="258">cooperative · 海量 IO 连接</text>
+</g>
+</svg>
+<div class="cap">threading 受 GIL 限制、同一时刻只有一个线程真正执行；multiprocessing 各自独立 GIL、真并行；asyncio 单线程靠事件循环在 await 点切换任务。</div>
+</div>
+<script type="sourcecode">
+import asyncio
+
+async def fetch(name, delay):
+    await asyncio.sleep(delay)        # 非阻塞: 让出事件循环 (yields loop)
+    return f"{name} done"
+
+async def main():
+    # 并发运行, 总耗时≈max(delay) 而非 sum(delay)
+    results = await asyncio.gather(
+        fetch("A", 1), fetch("B", 2), fetch("C", 1)
+    )
+    print(results)
+
+asyncio.run(main())
+</script>
+<div class="box say">
+<div class="bt">🗣️ Say it in English — threads vs async vs processes</div>
+<p class="en">“I pick based on the workload. For I/O-bound work with lots of waiting, threads or asyncio work well — the GIL is released during I/O. Asyncio scales to thousands of concurrent connections in a single thread with no context-switch overhead, as long as I avoid blocking calls. For CPU-bound work I use multiprocessing to get true parallelism across cores, since each process has its own GIL. The trade-off with processes is higher memory overhead and needing to pickle data between them.”</p>
+</div>
+<h3 id="k-async">asyncio 核心机制 · Asyncio Internals</h3>
+<p>Staff 级别面试不会只问"async 是什么"，而是问<b>调度模型、任务生命周期、取消与异常怎么传</b>。下面按面试官的追问顺序展开。</p>
+<h4>1. 事件循环心智模型 · The event loop in one picture</h4>
+<p>一个线程 + 一个就绪队列。循环反复做三件事：</p>
+<ul>
+<li>① 从<b>就绪队列</b>取出一个任务，执行它的 Python 代码；</li>
+<li>② 任务跑到 <code>await</code> 且需要等 IO 时，<b>登记回调后挂起自己</b>，把控制权交回循环；</li>
+<li>③ 操作系统通知 IO 就绪（<code>epoll</code>/<code>kqueue</code>），循环把对应任务重新放回就绪队列。</li>
+</ul>
+<div class="box key">
+<div class="bt">🔑 一句话</div>
+<p>并发 ≠ 并行。任意时刻只有<b>一段</b> Python 字节码在跑；asyncio 快，是因为把"等待"重叠了，而不是因为算得更快。所以它对 IO 密集有效，对 CPU 密集<b>零收益</b>。</p>
+</div>
+<div class="diagram">
+<div class="dt">🔁 事件循环三步循环 · The event loop cycle</div>
+<svg font-family="-apple-system,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" viewbox="0 0 720 480" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="arrow2" markerheight="8" markerwidth="8" orient="auto-start-reverse" refx="8" refy="5" viewbox="0 0 10 10">
+<path d="M0,0 L10,5 L0,10 z" fill="#9aa2b1"></path>
+</marker>
+</defs>
+<!-- center context label -->
+<text fill="#9aa2b1" font-size="11.5" font-style="italic" text-anchor="middle" x="360" y="188">单线程事件循环 · 协作式调度，不会被打断</text>
+<text fill="#9aa2b1" font-size="11.5" font-style="italic" text-anchor="middle" x="360" y="204">single thread · cooperative, not preemptive</text>
+<!-- arrow A: Ready Queue -> Running -->
+<path d="M432,108 C 480,148 520,180 556,248" fill="none" marker-end="url(#arrow2)" stroke="#9aa2b1" stroke-width="1.8"></path>
+<text fill="#3730a3" font-size="12" font-weight="700" x="560" y="150">① 取出任务，执行代码</text>
+<text fill="#5b6472" font-size="10.5" x="560" y="166">dequeue → run bytecode</text>
+<!-- arrow B: Running -> Suspended -->
+<path d="M468,300 L 254,300" fill="none" marker-end="url(#arrow2)" stroke="#9aa2b1" stroke-width="1.8"></path>
+<text fill="#3730a3" font-size="12" font-weight="700" text-anchor="middle" x="360" y="292">② 遇到 await</text>
+<text fill="#5b6472" font-size="10.5" text-anchor="middle" x="360" y="317">登记回调 · 让出控制权 (yield to loop)</text>
+<!-- arrow C: Suspended -> Ready Queue -->
+<path d="M132,248 C 70,180 105,118 248,92" fill="none" marker-end="url(#arrow2)" stroke="#9aa2b1" stroke-width="1.8"></path>
+<text fill="#3730a3" font-size="12" font-weight="700" x="16" y="188">③ OS 通知 IO 就绪</text>
+<text fill="#5b6472" font-size="10.5" x="16" y="204">epoll/kqueue → 重新入队</text>
+<!-- Node: Ready Queue (top) -->
+<rect fill="#eef0ff" height="88" rx="12" stroke="#c7cbf0" stroke-width="1.5" width="220" x="250" y="20"></rect>
+<text fill="#3730a3" font-size="14" font-weight="700" text-anchor="middle" x="360" y="52">就绪队列</text>
+<text fill="#3730a3" font-size="11" text-anchor="middle" x="360" y="70">Ready Queue</text>
+<text fill="#5b6472" font-size="10.5" text-anchor="middle" x="360" y="90">下一个要跑的任务排在这</text>
+<!-- Node: Running (bottom right) -->
+<rect fill="#eafaf1" height="104" rx="12" stroke="#bfe7cf" stroke-width="1.5" width="222" x="468" y="248"></rect>
+<text fill="#0f7a43" font-size="14" font-weight="700" text-anchor="middle" x="579" y="280">执行中</text>
+<text fill="#0f7a43" font-size="11" text-anchor="middle" x="579" y="298">Running</text>
+<text fill="#5b6472" font-size="10.5" text-anchor="middle" x="579" y="318">跑这段协程的 Python</text>
+<text fill="#5b6472" font-size="10.5" text-anchor="middle" x="579" y="334">字节码，直到下个 await</text>
+<!-- Node: Suspended (bottom left) -->
+<rect fill="#fff4e6" height="104" rx="12" stroke="#ffd8a8" stroke-width="1.5" width="222" x="30" y="248"></rect>
+<text fill="#b5651d" font-size="14" font-weight="700" text-anchor="middle" x="141" y="280">挂起等待 IO</text>
+<text fill="#b5651d" font-size="11" text-anchor="middle" x="141" y="298">Suspended</text>
+<text fill="#5b6472" font-size="10.5" text-anchor="middle" x="141" y="318">已登记回调，任务本身</text>
+<text fill="#5b6472" font-size="10.5" text-anchor="middle" x="141" y="334">不占 CPU，等 OS 通知</text>
+</svg>
+<div class="cap">任意时刻只有一段字节码在跑；asyncio 快是因为把"等待"重叠了，而不是算得更快。</div>
+</div>
+<h4>2. Coroutine / Task / Future 三者的区别（高频）</h4>
+<div class="tablewrap">
+<table>
+<tr><th>概念</th><th>是什么</th><th>怎么来的</th><th>会自己开始跑吗</th></tr>
+<tr><td><code>coroutine</code><br/>协程对象</td><td>调用 <code>async def</code> 函数的<b>返回值</b>，一份"还没启动的计划"</td><td><code>fetch(url)</code></td><td>❌ 必须被 <code>await</code> 或包成 Task</td></tr>
+<tr><td><code>Task</code><br/>任务</td><td>被事件循环<b>调度</b>的协程包装（<code>Future</code> 的子类）</td><td><code>asyncio.create_task(...)</code><br/><code>TaskGroup.create_task(...)</code></td><td>✅ 创建即进入就绪队列</td></tr>
+<tr><td><code>Future</code></td><td>底层的"结果占位符"，可被 <code>await</code>，由别人 <code>set_result</code></td><td>库内部 / <code>loop.create_future()</code></td><td>— 它不含代码，只装结果</td></tr>
+</table>
+</div>
+<div class="box warn">
+<div class="bt">⚠️ 最容易答错的一点</div>
+<p><code>await f()</code> 是<b>顺序执行</b>——等它做完才往下走，没有任何并发。<b>并发的起点是 <code>create_task</code>（或 gather / TaskGroup）</b>，它先把所有协程塞进循环，再统一等结果。</p>
+</div>
+<script type="sourcecode">
+import asyncio, time
+
+async def work(n):
+    await asyncio.sleep(n)
+    return n
+
+async def sequential():                 # ❌ 总耗时 = 1 + 1 = 2s
+    a = await work(1)
+    b = await work(1)
+    return a, b
+
+async def concurrent():                 # ✅ 总耗时 ≈ 1s
+    ta = asyncio.create_task(work(1))   # 立刻排队开始
+    tb = asyncio.create_task(work(1))
+    return await ta, await tb           # 到这里才收结果
+
+# 注意: 光调用 work(1) 不会执行任何代码, 只得到一个 coroutine 对象;
+# 忘记 await 会得到 "RuntimeWarning: coroutine was never awaited"
+</script>
+<div class="diagram">
+<div class="dt">⏱ 顺序 vs 并发：同样两个 work(1)，耗时差一倍</div>
+<svg font-family="-apple-system,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" viewbox="0 0 740 262" xmlns="http://www.w3.org/2000/svg">
+<!-- gridlines + time axis -->
+<line stroke="#e6e8ef" stroke-width="1.5" x1="150" x2="150" y1="26" y2="246"></line>
+<line stroke="#e6e8ef" stroke-dasharray="3 3" stroke-width="1.5" x1="420" x2="420" y1="26" y2="246"></line>
+<line stroke="#e6e8ef" stroke-width="1.5" x1="690" x2="690" y1="26" y2="246"></line>
+<text fill="#9aa2b1" font-size="11" text-anchor="middle" x="150" y="18">0s</text>
+<text fill="#9aa2b1" font-size="11" text-anchor="middle" x="420" y="18">1s</text>
+<text fill="#9aa2b1" font-size="11" text-anchor="middle" x="690" y="18">2s</text>
+<!-- sequential() row group -->
+<text fill="#1f2430" font-size="13" font-weight="700" x="8" y="76">sequential()</text>
+<text fill="#5b6472" font-size="10.5" x="8" y="92">逐个 await</text>
+<rect fill="#4f46e5" height="28" rx="6" width="270" x="150" y="42"></rect>
+<text fill="#ffffff" font-size="11.5" font-weight="600" text-anchor="middle" x="285" y="61">A: await work(1)</text>
+<rect fill="#7c3aed" height="28" rx="6" width="270" x="420" y="76"></rect>
+<text fill="#ffffff" font-size="11.5" font-weight="600" text-anchor="middle" x="555" y="95">B: await work(1)</text>
+<path d="M150,116 L150,122 L690,122 L690,116" fill="none" stroke="#9aa2b1" stroke-width="1.4"></path>
+<text fill="#b5651d" font-size="12" font-weight="700" text-anchor="middle" x="420" y="138">总耗时 ≈ 2s（A + B 顺序相加）</text>
+<line stroke="#f0f1f7" stroke-width="1" x1="0" x2="740" y1="156" y2="156"></line>
+<!-- concurrent() row group -->
+<text fill="#1f2430" font-size="13" font-weight="700" x="8" y="182">concurrent()</text>
+<text fill="#5b6472" font-size="10.5" x="8" y="198">create_task 并发</text>
+<rect fill="#4f46e5" height="26" rx="6" width="270" x="150" y="164"></rect>
+<text fill="#ffffff" font-size="11.5" font-weight="600" text-anchor="middle" x="285" y="182">A: work(1)</text>
+<rect fill="#7c3aed" height="26" rx="6" width="270" x="150" y="196"></rect>
+<text fill="#ffffff" font-size="11.5" font-weight="600" text-anchor="middle" x="285" y="214">B: work(1)</text>
+<path d="M150,228 L150,234 L420,234 L420,228" fill="none" stroke="#9aa2b1" stroke-width="1.4"></path>
+<text fill="#0f7a43" font-size="12" font-weight="700" text-anchor="middle" x="285" y="250">总耗时 ≈ 1s（A、B 同时在飞）</text>
+</svg>
+<div class="cap">await 是顺序执行；并发的起点是 create_task —— 先把协程都塞进循环，再统一等结果。</div>
+</div>
+<h4>3. 并发编排四件套 · gather / as_completed / TaskGroup / wait</h4>
+<div class="tablewrap">
+<table>
+<tr><th>API</th><th>语义</th><th>出错时的行为</th><th>什么时候用</th></tr>
+<tr><td><code>gather(*aws)</code></td><td>全部跑完，结果<b>按传入顺序</b>返回</td><td>默认第一个异常向上抛，<b>其余任务不会被自动取消</b>（继续在后台跑）；<code>return_exceptions=True</code> 则把异常当结果收集</td><td>要全部结果、且顺序要和输入对齐</td></tr>
+<tr><td><code>as_completed(aws)</code></td><td>谁先完成先 yield，<b>顺序打乱</b></td><td>每个结果单独 <code>try</code></td><td>边出边处理、想早停、要进度条</td></tr>
+<tr><td><code>TaskGroup()</code><br/><span class="pill">3.11+</span></td><td><b>结构化并发</b>：退出 <code>async with</code> 前保证全部结束</td><td>任一失败 → <b>自动取消所有兄弟任务</b> → 抛 <code>ExceptionGroup</code></td><td>✅ 新代码的默认选择</td></tr>
+<tr><td><code>wait(tasks, return_when=)</code></td><td>返回 <code>(done, pending)</code> 两个集合</td><td><b>不抛异常</b>，要自己遍历检查</td><td>需要 <code>FIRST_COMPLETED</code> 这类精细控制</td></tr>
+</table>
+</div>
+<script type="sourcecode">
+# —— TaskGroup: 3.11+ 推荐写法，失败自动收拾兄弟任务 ——
+async def main(urls):
+    results = []
+    async with asyncio.TaskGroup() as tg:          # 退出时自动等全部
+        tasks = [tg.create_task(fetch(u)) for u in urls]
+    return [t.result() for t in tasks]             # 出了 with 才保证都完成
+    # 任一任务抛异常 -> 其余被 cancel -> 这里收到 ExceptionGroup
+    # 捕获: except* ValueError as eg: ...
+
+# —— gather: 要"部分失败也别整体崩" ——
+res = await asyncio.gather(*(fetch(u) for u in urls), return_exceptions=True)
+ok   = [r for r in res if not isinstance(r, Exception)]
+bad  = [r for r in res if isinstance(r, Exception)]
+
+# —— as_completed: 谁先好谁先处理，适合做进度 ——
+tasks = [asyncio.create_task(fetch(u)) for u in urls]
+for coro in asyncio.as_completed(tasks):
+    try:
+        print(await coro)
+    except Exception as e:
+        print("failed:", e)
+</script>
+<h4>4. 取消与异常传播 · Cancellation &amp; error propagation</h4>
+<div class="tablewrap">
+<table>
+<tr><th>要点</th><th>说明</th></tr>
+<tr><td><code>task.cancel()</code> 不是立刻杀死</td><td>它只是<b>请求</b>取消：在任务的<b>下一个 await 点</b>抛出 <code>CancelledError</code>。纯 CPU 循环里没有 await，取消不了。</td></tr>
+<tr><td><code>CancelledError</code> 继承 <code>BaseException</code></td><td>Python 3.8+ 起如此，所以 <code>except Exception</code> <b>抓不到</b>它——这是故意设计，防止业务代码误吞取消信号。</td></tr>
+<tr><td>清理放 <code>finally</code></td><td>取消发生时 <code>finally</code> 仍会执行。若清理本身要 await，注意别在取消期间再被取消；必要时用 <code>asyncio.shield()</code> 保护关键收尾。</td></tr>
+<tr><td>⚠️ Task 会被 GC 掉</td><td>事件循环只持<b>弱引用</b>。<code>asyncio.create_task(f())</code> 不保存返回值，任务可能被垃圾回收而中途消失、异常静默丢失。<b>务必存起来</b>（放 set 里 + <code>add_done_callback(discard)</code>），或用 TaskGroup。</td></tr>
+<tr><td>孤儿异常</td><td>任务抛异常但从没被 await/取结果 → 只在 GC 时打印 "Task exception was never retrieved"。</td></tr>
+</table>
+</div>
+<script type="sourcecode">
+# 超时: 3.11+ 用 asyncio.timeout, 老版本用 wait_for
+async with asyncio.timeout(5):          # 超时 -> 内部抛 CancelledError -> 外部收到 TimeoutError
+    data = await fetch(url)
+
+data = await asyncio.wait_for(fetch(url), timeout=5)   # 3.10 及以前
+
+# 优雅收尾: 取消 + 等它真的结束
+task.cancel()
+try:
+    await task
+except asyncio.CancelledError:
+    pass                                 # 预期内, 吞掉
+
+# 防止 fire-and-forget 任务被 GC
+_bg = set()
+t = asyncio.create_task(worker())
+_bg.add(t); t.add_done_callback(_bg.discard)
+</script>
+<h4>5. 头号杀手：阻塞调用 · Never block the loop</h4>
+<p>事件循环是<b>单线程</b>。任何同步阻塞——<code>time.sleep()</code>、<code>requests.get()</code>、大文件读写、重 CPU 计算、同步的 DB driver——都会让<b>所有</b>协程一起卡住。</p>
+<div class="tablewrap">
+<table>
+<tr><th>症状</th><th>解法</th></tr>
+<tr><td>阻塞 IO（同步库、文件、老 SDK）</td><td><code>await asyncio.to_thread(fn, *args)</code><span class="pill">3.9+</span> 或 <code>await loop.run_in_executor(pool, fn)</code>——丢到线程池，GIL 在 IO 时会释放</td></tr>
+<tr><td>CPU 密集（解析、加密、向量运算）</td><td><code>run_in_executor(ProcessPoolExecutor(), ...)</code>，真并行绕开 GIL</td></tr>
+<tr><td>不知道谁在卡</td><td><code>asyncio.run(main(), debug=True)</code> 会对 &gt;100ms 的回调发出告警；<code>loop.slow_callback_duration</code> 可调</td></tr>
+</table>
+</div>
+<h4>6. 同步原语与队列 · Locks &amp; Queues</h4>
+<p>用 <code>asyncio.Lock/Event/Queue</code>，<b>不要</b>用 <code>threading</code> 版本——后者会阻塞整个循环。asyncio 的锁保护的是"跨 await 的临界区"（同一线程内，没 await 就不会被打断）。</p>
+<script type="sourcecode">
+# 生产者 / 消费者：天然的背压 (backpressure) 模型
+async def producer(q, urls):
+    for u in urls:
+        await q.put(u)              # 队列满了会在这里等 -> 自动降速
+
+async def consumer(q, session):
+    while True:
+        u = await q.get()
+        try:
+            await fetch(session, u)
+        finally:
+            q.task_done()           # 必须调, 否则 q.join() 永远不返回
+
+async def main(urls):
+    q = asyncio.Queue(maxsize=100)                     # maxsize 就是背压阀门
+    async with asyncio.TaskGroup() as tg:
+        workers = [tg.create_task(consumer(q, s)) for _ in range(10)]
+        await producer(q, urls)
+        await q.join()                                 # 等队列清空
+        for w in workers: w.cancel()                   # 收工, 否则 while True 永远不退
+</script>
+<h4>7. 高频陷阱速查 · Async gotchas</h4>
+<div class="tablewrap">
+<table>
+<tr><th>写法</th><th>问题</th></tr>
+<tr><td><code>result = fetch(url)</code></td><td>忘了 <code>await</code>：拿到的是 coroutine 对象，不是结果；warning 提示 "never awaited"</td></tr>
+<tr><td><code>time.sleep(1)</code> 写在 <code>async def</code> 里</td><td>阻塞整个循环，应为 <code>await asyncio.sleep(1)</code></td></tr>
+<tr><td><code>for x in agen:</code></td><td>异步生成器要 <code>async for</code>；异步上下文管理器要 <code>async with</code></td></tr>
+<tr><td>在 <code>async def</code> 里调 <code>asyncio.run()</code></td><td><code>RuntimeError: cannot be called from a running event loop</code>。Jupyter 里已有循环，直接 <code>await</code> 即可</td></tr>
+<tr><td><code>[await f(x) for x in xs]</code></td><td>看着像并发，其实是<b>串行</b>。要并发得 <code>await gather(*(f(x) for x in xs))</code></td></tr>
+<tr><td>把 <code>__init__</code> 写成 async</td><td>构造函数不能是协程。用 <code>classmethod async def create()</code> 工厂模式</td></tr>
+</table>
+</div>
+<div class="box say">
+<div class="bt">🗣️ Say it in English — how asyncio actually works</div>
+<p class="en">“Asyncio is cooperative concurrency on a single thread. The event loop keeps a queue of ready tasks; when a coroutine hits an <i>await</i> on I/O, it registers a callback and yields control back to the loop, so the loop can run something else while the socket is waiting. Nothing is preempted — a task only gives up control at an await point, which is why one blocking call stalls everything.”</p>
+<p class="en">“The distinction I'd stress is coroutine versus task. Calling an async function just builds a coroutine object; it doesn't run. <i>await</i>-ing it runs it sequentially. Concurrency starts when you wrap it in a task — with <i>create_task</i>, <i>gather</i>, or ideally a <i>TaskGroup</i>, which gives structured concurrency: if one child fails, its siblings get cancelled and you get an ExceptionGroup, instead of orphaned tasks leaking in the background.”</p>
+</div>
+<h3 id="k-ratelimit">限流三件套 · Semaphore / AsyncLimiter / ClientSession</h3>
+<p>批量调 LLM API、批量抓取——这是 asyncio 最常被拿来考的落地场景。三个组件各管一件事，<b>缺一个就会出事</b>：并发打爆下游、被 429 限流、或者把连接池耗尽。</p>
+<h4>标准骨架 · The canonical skeleton</h4>
+<script type="sourcecode">
+import asyncio, aiohttp
+from aiolimiter import AsyncLimiter
+
+sem     = asyncio.Semaphore(10)      # 并发上限: 同时最多 10 个请求"在飞"
+limiter = AsyncLimiter(50, 60)       # 速率上限: 每 60 秒最多"发起" 50 个
+
+async def fetch(session, url):
+    async with limiter:                       # 门 ①  控制发起速率
+        async with sem:                       # 门 ②  控制同时在飞数量
+            async with session.get(url) as r: # 门 ③  借一条连接, 用完归还
+                return await r.text()
+
+async def main(urls):
+    async with aiohttp.ClientSession() as session:      # 全程复用一个 session
+        return await asyncio.gather(*(fetch(session, u) for u in urls))
+
+asyncio.run(main(urls))
+</script>
+<div class="box key">
+<div class="bt">🔑 一句话记住分工</div>
+<p><b>Semaphore 管"存量"</b>（同时有几个在跑）· <b>AsyncLimiter 管"流量"</b>（单位时间发起几个）· <b>ClientSession 管"资源"</b>（TCP 连接复用）。</p>
+</div>
+<div class="diagram">
+<div class="dt">🚦 三道门：一个请求怎么从队列流到下游</div>
+<svg font-family="-apple-system,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" viewbox="0 0 1000 300" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="arrow4" markerheight="7" markerwidth="7" orient="auto-start-reverse" refx="8" refy="5" viewbox="0 0 10 10">
+<path d="M0,0 L10,5 L0,10 z" fill="#9aa2b1"></path>
+</marker>
+<marker id="arrow4c" markerheight="7" markerwidth="7" orient="auto-start-reverse" refx="8" refy="5" viewbox="0 0 10 10">
+<path d="M0,0 L10,5 L0,10 z" fill="#c47712"></path>
+</marker>
+</defs>
+<!-- ordering principle annotation -->
+<line marker-end="url(#arrow4c)" marker-start="url(#arrow4c)" stroke="#9aa2b1" stroke-width="1.3" x1="270" x2="750" y1="26" y2="26"></line>
+<text fill="#3730a3" font-size="12" font-weight="700" text-anchor="middle" x="510" y="16">先等时间，再占资源：等待型门放外层，持有资源的门放内层，越往内持有时间越短</text>
+<!-- Queue -->
+<rect fill="#f0f1f7" height="82" rx="10" stroke="#dfe2ec" stroke-width="1.4" width="120" x="10" y="102"></rect>
+<text fill="#3a4051" font-size="12.5" font-weight="700" text-anchor="middle" x="70" y="138">协程队列</text>
+<text fill="#8a92a3" font-size="10" text-anchor="middle" x="70" y="156">pending coroutines</text>
+<path d="M130,143 L166,143" fill="none" marker-end="url(#arrow4)" stroke="#9aa2b1" stroke-width="1.6"></path>
+<!-- Gate 1: AsyncLimiter -->
+<rect fill="#eafaf1" height="186" rx="14" stroke="#bfe7cf" stroke-width="1.5" width="200" x="170" y="50"></rect>
+<text fill="#0f7a43" font-size="13" font-weight="700" text-anchor="middle" x="270" y="76">① Rate Gate · 限流</text>
+<rect fill="#ffffff" height="24" rx="12" stroke="#bfe7cf" width="140" x="200" y="88"></rect>
+<text fill="#0f7a43" font-family="SFMono-Regular,Consolas,monospace" font-size="10.5" text-anchor="middle" x="270" y="104">AsyncLimiter(50,60)</text>
+<text fill="#3a4051" font-size="10.5" text-anchor="middle" x="270" y="132">60 秒内最多"发起" 50 个</text>
+<circle cx="270" cy="163" fill="none" r="17" stroke="#0f9d58" stroke-width="2"></circle>
+<line stroke="#0f9d58" stroke-width="2" x1="270" x2="270" y1="163" y2="151"></line>
+<line stroke="#0f9d58" stroke-width="2" x1="270" x2="279" y1="163" y2="167"></line>
+<text fill="#0f7a43" font-size="10" font-style="italic" text-anchor="middle" x="270" y="200">按时间自动补充</text>
+<text fill="#0f7a43" font-size="10" font-style="italic" text-anchor="middle" x="270" y="215">（与请求是否完成无关）</text>
+<path d="M370,143 L406,143" fill="none" marker-end="url(#arrow4)" stroke="#9aa2b1" stroke-width="1.6"></path>
+<!-- Gate 2: Semaphore -->
+<rect fill="#f5f0ff" height="186" rx="14" stroke="#e0d0ff" stroke-width="1.5" width="200" x="410" y="50"></rect>
+<text fill="#5b21b6" font-size="13" font-weight="700" text-anchor="middle" x="510" y="76">② Concurrency Gate · 并发</text>
+<rect fill="#ffffff" height="24" rx="12" stroke="#e0d0ff" width="120" x="450" y="88"></rect>
+<text fill="#5b21b6" font-family="SFMono-Regular,Consolas,monospace" font-size="10.5" text-anchor="middle" x="510" y="104">Semaphore(10)</text>
+<text fill="#3a4051" font-size="10.5" text-anchor="middle" x="510" y="132">同时最多 10 个请求在飞</text>
+<rect fill="#7c3aed" height="16" rx="3" width="16" x="463" y="152"></rect>
+<rect fill="#7c3aed" height="16" rx="3" width="16" x="483" y="152"></rect>
+<rect fill="#7c3aed" height="16" rx="3" width="16" x="503" y="152"></rect>
+<rect fill="#ffffff" height="16" rx="3" stroke="#c7bce6" stroke-dasharray="2 2" width="16" x="523" y="152"></rect>
+<rect fill="#ffffff" height="16" rx="3" stroke="#c7bce6" stroke-dasharray="2 2" width="16" x="543" y="152"></rect>
+<text fill="#5b21b6" font-size="10" font-style="italic" text-anchor="middle" x="510" y="200">占用的槽位，请求结束</text>
+<text fill="#5b21b6" font-size="10" font-style="italic" text-anchor="middle" x="510" y="215">才归还（闭环反馈）</text>
+<path d="M610,143 L646,143" fill="none" marker-end="url(#arrow4)" stroke="#9aa2b1" stroke-width="1.6"></path>
+<!-- Gate 3: ClientSession pool -->
+<rect fill="#eef0ff" height="186" rx="14" stroke="#c7cbf0" stroke-width="1.5" width="200" x="650" y="50"></rect>
+<text fill="#3730a3" font-size="13" font-weight="700" text-anchor="middle" x="750" y="76">③ Resource Gate · 连接池</text>
+<rect fill="#ffffff" height="24" rx="12" stroke="#c7cbf0" width="120" x="690" y="88"></rect>
+<text fill="#3730a3" font-family="SFMono-Regular,Consolas,monospace" font-size="10" text-anchor="middle" x="750" y="104">TCPConnector(100)</text>
+<text fill="#3a4051" font-size="10.5" text-anchor="middle" x="750" y="132">复用 TCP/TLS，免重复握手</text>
+<rect fill="#4f46e5" height="20" rx="5" width="30" x="710" y="150"></rect>
+<rect fill="#4f46e5" height="20" rx="5" width="30" x="745" y="150"></rect>
+<path d="M740,160 L745,160" stroke="#c7cbf0" stroke-width="2"></path>
+<text fill="#3730a3" font-size="10" font-style="italic" text-anchor="middle" x="750" y="196">池满 → 协程排队等连接，</text>
+<text fill="#3730a3" font-size="10" font-style="italic" text-anchor="middle" x="750" y="211">而不是报错</text>
+<path d="M850,143 L886,143" fill="none" marker-end="url(#arrow4)" stroke="#9aa2b1" stroke-width="1.6"></path>
+<!-- Downstream API -->
+<rect fill="#fff4e6" height="82" rx="10" stroke="#ffd8a8" stroke-width="1.4" width="100" x="890" y="102"></rect>
+<text fill="#b5651d" font-size="12.5" font-weight="700" text-anchor="middle" x="940" y="138">下游 API</text>
+<text fill="#b5651d" font-size="10" text-anchor="middle" x="940" y="156">可能 429</text>
+<!-- feedback: completion releases slot -->
+<path d="M750,236 C 700,270 560,270 512,238" fill="none" marker-end="url(#arrow4c)" stroke="#c47712" stroke-dasharray="5 3" stroke-width="1.5"></path>
+<text fill="#b5651d" font-size="11" text-anchor="middle" x="631" y="280">请求结束 → 归还并发槽位（Semaphore release）· 与限流器的补充方式不同</text>
+</svg>
+<div class="cap">Semaphore 管"存量" · AsyncLimiter 管"流量" · ClientSession 管"资源"——缺一个就会出事：并发打爆下游、被 429 限流、或连接池耗尽。</div>
+</div>
+<h4>Semaphore vs AsyncLimiter：本质区别在"谁归还额度"</h4>
+<div class="tablewrap">
+<table>
+<tr><th></th><th><code>asyncio.Semaphore(10)</code></th><th><code>AsyncLimiter(50, 60)</code></th></tr>
+<tr><td>限制的量</td><td><b>存量</b>：任一时刻在飞的请求数 ≤ 10</td><td><b>流量</b>：任意 60 秒窗口内发起数 ≤ 50</td></tr>
+<tr><td>额度怎么回来</td><td>请求<b>结束时</b>归还 → 依赖下游快慢，是<b>闭环反馈</b></td><td><b>时间</b>自动补充（漏桶/令牌桶）→ 与请求是否完成无关</td></tr>
+<tr><td>下游变慢时</td><td>自动降速（槽位不释放）✅</td><td>照样按点发 → 在飞数量堆积 ❌</td></tr>
+<tr><td>请求很快时</td><td>不设防，可能瞬间打出上千个 ❌</td><td>稳稳压住速率 ✅</td></tr>
+<tr><td>对应的下游限制</td><td>连接数 / 并发配额 / 内存</td><td>RPM、TPM、QPS 配额（LLM API 的典型形态）</td></tr>
+</table>
+</div>
+<div class="box tip">
+<div class="bt">💡 为什么两个都要</div>
+<p>只有 Semaphore：请求平均 50ms 就返回时，10 个槽位一秒能转 200 轮 → <b>轻松超 RPM 被 429</b>。<br/>只有 AsyncLimiter：下游卡到 30s 不返回时，限流器照发不误 → <b>在飞请求无限堆积，内存和连接池双爆</b>。<br/>一个防"太快"，一个防"太多"，正交。</p>
+</div>
+<h4>嵌套顺序：为什么 limiter 在外、sem 在内</h4>
+<p>当前写法 <code>limiter → sem → 请求</code>：协程先排队等"发令枪"，拿到令牌后再抢并发槽。反过来（<code>sem</code> 在外）会怎样？</p>
+<ul>
+<li><b>sem 在外</b>：协程<b>先占住并发槽</b>，然后卡在限流器上干等。槽位被"排队中"的协程占着，而它们其实<b>什么都没做</b> → 有效并发下降，Semaphore 形同虚设。</li>
+<li><b>limiter 在外</b>（推荐）：等待发生在<b>占资源之前</b>，槽位只被真正在发请求的协程持有。</li>
+</ul>
+<div class="box tip">
+<div class="bt">💡 通用原则</div>
+<p><b>"先等时间，再占资源"</b>——所有纯等待型的门（限流、退避）放外层，所有持有稀缺资源的门（并发槽、连接、锁）放内层，且持有时间越短越好。</p>
+</div>
+<h4>aiohttp.ClientSession：为什么必须"建一次，全程共享"</h4>
+<div class="tablewrap">
+<table>
+<tr><th>它内部是什么</th><th>每次新建的代价</th></tr>
+<tr><td>一个 <code>TCPConnector</code> 连接池（默认 <code>limit=100</code> 总连接、<code>limit_per_host=0</code> 不限）+ cookie jar + 默认 headers + DNS 缓存</td><td>每个请求都要重做 <b>DNS 解析 → TCP 三次握手 → TLS 握手</b>，延迟涨几十到几百毫秒；连接无法复用（没有 keep-alive）；还会漏 socket 和 "Unclosed client session" 警告</td></tr>
+</table>
+</div>
+<div class="box warn">
+<div class="bt">⚠️ 隐形的第四道门</div>
+<p><code>ClientSession</code> 的连接池本身就是一个限流器。如果 <code>Semaphore(200)</code> 但连接池 <code>limit=100</code>，实际并发被压到 100，多出来的协程在池里排队——<b>调并发时两个数要一起看</b>，否则会以为限流没生效。</p>
+</div>
+<script type="sourcecode">
+timeout   = aiohttp.ClientTimeout(total=60, connect=10, sock_read=30)
+connector = aiohttp.TCPConnector(limit=100, limit_per_host=20, ttl_dns_cache=300)
+
+async with aiohttp.ClientSession(timeout=timeout, connector=connector,
+                                 headers={"Authorization": f"Bearer {key}"}) as session:
+    ...
+# 三层 async with 各管各的:
+#   session  -> 整个程序生命周期, 退出时关连接池
+#   sem/limiter -> 单个请求的"许可", 退出时归还名额
+#   session.get(url) -> 单次响应, 退出时释放连接回池 (必须退出后才归还!)
+</script>
+<h4>面试加分：这段骨架还缺什么 · Production gaps</h4>
+<div class="tablewrap">
+<table>
+<tr><th>缺口</th><th>补法</th></tr>
+<tr><td>没有重试</td><td>对 429 / 5xx / 网络错做<b>指数退避 + 抖动</b>；429 优先读 <code>Retry-After</code> 头。重试要放在<b>限流器内部</b>，否则重试流量绕过限流</td></tr>
+<tr><td>没检查状态码</td><td><code>r.text()</code> 对 500 也照读不误。用 <code>raise_for_status=True</code> 或手动判断</td></tr>
+<tr><td><code>gather</code> 一个错全崩</td><td><code>return_exceptions=True</code> 收集失败，或换 <code>TaskGroup</code> 明确语义</td></tr>
+<tr><td>一次性建 100 万个协程</td><td>协程对象本身占内存。改用 <code>asyncio.Queue</code> + 固定 worker 池，或分批 <code>gather</code></td></tr>
+<tr><td>LLM 特有：TPM 也限</td><td>OpenAI/Anthropic 同时限 RPM <b>和</b> TPM。需要<b>按 token 数消费额度</b>：<code>await limiter.acquire(n_tokens)</code>，先估算 prompt token</td></tr>
+<tr><td>没有可观测性</td><td>记录 p50/p99 延迟、429 率、在飞数量。限流参数不该拍脑袋，应该由 429 率反推</td></tr>
+</table>
+</div>
+<script type="sourcecode">
+# 带退避重试的 fetch —— 重试放在限流器"里面", 每次重试也消耗额度
+import random
+
+RETRYABLE = {408, 425, 429, 500, 502, 503, 504}   # 其余 4xx 是我方的错, 重试无意义
+
+async def fetch(session, url, retries=5):
+    for attempt in range(retries):
+        async with limiter:                    # 限流在外: 等待时不占并发槽
+            async with sem:
+                try:
+                    async with session.get(url) as r:
+                        if r.status in RETRYABLE:
+                            wait = float(r.headers.get("Retry-After", 2 ** attempt))
+                        else:
+                            r.raise_for_status()      # 400/401/404 直接抛, 不重试
+                            return await r.text()
+                except (aiohttp.ClientConnectionError,
+                        asyncio.TimeoutError):        # 网络层错误才重试
+                    wait = 2 ** attempt
+        await asyncio.sleep(wait + random.uniform(0, 1))   # 抖动防惊群; 在门外面睡
+    raise RuntimeError(f"giving up after {retries} attempts: {url}")
+</script>
+<h4>快问快答 · Rapid fire</h4>
+<div class="tablewrap">
+<table>
+<tr><th>问</th><th>答</th></tr>
+<tr><td>Semaphore 用 <code>threading</code> 的行不行？</td><td>不行。<code>threading.Semaphore.acquire()</code> 是阻塞调用，会卡死整个事件循环。必须用 <code>asyncio.Semaphore</code>（它不是线程安全的，但单线程里不需要）。</td></tr>
+<tr><td>为什么不用 <code>time.sleep</code> 做限流？</td><td>同理，阻塞循环。限流器内部用的是 <code>await asyncio.sleep</code>。</td></tr>
+<tr><td>AsyncLimiter 是令牌桶还是漏桶？</td><td>aiolimiter 实现的是<b>漏桶</b>语义：容量 <code>max_rate</code>，按 <code>max_rate/time_period</code> 的速率持续补充，允许突发到桶容量。</td></tr>
+<tr><td>三个门都是 <code>async with</code>，凭什么？</td><td>它们都实现了 <code>__aenter__</code>/<code>__aexit__</code>。<code>async with</code> 的价值是<b>异常安全</b>——请求抛错时槽位/连接照样归还，用 try/finally 手写等价但容易漏。</td></tr>
+<tr><td>怎么定 Semaphore 的值？</td><td>从下游文档的并发配额或 <code>限流QPS × 平均延迟</code>（Little's Law）估一个起点，再用 429 率和 p99 延迟压测调整。</td></tr>
+<tr><td>多进程/多实例部署怎么办？</td><td>这套限流是<b>单进程内存态</b>的。多副本要么把额度按副本数均分，要么上 Redis 做分布式令牌桶。</td></tr>
+</table>
+</div>
+<div class="box say">
+<div class="bt">🗣️ Say it in English — rate limiting a batch of API calls</div>
+<p class="en">“I'd layer three things. A semaphore caps how many requests are in flight at once — it protects my own memory and the connection pool, and it self-throttles when the upstream slows down, because slots only free up on completion. A rate limiter caps how many I <i>start</i> per minute — that's what maps to an API's RPM quota, and it's replenished by time, not by completion. And a single shared ClientSession keeps a connection pool alive so I'm not paying for a TCP and TLS handshake on every call.”</p>
+<p class="en">“Order matters: the rate limiter goes on the outside and the semaphore inside, so a coroutine waits for its turn <i>before</i> it occupies a concurrency slot. Otherwise idle waiters hold slots and my effective concurrency silently drops. On top of that, production code needs exponential backoff with jitter on 429s — honoring Retry-After — and for LLM APIs specifically I'd meter tokens as well as requests, since providers limit TPM and RPM independently.”</p>
+</div>
+<h3 id="k-stdlib">标准库利器 · Standard Library Power Tools</h3>
+<p>面试写题时，熟练调用这些能让代码又短又对。<b>知道用哪个 = 展示经验。</b></p>
+<div class="tablewrap">
+<table>
+<tr><th>模块 / 工具</th><th>用途</th><th>典型场景</th></tr>
+<tr><td><code>collections.defaultdict</code></td><td>带默认值的字典，免去 key 检查</td><td>分组、建图邻接表、计数</td></tr>
+<tr><td><code>collections.Counter</code></td><td>计数并排序</td><td>词频、Top-K、anagram 判断（<code>Counter(a)==Counter(b)</code>）</td></tr>
+<tr><td><code>collections.deque</code></td><td>两端 O(1) 的队列/栈</td><td>BFS 队列、滑动窗口</td></tr>
+<tr><td><code>heapq</code></td><td>最小堆（优先队列）</td><td>Top-K、合并有序流、Dijkstra；最大堆用<b>取负</b></td></tr>
+<tr><td><code>bisect</code></td><td>有序数组二分插入/查找</td><td>维护有序序列、查找边界</td></tr>
+<tr><td><code>functools.lru_cache</code>/<code>cache</code></td><td>记忆化缓存</td><td>递归/DP 提速一行搞定</td></tr>
+<tr><td><code>itertools</code></td><td>组合/排列/分组/累积</td><td><code>product, combinations, groupby, accumulate, pairwise</code></td></tr>
+</table>
+</div>
+<script type="sourcecode">
+from collections import defaultdict, Counter
+import heapq
+
+# defaultdict: 建图邻接表, 无需先判断 key
+graph = defaultdict(list)
+for u, v in [(1, 2), (1, 3), (2, 3)]:
+    graph[u].append(v)
+
+# Counter: Top-2 高频
+c = Counter("banana")            # {'a':3,'n':2,'b':1}
+print(c.most_common(2))          # [('a', 3), ('n', 2)]
+
+# heapq: 最大堆技巧 —— 存负数
+nums, heap = [5, 1, 8, 3], []
+for n in nums:
+    heapq.heappush(heap, -n)
+largest = -heapq.heappop(heap)   # 8
+</script>
+<h3 id="k-ops">编程常用操作与方法速查 · Ops &amp; Methods Cheat Sheet</h3>
+<p>写 coding 题时最常用的操作与方法——手写时要能<b>不假思索</b>地用出来。带 ⚠️ 的是复杂度陷阱。</p>
+<h4>字符串 · String（不可变 immutable）</h4>
+<div class="tablewrap">
+<table>
+<tr><th>方法 / 操作</th><th>作用</th><th>示例 → 结果</th></tr>
+<tr><td><code>s.split(sep)</code></td><td>切分（默认按空白）</td><td><code>"a,b".split(",")</code> → <code>['a','b']</code></td></tr>
+<tr><td><code>sep.join(list)</code></td><td>拼接列表（高效 O(n)，优于 <code>+</code>）</td><td><code>"-".join(['a','b'])</code> → <code>"a-b"</code></td></tr>
+<tr><td><code>s.strip()</code> / <code>lstrip</code> / <code>rstrip</code></td><td>去两端空白/指定字符</td><td><code>"  hi ".strip()</code> → <code>"hi"</code></td></tr>
+<tr><td><code>s.replace(a, b)</code></td><td>替换全部出现</td><td><code>"aaa".replace("a","b")</code> → <code>"bbb"</code></td></tr>
+<tr><td><code>s.find(x)</code> / <code>s.index(x)</code></td><td>子串位置（find 无则 -1，index 抛错）</td><td><code>"abc".find("b")</code> → <code>1</code></td></tr>
+<tr><td><code>s.startswith / endswith</code></td><td>前/后缀判断</td><td><code>"a.py".endswith(".py")</code> → <code>True</code></td></tr>
+<tr><td><code>s.lower() / upper()</code></td><td>大小写转换</td><td><code>"AB".lower()</code> → <code>"ab"</code></td></tr>
+<tr><td><code>s.isdigit()/isalpha()/isalnum()</code></td><td>字符类型判断</td><td><code>"12".isdigit()</code> → <code>True</code></td></tr>
+<tr><td><code>s.count(x)</code></td><td>子串出现次数</td><td><code>"banana".count("a")</code> → <code>3</code></td></tr>
+<tr><td><code>ord(c)</code> / <code>chr(n)</code></td><td>字符 ↔ ASCII 码（字母表题常用）</td><td><code>ord('a')</code> → <code>97</code>；<code>chr(97)</code> → <code>'a'</code></td></tr>
+<tr><td><code>s[::-1]</code></td><td>反转字符串</td><td><code>"abc"[::-1]</code> → <code>"cba"</code></td></tr>
+</table>
+</div>
+<div class="box warn"><div class="bt">⚠️ 复杂度</div><p>字符串<b>不可变</b>，循环里 <code>s += x</code> 是 O(n²)（每次新建）。收集到 <code>list</code> 再 <code>''.join()</code>，整体 O(n)。</p></div>
+<h4>列表 · List（动态数组 dynamic array）</h4>
+<div class="tablewrap">
+<table>
+<tr><th>方法 / 操作</th><th>作用</th><th>复杂度</th></tr>
+<tr><td><code>lst.append(x)</code></td><td>尾部添加</td><td><code>O(1)</code></td></tr>
+<tr><td><code>lst.pop()</code> / <code>lst.pop(i)</code></td><td>弹出尾部 / 指定位置</td><td><code>O(1)</code> / <code>O(n)</code> ⚠️</td></tr>
+<tr><td><code>lst.insert(i, x)</code></td><td>指定位置插入</td><td><code>O(n)</code> ⚠️</td></tr>
+<tr><td><code>lst.remove(x)</code></td><td>删除第一个值为 x 的元素</td><td><code>O(n)</code></td></tr>
+<tr><td><code>lst.extend(it)</code> / <code>lst += it</code></td><td>追加多个元素</td><td><code>O(k)</code></td></tr>
+<tr><td><code>lst.index(x)</code> / <code>lst.count(x)</code></td><td>找下标（无则抛错）/ 计数</td><td><code>O(n)</code></td></tr>
+<tr><td><code>lst.sort(key=, reverse=)</code></td><td>原地排序</td><td><code>O(n log n)</code></td></tr>
+<tr><td><code>sorted(it, key=, reverse=)</code></td><td>返回<b>新</b>列表（不改原）</td><td><code>O(n log n)</code></td></tr>
+<tr><td><code>lst.reverse()</code> / <code>lst[::-1]</code></td><td>原地反转 / 反转副本</td><td><code>O(n)</code></td></tr>
+<tr><td><code>x in lst</code></td><td>成员判断（频繁用应换 set）</td><td><code>O(n)</code> ⚠️</td></tr>
+<tr><td><code>[f(x) for x in it if cond]</code></td><td>列表推导式</td><td><code>O(n)</code></td></tr>
+</table>
+</div>
+<h4>字典 · Dict &amp; 集合 · Set（哈希表 hash table，平均 O(1)）</h4>
+<div class="tablewrap">
+<table>
+<tr><th>操作</th><th>作用</th></tr>
+<tr><td><code>d[k]</code> / <code>d.get(k, default)</code></td><td>取值；<code>get</code> 缺键返回默认而<b>不抛错</b></td></tr>
+<tr><td><code>d.setdefault(k, default)</code></td><td>缺键则设默认并返回（建分组/邻接表常用）</td></tr>
+<tr><td><code>d.items() / keys() / values()</code></td><td>遍历键值对 / 键 / 值</td></tr>
+<tr><td><code>k in d</code> · <code>d.pop(k, default)</code></td><td>键判断 O(1) · 删除并返回</td></tr>
+<tr><td><code>{k: v for k, v in it}</code></td><td>字典推导式</td></tr>
+<tr><td><code>s.add(x)</code> · <code>s.discard(x)</code> / <code>remove(x)</code></td><td>集合增 · 删（<code>discard</code> 不抛错，<code>remove</code> 抛错）</td></tr>
+<tr><td><code>a &amp; b</code> · <code>a | b</code> · <code>a - b</code> · <code>a ^ b</code></td><td>交 · 并 · 差 · 对称差</td></tr>
+<tr><td><code>set(lst)</code> · <code>x in s</code></td><td>去重 · 成员判断 O(1)</td></tr>
+</table>
+</div>
+<h4>字典键访问 · d[key] vs d.get()</h4>
+<p>Python 3 的 dict <b>有</b> <code>.get()</code> 方法（一直都有）。两者区别只在<b>键不存在时</b>：</p>
+<div class="tablewrap">
+<table>
+<tr><th>操作</th><th>键存在</th><th>键不存在</th><th>改字典?</th></tr>
+<tr><td><code>d[key]</code></td><td>返回值</td><td><b>抛 KeyError</b> ❌</td><td>否</td></tr>
+<tr><td><code>d.get(key)</code></td><td>返回值</td><td>返回 <code>None</code></td><td>否</td></tr>
+<tr><td><code>d.get(key, default)</code></td><td>返回值</td><td>返回 <code>default</code></td><td>否</td></tr>
+<tr><td><code>d.setdefault(key, default)</code></td><td>返回值</td><td>写入并返回 <code>default</code></td><td><b>是</b> ⚠️</td></tr>
+</table>
+</div>
+<script type="sourcecode">
+d = {"a": 1}
+d["z"]              # ❌ KeyError
+d.get("z")          # None —— 不抛错
+d.get("z", 0)       # 0   —— 指定默认值
+
+# 计数惯用法: 缺键给 0
+d[k] = d.get(k, 0) + 1
+
+# setdefault: 像 get, 但缺键时"顺手写入"默认值 -> 会改字典
+d.setdefault("z", []).append(1)     # 若 z 不存在, 先建 z:[] 再 append
+
+# 更适合分组/计数: collections.defaultdict (访问缺键自动建)
+from collections import defaultdict
+g = defaultdict(list)
+g[k].append(v)                      # k 不存在也不报错, 自动建 []
+</script>
+<div class="box tip"><div class="bt">💡 用哪个</div><p>键<b>理应存在</b>（不在就该报错以暴露 bug），或需要<b>赋值</b>（<code>d[k]=v</code>，get 不能赋值）→ 用 <code>[]</code>；键<b>可能缺失</b>、想要安全兜底 → 用 <code>d.get(k, default)</code>。注意 <code>setdefault</code> 会<b>修改</b>字典而 <code>get</code> 不会；若某键的值本身是 <code>None</code>，<code>get</code> 无法区分"缺键"与"值为 None"，此时用 <code>k in d</code>。</p></div>
+<h4>常用内置函数 · Built-ins</h4>
+<div class="tablewrap">
+<table>
+<tr><th>函数</th><th>作用 / 示例</th></tr>
+<tr><td><code>len, sum, min, max</code></td><td>长度 / 求和 / 最值；<code>max(items, key=len)</code> 可带 key</td></tr>
+<tr><td><code>sorted(it, key=, reverse=)</code></td><td>排序；<code>key=lambda x:(-x[1], x[0])</code> 多关键字</td></tr>
+<tr><td><code>enumerate(it, start=0)</code></td><td>带下标遍历 <code>for i, v in enumerate(a)</code></td></tr>
+<tr><td><code>zip(a, b)</code></td><td>并行遍历 / 转置 <code>for x, y in zip(a, b)</code></td></tr>
+<tr><td><code>map(f, it)</code> / <code>filter(f, it)</code></td><td>映射 / 过滤（返回惰性迭代器）</td></tr>
+<tr><td><code>any(it)</code> / <code>all(it)</code></td><td>存在真 / 全为真</td></tr>
+<tr><td><code>reversed(seq)</code> / <code>range(a, b, step)</code></td><td>反向迭代 / 区间</td></tr>
+<tr><td><code>abs, round(x, n), divmod(a, b)</code></td><td>绝对值 / 四舍五入 / 一步取商和余</td></tr>
+<tr><td><code>isinstance(x, T)</code></td><td>类型判断</td></tr>
+</table>
+</div>
+<h4>判断与检查 · is / in / isinstance</h4>
+<div class="tablewrap">
+<table>
+<tr><th>操作</th><th>作用</th><th>要点 / 示例</th></tr>
+<tr><td><code>x == y</code></td><td>值是否相等（调 <code>__eq__</code>）</td><td>比较内容</td></tr>
+<tr><td><code>x is y</code></td><td>是否<b>同一对象</b>（比 <code>id</code>）</td><td>判断 <code>None</code> 永远用 <code>x is None</code> / <code>is not None</code>；<b>别用 <code>is</code> 比较值</b></td></tr>
+<tr><td><code>x in seq</code> / <code>not in</code></td><td>成员判断</td><td><code>list</code> O(n) ⚠️、<code>set/dict</code> O(1)；<code>dict</code> 查的是<b>键</b>；<code>str</code> 查<b>子串</b></td></tr>
+<tr><td><code>isinstance(x, T)</code></td><td>类型判断（<b>尊重继承</b>）</td><td>支持多类型 <code>isinstance(x, (int, float))</code>；优于 <code>type(x) == T</code></td></tr>
+<tr><td><code>issubclass(A, B)</code></td><td>A 是否 B 的子类</td><td><code>issubclass(bool, int)</code> → True</td></tr>
+<tr><td><code>hasattr / getattr / callable</code></td><td>有无属性 / 取属性 / 是否可调用</td><td><code>getattr(o, "x", default)</code></td></tr>
+</table>
+</div>
+<script type="sourcecode">
+# is vs == : 身份 vs 值
+a, b = [1, 2], [1, 2]
+a == b        # True  —— 值相等
+a is b        # False —— 不是同一个对象
+x is None     # 判断 None 的标准写法 (不要用 x == None)
+
+# in : 成员 / 子串 / 键
+3 in [1, 2, 3]        # True (list, O(n))
+"x" in {"x": 1}       # True (dict 查 key, O(1))
+"ab" in "abcd"        # True (str 子串)
+
+# isinstance : 尊重继承, 支持多类型
+isinstance(5, int)            # True
+isinstance(5, (int, float))   # True —— 任一即可
+isinstance(True, int)         # True! ⚠️ bool 是 int 的子类
+type(True) == int             # False —— type== 不认子类, 少用
+</script>
+<div class="box warn"><div class="bt">⚠️ 两个高频陷阱</div><p>① 判断 <code>None</code> 用 <code>is</code> 不用 <code>==</code>（<code>==</code> 可能被重写、且更慢）。② <code>bool</code> 是 <code>int</code> 的子类，<code>isinstance(True, int)</code> 为 <b>True</b>——需要严格区分时要额外判断。用 <code>isinstance</code> 而非 <code>type(x)==T</code>，因为前者认子类、更符合多态。</p></div>
+<h4>切片 · Slicing 与数字/进制 · Numbers</h4>
+<script type="sourcecode">
+# ---- 切片 s[start:stop:step] ----
+a = [0, 1, 2, 3, 4, 5]
+a[2:4]      # [2, 3]      索引 2..3
+a[:3]       # [0, 1, 2]   前 3 个
+a[3:]       # [3, 4, 5]   从索引 3 到末尾
+a[-2:]      # [4, 5]      最后 2 个
+a[::-1]     # [5,4,3,2,1,0]  反转
+a[::2]      # [0, 2, 4]   每隔一个
+b = a[:]    # 浅拷贝 (shallow copy)
+
+# ---- 数字与进制 ----
+7 // 2          # 3     整除 (向下取整)
+7 % 2           # 1     取余
+divmod(7, 2)    # (3, 1)  商和余一步到位
+2 ** 10         # 1024  幂
+pow(2, 10, 1000)# 24    模幂 (a**b % mod, 大数高效)
+float('inf')    # 正无穷, 常用来初始化最小值
+float('-inf')   # 负无穷, 初始化最大值
+bin(10)         # '0b1010'   hex(255) -> '0xff'
+int('1010', 2)  # 10    按进制解析字符串
+</script>
+<h4>必背惯用法 · Must-know idioms</h4>
+<script type="sourcecode">
+# 交换 / 解包
+a, b = b, a
+first, *rest = [1, 2, 3, 4]      # first=1, rest=[2,3,4]
+
+# 三元表达式
+x = a if cond else b
+
+# 遍历: 带下标 / 并行 / 反向
+for i, v in enumerate(arr): ...
+for x, y in zip(xs, ys): ...
+for v in reversed(arr): ...
+
+# 多关键字排序: 频率降序, 同频字母升序
+items.sort(key=lambda kv: (-kv[1], kv[0]))
+
+# 反转字典 (value -> key)
+inv = {v: k for k, v in d.items()}
+
+# 频率统计 / 分组
+from collections import Counter, defaultdict
+freq = Counter(arr)              # {元素: 次数}
+groups = defaultdict(list)
+for k, v in pairs:
+    groups[k].append(v)          # 免去 key 检查
+
+# 网格四方向 (BFS/DFS 必备)
+DIRS = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+for dr, dc in DIRS:
+    nr, nc = r + dr, c + dc
+</script>
+<div class="box say">
+<div class="bt">🗣️ Say it in English — 提到这些库/方法时</div>
+<p class="en">“I'll use a <code>defaultdict(list)</code> here so I don't have to check whether the key exists before appending. / I'll sort with a key of negative count then the word, to get frequency descending with an alphabetical tiebreak. / I'm using a set for O(1) membership checks instead of a list.”</p>
+</div>
+<h4>lambda 用法 · Lambda in practice</h4>
+<p><code>lambda 参数: 表达式</code> 是匿名的一次性小函数，只能写<b>一个表达式</b>，其值即返回值。最常见的用途是当 <code>key=</code> 传给排序等函数。</p>
+<p><b>① sort / sorted 的 key（含降序、多关键字）：</b></p>
+<script type="sourcecode">
+pairs = [("apple", 3), ("banana", 1), ("cherry", 2)]
+
+# key 对每个元素求值, 按返回值排序
+sorted(pairs, key=lambda x: x[1])        # 按第2个元素升序
+sorted(pairs, key=lambda x: len(x[0]))   # 按名字长度
+data.sort(key=lambda p: p["age"])        # 原地按字典字段排
+
+# 降序: 取负 或 reverse=True
+sorted(pairs, key=lambda x: -x[1])
+sorted(pairs, key=lambda x: x[1], reverse=True)
+
+# 多关键字: 返回元组, 依次比较
+sorted(words, key=lambda w: (len(w), w))       # 先按长度, 再按字母
+sorted(items, key=lambda kv: (-kv[1], kv[0]))  # 频率降序 + 字母升序 (高频)
+</script>
+<p><b>② map / filter vs 列表推导：</b></p>
+<script type="sourcecode">
+list(map(lambda x: x * x, range(5)))            # [0, 1, 4, 9, 16]
+list(filter(lambda x: x % 2 == 0, range(10)))   # [0, 2, 4, 6, 8]
+
+# ✅ 更 Pythonic: 能用推导式就用推导式
+[x * x for x in range(5)]
+[x for x in range(10) if x % 2 == 0]
+</script>
+<div class="box tip"><div class="bt">💡 小贴士</div>
+<p>若 key 就是"取长度"，直接 <code>key=len</code> 即可，无需 lambda；<code>max/min</code> 同样吃 <code>key=</code>（如 <code>max(words, key=len)</code>）。别把 lambda 赋给变量（<code>f = lambda ...</code>）——那种情况用 <code>def</code> 更清晰。lambda 只能是单个表达式，不能有语句、赋值或多行。</p></div>
+<h4>lambda 什么时候需要 <code>x=x</code>？延迟绑定 vs 立即绑定 · When lambdas need the default-arg snapshot</h4>
+<p><b>判断标准就两条，两条都满足才需要 <code>x=x</code> 这个默认参数技巧：</b> ① lambda 里用到的变量是<b>从外层作用域捕获的自由变量</b>（不是它自己的形参）；② 这个 lambda 会<b>活到外层变量已经改变之后才被调用</b>（存起来、事后才用）。只要少一条，就不需要。</p>
+<p><b>① 当 lambda 作为参数、立刻被调用（sort/map/filter 的 key/func）：不需要</b></p>
+<script type="sourcecode">
+sorted(pairs, key=lambda x: x[1])   # x 是 lambda 自己的形参
+# sorted() 内部对每个元素依次调用 key(元素)，每次调用都会把当前元素传给 x
+# 这里根本没有"捕获外层变量"这回事，跟延迟绑定毫无关系
+</script>
+<p><b>② lambda 捕获了外层变量，但在同一轮循环里立刻被使用：不需要</b></p>
+<script type="sourcecode">
+for key in ["a", "b"]:
+    rows.sort(key=lambda x: x[key])   # 捕获了外层变量 key，但 sort() 立刻同步执行
+                                       # 执行的那一刻 key 还没被循环推进，值是对的
+</script>
+<p><b>③ 把 lambda 存起来，留到循环结束后才调用：需要</b></p>
+<script type="sourcecode">
+funcs = [lambda: i for i in range(3)]
+print([f() for f in funcs])          # [2, 2, 2] —— 不是 [0, 1, 2]!
+</script>
+<p>为什么会这样：闭包捕获的是<b>变量本身</b>（一个 cell），值在<b>调用时</b>才去查找，而不是定义时就固定——这就是<b>延迟绑定 (late binding)</b>。Python 循环也<b>不为每轮迭代新建作用域</b>，<code>i</code> 全程是外层同一个变量，每轮只是重新绑定它，所有闭包共享同一个 cell：</p>
+<script type="sourcecode">
+funcs[0].__closure__[0] is funcs[1].__closure__[0]   # True —— 共享同一个 cell
+funcs[0].__closure__[0].cell_contents                # 2 —— 循环结束后 cell 里是最后一个值
+</script>
+<p><b>修复：加上 <code>=</code> 变成默认参数</b>，在<b>定义时</b>把当前值拍成快照——提前绑定 (early binding)：</p>
+<script type="sourcecode">
+funcs = [lambda i=i: i for i in range(3)]            # [0, 1, 2]
+# 等号右边的 i = 定义时读取的当前循环值; 等号左边的 i = 该 lambda 自己的形参默认值
+</script>
+<div class="box warn"><div class="bt">⚠️ 真实场景：循环里绑定回调</div>
+<p>不止 lambda——任何"循环里定义、事后才调用"的函数都会中招，最常见的是 GUI / 异步里的事件回调：</p>
+<script type="sourcecode">
+for url in urls:
+    button.on_click(lambda: open(url))          # ❌ 所有按钮都打开最后一个 url
+    button.on_click(lambda url=url: open(url))  # ✅ 默认参数快照当前 url
+</script>
+</div>
+<p><b>④ 辨析：<code>lambda i: i</code> 不等于 <code>lambda i=i: i</code>，一个 <code>=</code> 号完全改变行为</b></p>
+<div class="tablewrap">
+<table>
+<tr><th>写法</th><th><code>i</code> 从哪来</th><th><code>funcs[k]()</code>（不传参）调用结果</th></tr>
+<tr><td><code>lambda: i</code></td><td>捕获外层自由变量（闭包）</td><td>循环内立刻用没事；存起来事后调 → <b>全部是最后一轮的值</b>（延迟绑定陷阱）</td></tr>
+<tr><td><code>lambda i: i</code></td><td><b>自己的形参</b>，同名遮蔽外层变量，不构成闭包捕获</td><td>直接报 <code>TypeError</code>（缺少参数）；传参就原样返回传入值——和外层循环<b>毫无关系</b></td></tr>
+<tr><td><code>lambda i=i: i</code></td><td>自己的形参，但<b>默认值在定义时求值</b>，读取的是当前那一轮的外层 <code>i</code></td><td><code>[0, 1, 2]</code>——提前绑定，标准修复写法</td></tr>
+</table>
+</div>
+<div class="box key"><div class="bt">👑 一句话记住</div>
+<p><code>lambda i: i</code> 里的 <code>i</code> 每次调用都要<b>由外部传入</b>，跟循环无关；<code>lambda i=i: i</code> 里的 <code>i</code> 在<b>定义那一刻就已经确定</b>，之后调用可以不传参直接拿到当轮的值。少一个 <code>=</code>，是"要求传参的形参"和"定义时拍好快照的默认值"两种完全不同的语义。</p></div>
+<div class="box say"><div class="bt">🗣️ Say it in English</div>
+<p class="en">“Whether a lambda needs the <i>x=x</i> default-argument trick comes down to two questions: is the variable a free variable captured from an enclosing scope rather than the lambda's own parameter, and will this lambda outlive the current loop iteration before it's called? If both are true — like storing callbacks in a loop — Python's late binding means every closure reads the same shared cell, so they all end up seeing the final value. A default argument snapshots the value at definition time instead, which is early binding. But if the lambda is invoked immediately, like a sort key or a map function, there's no capture at all — the variable is just the lambda's own parameter, supplied fresh on every call, so the trick isn't needed.”</p></div>
+<h4>sort vs sorted · 区别</h4>
+<p>两者的 <code>key=</code> / <code>reverse=</code> 语义完全一样，区别在于<b>作用对象</b>和<b>是否原地</b>：</p>
+<div class="tablewrap">
+<table>
+<tr><th></th><th><code>list.sort()</code></th><th><code>sorted(iterable)</code></th></tr>
+<tr><td>作用对象</td><td><b>只能是 list</b></td><td>任何可迭代对象（list/tuple/dict…）</td></tr>
+<tr><td>是否原地</td><td>原地修改，返回 <code>None</code></td><td>返回<b>新列表</b>，不改原对象</td></tr>
+<tr><td>参数</td><td colspan="2">都支持 <code>key=</code> 和 <code>reverse=</code></td></tr>
+</table>
+</div>
+<div class="box warn"><div class="bt">⚠️ 常见错误</div><p><code>list.sort()</code> 返回 <code>None</code>——<b>别写 <code>x = a.sort()</code></b>（x 会变成 None）。要新列表就用 <code>sorted(a)</code>；要原地排就 <code>a.sort()</code> 后继续用 <code>a</code>。</p></div>
+<h4>多 key 排序 · Multi-key sorting</h4>
+<p><b>基础：让 key 返回一个元组。</b>Python 比较元组是<b>逐元素、从左到右</b>（字典序）：先比第 1 个，相等再比第 2 个……于是实现"主键 + 次键"。默认<b>全部升序</b>。</p>
+<p><b>每个 key 的升/降方向如何决定？</b><code>reverse=True</code> 反转的是<b>整体</b>（所有 key 一起反），不能单独设某个键。分三种情况：</p>
+<script type="sourcecode">
+people = [("Alice",30,90), ("Bob",25,90), ("Alice",25,85), ("Bob",30,85)]  # (name, age, score)
+
+# ① 全部同方向: 元组 key (全降序再加 reverse=True)
+sorted(people, key=lambda p: (p[0], p[1]))        # 先 name 升, 同名再 age 升
+sorted(people, key=lambda p: (p[0], p[1]), reverse=True)   # 两者都降
+
+# ② 混合方向 + 数字键: 给"要降序的数字键"取负
+sorted(people, key=lambda p: (-p[2], p[1]))       # score 降序, 同分 age 升序
+
+# ③ 混合方向 + 字符串降序(不能取负): 稳定多趟排序
+#    规则: 次要键先排、主要键后排 (顺序是反的!)
+people.sort(key=lambda p: p[1])                   # 次要键: age 升序
+people.sort(key=lambda p: p[0], reverse=True)     # 主要键: name 降序
+# 结果: name 降; 同名内部 age 仍升
+</script>
+<div class="box key"><div class="bt">👑 为什么"多趟"能行：稳定排序</div>
+<p>Python 的 sort/sorted 是<b>稳定的 (stable, Timsort)</b>：<b>值相等的元素保持原有相对顺序</b>。所以后一趟按主键排时，主键相同的元素会保留前一趟按次键排好的顺序——因此<b>次要键先排、主要键后排</b>。稳定性也意味着：只给一个 key 时，并列元素保持<b>输入原序</b>。</p></div>
+<div class="box tip"><div class="bt">💡 决策速记</div><p>同方向 → 一个元组 key（全降加 <code>reverse=True</code>）；混合方向且是数字 → 降序键<b>取负</b> <code>(-a, b)</code>；混合方向含<b>字符串降序</b> → <b>稳定多趟</b>，次要键先、主要键后。</p></div>
+<h3 id="k-http-requests">HTTP 请求与响应 · requests / Response / JSON 常用操作</h3>
+<div class="qa"><p class="q">Q. Python 如何发送 GET / POST / PUT 请求，并将 Response 转成 JSON？</p>
+<p>常用第三方库 <code>requests</code>（安装：<code>python -m pip install requests</code>）。<b>GET</b> 读取数据；<b>POST</b> 常用于创建资源；<b>PUT</b> 常用于完整替换资源（具体以 API 约定为准）。请求返回 <code>requests.Response</code>，用 <code>response.json()</code> 解析 JSON；它<b>不是</b> <code>json.dumps(response)</code>。</p></div>
+<h4>GET · Query 参数 / Headers / Timeout</h4>
+<script type="sourcecode">
+import requests
+
+url = "https://httpbin.org/get"   # 示例测试 API
+params = {"page": 1, "keyword": "python"}  # 自动编码到 URL ?page=1&keyword=python
+headers = {"Accept": "application/json"}
+
+response = requests.get(url, params=params, headers=headers, timeout=10)
+response.raise_for_status()  # HTTP 4xx/5xx 抛 requests.HTTPError
+result = response.json()     # JSON -> Python dict/list
+print(response.status_code)  # HTTP 状态码，例如 200
+print(result["args"])       # {'keyword': 'python', 'page': '1'} (字符串化参数)
+</script>
+<h4>POST · 发送 JSON 请求体</h4>
+<script type="sourcecode">
+payload = {"name": "Alice", "active": True}
+response = requests.post(
+    "https://httpbin.org/post",
+    json=payload,           # 推荐：自动序列化 JSON 并设置 Content-Type
+    timeout=10,
+)
+response.raise_for_status()
+data = response.json()
+print(data["json"])        # {'active': True, 'name': 'Alice'}
+
+# 注意：data=payload 通常按表单发送，而不是 JSON
+# 如果接口要求 form: requests.post(url, data={"name": "Alice"}, timeout=10)
+</script>
+<h4>PUT / PATCH / DELETE · 更新与删除</h4>
+<script type="sourcecode">
+url = "https://httpbin.org/put"
+response = requests.put(url, json={"name": "Bob"}, timeout=10)
+response.raise_for_status()
+print(response.json()["json"])
+
+# PATCH 常用于局部更新；DELETE 用于删除
+# requests.patch(url, json={"name": "Bob"}, timeout=10)
+# requests.delete(url, timeout=10)
+</script>
+<h4>Response 常用属性 / JSON 编解码</h4>
+<div class="tablewrap"><table>
+<tr><th>操作</th><th>用途 / 注意事项</th></tr>
+<tr><td><code>response.status_code</code></td><td>HTTP 状态码，例如 200、201、404</td></tr>
+<tr><td><code>response.ok</code></td><td>状态码小于 400 时通常为 True；不代表业务成功</td></tr>
+<tr><td><code>response.headers</code></td><td>响应头，例如 <code>response.headers.get("Content-Type")</code></td></tr>
+<tr><td><code>response.text</code></td><td>解码后的文本字符串</td></tr>
+<tr><td><code>response.content</code></td><td>原始响应 body 字节 <code>bytes</code></td></tr>
+<tr><td><code>response.json()</code></td><td>把 JSON 响应解析成 Python 对象；非法/空 JSON 会报错</td></tr>
+<tr><td><code>response.raise_for_status()</code></td><td>4xx / 5xx 抛 HTTPError；调用后再处理正常响应</td></tr>
+<tr><td><code>requests.get(..., params={...})</code></td><td>URL query 参数</td></tr>
+<tr><td><code>requests.post(..., json={...})</code></td><td>JSON 请求体；与 <code>data=</code> 区分</td></tr>
+</table></div>
+<script type="sourcecode">
+import json
+import requests
+
+obj = {"id": 1, "name": "Alice"}
+json_string = json.dumps(obj)          # Python dict -> JSON 字符串
+back_to_dict = json.loads(json_string) # JSON 字符串 -> Python dict
+
+try:
+    response = requests.get("https://httpbin.org/json", timeout=10)
+    response.raise_for_status()
+    data = response.json()            # 相当于解析响应体 JSON
+except requests.Timeout:
+    print("请求超时")
+except requests.RequestException as exc:
+    print("网络或 HTTP 错误:", exc)
+except ValueError:
+    print("响应不是有效 JSON")
+</script>
+<div class="qa"><p class="q">Q. 高频陷阱 / Interview gotchas</p>
+<p><b>①</b> <code>response.json()</code> 可能返回 <code>dict</code>、<code>list</code>、字符串、数字等，并非永远是字典。<b>②</b> <code>raise_for_status()</code> 不会检查 JSON 业务字段。<b>③</b> HTTP 204 No Content 不应直接调用 <code>response.json()</code>。<b>④</b> 设置 <code>timeout</code>，避免请求无限等待。<b>⑤</b> 多次请求可使用 <code>requests.Session()</code> 复用连接；异步程序可考虑 <code>httpx.AsyncClient</code> 或 <code>aiohttp</code>。</p></div>
+<h3 id="k-sorteddict">常用有序字典操作 · SortedDict vs OrderedDict</h3>
+<p><b>记忆口诀：</b><code>dict</code> = 插入顺序的哈希表；<code>OrderedDict</code> = 可调整顺序（LRU）；<code>SortedDict</code> = 自动按 Key 排序（找最近 Key、前驱/后继、范围查询）。<b>注意：</b><code>SortedDict</code> 是 <code>sortedcontainers</code> 第三方库，不是 Python 标准库。</p>
+<div class="tablewrap"><table><tr><th>需求</th><th>推荐</th><th>常用 API</th></tr>
+<tr><td>普通查找</td><td><code>dict</code></td><td><code>d.get(k)</code>、<code>k in d</code></td></tr>
+<tr><td>LRU / 调整顺序</td><td><code>OrderedDict</code></td><td><code>move_to_end(k)</code>、<code>popitem(last=False)</code></td></tr>
+<tr><td>按 Key 自动排序</td><td><code>SortedDict</code></td><td><code>bisect_left(k)</code>、<code>peekitem(i)</code>、<code>irange(lo, hi)</code></td></tr></table></div>
+<script type="sourcecode">
+from collections import OrderedDict
+from sortedcontainers import SortedDict  # pip install sortedcontainers
+
+od = OrderedDict([(3, 'C'), (1, 'A'), (2, 'B')])
+od.move_to_end(3)                 # 顺序变成 [1, 2, 3]
+od.popitem(last=False)            # 删除最左边 / 最久未使用的元素
+
+sd = SortedDict({3: 'C', 1: 'A', 2: 'B'})
+print(list(sd))                   # [1, 2, 3]，按 Key 排序
+print(sd.peekitem(0))             # (1, 'A')，最小 Key
+print(sd.peekitem(-1))            # (3, 'C')，最大 Key
+print(sd.bisect_left(2))          # 1，左插入位置
+print(list(sd.irange(1, 2)))     # [1, 2]，闭区间 Key
+
+# 最近 Key：用 bisect_left 找左右候选，比较绝对距离
+keys = list(sd)                   # 演示用途；实际避免每次 O(n) 转 list
+</script>
+<div class="box tip"><div class="bt">⚠️ 面试提醒</div><p>使用 <code>SortedDict</code> 前确认平台允许第三方依赖。通常查找、插入及二分定位为近似摊还 O(log n)；普通 <code>dict</code> 平均 O(1)；静态有序 <code>list</code> + <code>bisect</code> 查找 O(log n)，但中间插入 O(n)。</p></div>
+<h3 id="k-traps">高频陷阱题 · Classic Gotchas</h3>
+<p>面试官爱用这些考你对语言的<b>真正理解</b>。看到就要能立刻说出"为什么"。</p>
+<h4>1. 可变默认参数 · Mutable default argument</h4>
+<p>默认值在<b>函数定义时只创建一次</b>，被所有调用共享——用 <code>None</code> 作哨兵修复。</p>
+<script type="sourcecode">
+def bad(x, acc=[]):        # ❌ acc 只创建一次, 跨调用累积
+    acc.append(x); return acc
+print(bad(1)); print(bad(2))     # [1] 然后 [1, 2] —— 意外!
+
+def good(x, acc=None):     # ✅ 正确写法
+    if acc is None:
+        acc = []
+    acc.append(x); return acc
+</script>
+<h4>2. 遍历时修改列表 · Mutating a list while iterating</h4>
+<p>会跳过元素或索引错乱。应<b>遍历副本</b> (<code>for x in lst[:]</code>) 或<b>构建新列表</b>（推导式）。</p>
+<div class="box tip"><div class="bt">💡 相关陷阱</div>
+<p>循环里创建 lambda/嵌套函数、事后才调用，同样会因为<b>延迟绑定</b>踩坑（全都看到循环变量的最后一个值）。详见 <a href="#k-ops">lambda 用法</a> 一节的"lambda 什么时候需要 <code>x=x</code>"。</p></div>
+<h4>3. 类属性是可变对象时被共享 · Shared mutable class attribute</h4>
+<script type="sourcecode">
+class Team:
+    members = []            # ❌ 类属性, 所有实例共享同一个 list
+    def add(self, m): self.members.append(m)
+
+a, b = Team(), Team()
+a.add("x")
+print(b.members)           # ['x'] —— b 也被改了!
+# ✅ 修复: 在 __init__ 里 self.members = []
+</script>
+<h4>4. dataclass 用可变对象当默认值 · Mutable default in dataclass</h4>
+<p><code>@dataclass</code> <b>禁止</b>用 <code>list/dict/set</code> 作字段默认值，在<b>定义类时</b>就抛 <code>ValueError</code>——正是为了防止 #1 / #4 那种"所有实例共享同一个可变对象"。改用 <code>field(default_factory=...)</code>：它是个<b>零参可调用</b>，会为<b>每个实例</b>各建一份新对象。</p>
+<script type="sourcecode">
+from dataclasses import dataclass, field
+
+@dataclass
+class Bad:
+    items: list = []                           # ❌ ValueError: mutable default ...
+
+@dataclass
+class Good:
+    items: list = field(default_factory=list)  # ✅ 每个实例各得一份新 list
+    x: int = 0                                 # 不可变默认值(int/str/tuple)则没问题
+# 需要带初值时用 lambda: field(default_factory=lambda: [1, 2, 3])
+</script>
+<p style="font-size:13px;color:var(--muted)">同理，有默认值的字段必须排在无默认值字段<b>之后</b>（和函数参数一样）。</p>
+<h4>5. int 与 str 不会隐式转换 · No implicit int/str coercion</h4>
+<p>和 JS 不同，Python 的 <code>+</code> 在数字和字符串之间<b>不会</b>帮你转类型——直接抛 <code>TypeError</code>。这是很多从 JS/其它语言转过来的候选人会踩的点。</p>
+<script type="sourcecode">
+mine, yours = 3, 2
+apples = mine + yours        # 5 —— 两个都是 int, 正常相加
+print(apples)
+
+more_apples = apples + '4'   # ❌ TypeError: unsupported operand type(s)
+                              #    for +: 'int' and 'str'
+print(more_apples)
+
+# ✅ 修复: 统一类型再运算
+str(apples) + '4'            # '54' —— 想拼接成字符串
+apples + int('4')            # 9   —— 想按数字相加
+</script>
+<div class="box say"><div class="bt">🗣️ Say it in English</div>
+<p class="en">“Python is strongly typed at runtime — it won't silently coerce between <code>int</code> and <code>str</code> the way JavaScript does with <code>+</code>. Mixing them raises a <code>TypeError</code> immediately, so I have to be explicit about intent: <code>str(x)</code> if I want concatenation, or <code>int(x)</code> if I want arithmetic.”</p></div>
+<h4>6. 线程解决不了 CPU 密集型任务 · Threads don't speed up CPU-bound work</h4>
+<p>常见面试场景题："这段代码是 CPU 密集型，同事建议用多线程并行化，为什么不行？该怎么做？多线程什么时候才有用？"</p>
+<ul>
+<li><b>为什么线程不行：</b> CPython 有 <b>GIL（全局解释器锁）</b>，同一时刻只允许<b>一个</b>线程执行 Python 字节码。CPU 密集任务里线程只是在一个核上来回切换，没有真正并行，还多了上下文切换开销——有时反而更慢。</li>
+<li><b>该用什么：</b> <code>multiprocessing</code> / <code>concurrent.futures.ProcessPoolExecutor</code>——每个进程各有自己的解释器和 GIL，能跑在不同核上实现真并行。也可以把热点循环下沉到会释放 GIL 的 C 扩展 / 向量化库（如 NumPy）。</li>
+<li><b>线程什么时候有用：</b> I/O 密集场景（网络请求、磁盘、数据库查询）——线程大部分时间在<b>等待</b>，等待期间会释放 GIL，让其它线程运行。这正是本节 <a href="#k-concur">并发与异步</a> 表格里 <code>threading</code> 适合"IO 密集"的原因。</li>
+</ul>
+<div class="box say"><div class="bt">🗣️ Say it in English</div>
+<p class="en">“Threading won't help here because of the GIL — only one thread executes Python bytecode at a time, so for CPU-bound work threads just take turns on a single core with added context-switch overhead, no real speedup. I'd reach for <code>multiprocessing</code> instead: separate processes each get their own interpreter and GIL, so they run truly in parallel across cores. Threads are the right tool when the work is I/O-bound — waiting on network or disk — because the GIL is released during that wait.”</p></div>
+<div class="box tip">
+<div class="bt">✅ 其它常考小点 · Quick hits</div>
+<p><code>/</code> 是真除法（返回 float），<code>//</code> 是整除（向下取整，对负数向 -∞）；链式比较 <code>1 &lt; x &lt; 10</code> 合法；<code>a += b</code> 对 list 是<b>原地修改</b>（可能影响别名），对不可变对象是<b>重新绑定</b>；<code>try/finally</code> 里的 <code>return</code> 会覆盖 try 的返回值；<code>0, '', [], {}, None</code> 都是 falsy。</p>
+</div>
+</section>
+
+</main>
+</div>
+<div class="backtop" id="backtop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script>
+// Inject raw source from the sourcecode blocks into styled code elements. Works even offline;
+// Prism (if loaded from CDN) then colorizes. Raw block content needs no HTML-escaping.
+(function(){
+  document.querySelectorAll('script[type="sourcecode"]').forEach(function(s){
+    var txt = s.textContent.replace(/^\n/,'').replace(/[ \t\n]+$/,'');
+    var pre = document.createElement('pre');
+    var code = document.createElement('code');
+    code.className = 'language-python';
+    code.textContent = txt;
+    pre.appendChild(code);
+    s.parentNode.replaceChild(pre, s);
+  });
+  if(window.Prism){ try{ Prism.highlightAll(); }catch(e){} }
+})();
+
+// Solution accordions
+function bindSolutions(){
+  document.querySelectorAll('.sol-toggle').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var sol = btn.nextElementSibling;
+      var open = sol.classList.toggle('open');
+      btn.classList.toggle('open', open);
+      btn.querySelector('.txt').textContent = open ? '收起解答' : '查看解答';
+    });
+  });
+}
+bindSolutions();
+function allSolutions(open){
+  document.querySelectorAll('.sol').forEach(function(s){ s.classList.toggle('open', open); });
+  document.querySelectorAll('.sol-toggle').forEach(function(b){
+    b.classList.toggle('open', open);
+    b.querySelector('.txt').textContent = open ? '收起解答' : '查看解答';
+  });
+}
+
+// Build mobile nav from sidebar
+(function(){
+  var mnav = document.getElementById('mnav');
+  document.querySelectorAll('#nav a, #nav .grp').forEach(function(el){
+    if(el.classList.contains('grp')){ return; }
+    var a = el.cloneNode(true);
+    a.addEventListener('click', function(){ mnav.classList.remove('open'); });
+    mnav.appendChild(a);
+  });
+})();
+
+// Scrollspy + back-to-top
+(function(){
+  var links = Array.prototype.slice.call(document.querySelectorAll('#nav a'));
+  var map = {};
+  links.forEach(function(a){ var id=a.getAttribute('href').slice(1); var t=document.getElementById(id); if(t) map[id]=a; });
+  var ids = Object.keys(map);
+  var backtop = document.getElementById('backtop');
+  function onScroll(){
+    var y = window.scrollY + 90;
+    var cur = null;
+    ids.forEach(function(id){ var t=document.getElementById(id); if(t && t.offsetTop <= y) cur = id; });
+    links.forEach(function(a){ a.classList.remove('active'); });
+    if(cur && map[cur]) map[cur].classList.add('active');
+    backtop.classList.toggle('show', window.scrollY > 500);
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+})();
+</script>
+</body>
+</html>
