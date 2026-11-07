@@ -2,7 +2,7 @@
 
 > **范围**：面向有软件工程基础、但刚开始系统学习 AI Agent 的学习者；优先 **General-purpose AI Agent Engineering** 的短视频，而非 Voice / Vision / Multimodal 专项。与仅收录大学课程的 `docs/university-ai-agent-courses.md` 严格分离。
 >
-> **更新日期**：2026-11-07 · **版本**：v1.3 · **状态**：新选课标准已生效，首批 21 节候选课程按 Topic 收录；尚未逐条完成官方元数据复核的候选统一标记 `Needs Review`，不冒充 `Current`。
+> **更新日期**：2026-11-07 · **版本**：v1.4 · **状态**：新选课标准已生效，原有 21 节及新增 RAG/Graph 候选按 Topic 收录；尚未逐条完成官方元数据复核的候选统一标记 `Needs Review`，不冒充 `Current`。
 >
 > **唯一维护路径**：`diego-king/ai-agent-knowledge` / `main` / `docs/youtube-ai-agent-courses.md`。每次提交前读取最新全文与 blob SHA，原路径合并，不创建副本。
 
@@ -11,8 +11,8 @@
 ### 1.1 学习目标、优先级
 
 - **学习路径**：Beginner → General AI Agent Engineer → Production-ready Agent Systems。已有编程背景，但 AI Agent 知识从基础开始；按知识依赖推荐，不要求每个 Playlist 全看。
-- **核心必修**：Agent Fundamentals、LLM / Agent / Workflow 区别、ReAct / Agent Loop、Tool / Function Calling、MCP、Context Engineering、Session / State / Memory、Design Patterns、Multi-Agent、Agent Evaluation / Reliability / Safety。
-- **逐步补充**：RAG / Agentic RAG、Router / Worker、Event-driven / Long-running Agent、Persistence / Retry、Human-in-the-loop、Tracing / Observability、Production Engineering。
+- **核心必修**：RAG 基础 / Retrieval / Agentic RAG、Agent Fundamentals、LLM / Agent / Workflow 区别、ReAct / Agent Loop、Tool / Function Calling、MCP、Context Engineering、Session / State / Memory、Design Patterns、Multi-Agent、Agent Evaluation / Reliability / Safety。
+- **逐步补充**：RAG Chunking / Reranking / Evaluation、Router / Worker、Event-driven / Long-running Agent、Persistence / Retry、Human-in-the-loop、Tracing / Observability、Production Engineering。
 - **通用性优先**：先学可迁移到 LangGraph、Google ADK、OpenAI Agents SDK 的概念，再选学具体 Framework / Cloud API 实操；避免被单一厂商技术栈绑住。
 - **暂缓专项**：Voice AI、Vision AI、Gemini Live、音视频流处理、实时多模态、单一产品使用演示、营销宣传及纯 Coding Demo。只有具备明确跨场景价值（例如通用 SQL / Vector / Memory Bank 架构）的专项视频才可作为 **B 补充** 收录，不进入通用新手主线。
 
@@ -59,9 +59,9 @@
 
 状态：`Current`、`Evergreen`、`Needs Review`、`Outdated`、`Unavailable`。经典原理不因发布时间较早而自动归档；确实过时的课程注明原因并移至文末归档，保留可追溯记录。
 
-## 2. 今日课程：21 节 Topic 候选索引（2026-11-07）
+## 2. 按 Topic 的 25 节候选索引（2026-11-07）
 
-**来源统计**：AI Agent Crash Course **11**、Modern AI Agents: From Theory to Production **6**、The Agent Factory **3**、The Omni App **1**。其中 **18 节 ≤20 分钟**、**3 节 20–30 分钟**。全部为候选，**统一元数据状态：`Needs Review`（最后候选整理：2026-11-07）**；部分视频链接和时长已交叉核对，但并非全部完成 YouTube 官方页面/发布日期核验，不应错误展示为正式“已验证”。
+**原始 21 节统计（保留历史基线）**：AI Agent Crash Course **11**、Modern AI Agents: From Theory to Production **6**、The Agent Factory **3**、The Omni App **1**。原始候选中 **18 节 ≤20 分钟**、**3 节 20–30 分钟**。本次另新增 **4 节候选（RAG 2 + Graph 2）**，合计 **25 节**；新增视频精确时长未全部核验，不计入原始时长统计。全部为候选，**统一元数据状态：`Needs Review`（最后候选整理：2026-11-07）**；部分视频链接和时长已交叉核对，但并非全部完成 YouTube 官方页面/发布日期核验，不应错误展示为正式“已验证”。
 
 以下 **A / B** 为学习优先级初筛；具体分项评分待核验后补写。YouTube 链接为**单视频直达链接**，不以搜索结果 URL 冒充已确定的视频 ID。
 
@@ -79,6 +79,15 @@
 |---|---|---:|---|---|
 | **A** | [Workflow agents and communication in ADK](https://www.youtube.com/watch?v=WfJcCeLZD2I) | 4:53 | AI Agent Crash Course | Sequential / Parallel / Loop、Shared Session State、Delegation、Agent-as-Tool |
 | **B** | [Agents, their frameworks and when to use them](https://www.youtube.com/watch?v=aLYrV61rJG4) | 27:46 | The Agent Factory | 是否需要框架；LangGraph / CrewAI / ADK 的架构权衡；偏进阶长访谈 |
+
+### 2.2A Loop & Graph Engineering（Architecture 子主题）
+
+Agent Loop 负责迭代决策与工具调用；Graph 定义 Nodes、Edges、Router、Fan-out / Join 等显式流程。**以下为新增候选，原有 2.1 的 Loop Patterns 与 2.2 的 Workflow ADK 不重复建立条目。**
+
+| 级别 | 视频 | 时长 | 来源 | 中文核心知识点 | 元数据状态 |
+|---|---|---:|---|---|---|
+| **A** | [Graph Engineering 101](https://www.youtube.com/watch?v=IrW0_f-w4kA) | 待核（须确认 ≤30 分钟） | Google Cloud Tech | Graph vs Loop、Fan-out、Join、Router | Needs Review |
+| **B** | [Graph Engineering with ADK](https://www.youtube.com/watch?v=Mzr7byMFy_4) | 待核（须确认 ≤30 分钟） | Google Cloud Tech | Node、Parallel、Join、Deterministic / LLM Router | Needs Review |
 
 ### 2.3 Tool Calling & MCP
 
@@ -108,9 +117,16 @@
 | **A** | [Foundations of multi-agent systems with ADK](https://www.youtube.com/watch?v=pX0_iIfRilU) | 5:17 | AI Agent Crash Course | 多 Agent 协作、LLM / Workflow / Custom Agent、Hierarchy |
 | **B** | [Multi-agent systems, concepts & patterns](https://www.youtube.com/watch?v=TGNScswE0kU) | 23:06 | The Agent Factory | Supervisor / Swarm、协作、Context 分工；第二轮 |
 
-### 2.6 RAG & Knowledge Retrieval
+### 2.6 RAG & Agentic RAG
 
-本轮暂无足够符合“**新手 + 通用 Agent + ≤20 分钟**”的独立 RAG 候选。未来补齐 Retrieval Pipeline、Embeddings、Chunking、Reranking、Agentic RAG、Retrieval Evaluation；**不将 Memory 视频充当 RAG 教学**。
+RAG 是独立知识主题：Retrieval Pipeline、Embedding、Chunking、Vector / Hybrid Search、Reranking、Grounding、Agentic Retrieval、Retrieval Evaluation。**RAG 不等于 Memory**；已翻译的 SQL + Vector + Memory Bank 视频仍属于 Memory Architecture，不重复计入 RAG 主课程。
+
+| 级别 | 视频 | 时长* | 来源 | 中文核心知识点 | 元数据状态 |
+|---|---|---:|---|---|---|
+| **A** | [How to use Retrieval Augmented Generation (RAG)](https://www.youtube.com/watch?v=oVtlp72f9NQ) | 约 6–7 分钟（精确待核） | Google Cloud Tech · 2024-10-24 | RAG 数据流、Retrieval + Generation、质量优化；新手主线 | Needs Review |
+| **B** | [What is Agentic RAG?](https://www.youtube.com/watch?v=0z9_MhcYvcY) | 待核（须确认 ≤30 分钟） | IBM Technology · 2024-10-28 | Agent 参与检索决策；与基础 RAG 对比；与前一节互补 | Needs Review |
+
+下一步优先寻找通用的 Chunking、Hybrid Search / Reranking、RAG Evaluation 短课，避免重复纯框架 Demo。
 
 ### 2.7 Agent Evaluation & Safety
 
@@ -131,17 +147,16 @@
 
 ## 2A. HeyGen 中文翻译状态（永久去重记录）
 
-> **翻译状态与课程元数据状态是两个独立字段**：\`Needs Review\` 表示原视频元数据尚待核验；\`Translated\` 表示已成功生成 HeyGen 中文配音。以后任何人工或月度自动更新、批量提交 HeyGen 前，必须先按 YouTube Video ID 检查本表及 HeyGen 任务记录，\**不得重复翻译已完成视频**。除非用户明确要求重新翻译。
+> **翻译状态与课程元数据状态是两个独立字段**：`Needs Review` 表示原视频元数据尚待核验；`Translated` 表示已成功生成 HeyGen 中文配音。以后任何人工或月度自动更新、批量提交 HeyGen 前，必须先按 YouTube Video ID 检查本表及 HeyGen 任务记录，**不得重复翻译已完成视频**。除非用户明确要求重新翻译。
 
 | YouTube Video ID / 原视频 | Translation State | 目标语言 | HeyGen Translation ID | 中文视频 |
 |---|---|---|---|---|
-| [vfVcDUCucSs](https://www.youtube.com/watch?v=vfVcDUCucSs) · Short-term memory | **Translated** | zh-CN | \`eba09409636f49c2aba399a50af60db1-zh_zh-CN\` | [中文 MP4](https://resource2.heygen.ai/video_translate/eba09409636f49c2aba399a50af60db1-zh_zh-CN/original.mp4) |
-| [HDqzJJhZsxw](https://www.youtube.com/watch?v=HDqzJJhZsxw) · Persistent memory | **Translated** | zh-CN | \`b5095067e5d88966ff36399a2d599026-zh_zh-CN\` | [中文 MP4](https://resource2.heygen.ai/video_translate/b5095067e5d88966ff36399a2d599026-zh_zh-CN/original.mp4) |
-| [KZPo15M2DbM](https://www.youtube.com/watch?v=KZPo15M2DbM) · Long-term memory bank | **Translated** | zh-CN | \`9fa3f46c520142437236c86d3179ef70-zh_zh-CN\` | [中文 MP4](https://resource2.heygen.ai/video_translate/9fa3f46c520142437236c86d3179ef70-zh_zh-CN/original.mp4) |
-
+| [vfVcDUCucSs](https://www.youtube.com/watch?v=vfVcDUCucSs) · Short-term memory | **Translated** | zh-CN | `eba09409636f49c2aba399a50af60db1-zh_zh-CN` | [中文 MP4](https://resource2.heygen.ai/video_translate/eba09409636f49c2aba399a50af60db1-zh_zh-CN/original.mp4) |
+| [HDqzJJhZsxw](https://www.youtube.com/watch?v=HDqzJJhZsxw) · Persistent memory | **Translated** | zh-CN | `b5095067e5d88966ff36399a2d599026-zh_zh-CN` | [中文 MP4](https://resource2.heygen.ai/video_translate/b5095067e5d88966ff36399a2d599026-zh_zh-CN/original.mp4) |
+| [KZPo15M2DbM](https://www.youtube.com/watch?v=KZPo15M2DbM) · Long-term memory bank | **Translated** | zh-CN | `9fa3f46c520142437236c86d3179ef70-zh_zh-CN` | [中文 MP4](https://resource2.heygen.ai/video_translate/9fa3f46c520142437236c86d3179ef70-zh_zh-CN/original.mp4) |
 | [8C4bh59FtsI](https://www.youtube.com/watch?v=8C4bh59FtsI) · AI Agent Memory Architecture: Structured SQL, Semantic Vector Search & Memory Bank | **Translated** | Mandarin | `ca1aaca42e4b49d18d75abcce9f38da4-zh` | [中文 MP4](https://resource2.heygen.ai/video_translate/ca1aaca42e4b49d18d75abcce9f38da4-zh/original.mp4) |
 
-**未来操作规范**：新视频默认 \`Not Translated\`；提交后记录 \`Submitted/Running\` 和 HeyGen ID；确认成功后改为 \`Translated\` 并保存结果 URL；失败标记 \`Failed\`。每次更新先读取 main 最新文件，并检查 HeyGen 账号历史作品（包括非本次对话创建的任务），按 YouTube ID 合并原路径，不复制条目。结果 URL 可能随 HeyGen 保留策略失效，翻译状态和任务 ID 仍须保留以防重复扣费。
+**未来操作规范**：新视频默认 `Not Translated`；提交后记录 `Submitted/Running` 和 HeyGen ID；确认成功后改为 `Translated` 并保存结果 URL；失败标记 `Failed`。每次更新先读取 main 最新文件，并检查 HeyGen 账号历史作品（包括非本次对话创建的任务），按 YouTube ID 合并原路径，不复制条目。结果 URL 可能随 HeyGen 保留策略失效，翻译状态和任务 ID 仍须保留以防重复扣费。
 
 ## 3. 第一轮学习路线（精选 11 节，约 89 分钟）
 
