@@ -35,6 +35,7 @@
 - [补充主题｜数据、对齐、人机交互、多模态与应用](#topic-supplement)
 - [课程原始目录与版本说明](#courses)
 - [缺失、仅视频和未来课程](#missing)
+- [官方实战课程补充（2026-11-07）](#official-practical-2026-11-07)
 - [核验局限与待补齐项](#limitations)
 - [如何添加到 Project Sources](#project-sources)
 
@@ -3223,6 +3224,40 @@ Agent loop、工作流、状态与控制流、DSPy、LangGraph、OpenHands、Pyd
 | <a id="h26-18"></a>H26-18<br>2026-11-16 | Efficient LLM serving: KV-cache optimization and model architectures | Optimization、Production / Reliability / Security / Infra、LLM Foundations | 计划课程，2026-10-23 尚未开讲；未发现公开讲义；[原目录](https://cs2680.seas.harvard.edu/) |
 | <a id="h26-19"></a>H26-19<br>2026-11-23 | Efficient agentic system: routing and load balancing | 补充主题 | 计划课程，2026-10-23 尚未开讲；未发现公开讲义；[原目录](https://cs2680.seas.harvard.edu/) |
 | <a id="h26-20"></a>H26-20<br>2026-11-30 | Efficient agentic systems: others | Agent Architecture / Orchestration | 计划课程，2026-10-23 尚未开讲；未发现公开讲义；[原目录](https://cs2680.seas.harvard.edu/) |
+
+<a id="official-practical-2026-11-07"></a>
+## 官方实战课程补充｜Agent Frameworks / Deep Agents（2026-11-07 新增）
+
+> **维护元数据**：语义化版本 **v1.1.0**；本次核验日期 **2026-11-07**；更新日期 **2026-11-07**；以下各条添加日期均为 **2026-11-07**。此版本号为后续增量维护起点，不追溯改写 2026-10-23 的历史统计口径。此节为厂商官方实战课程，**不计入**上文 21 个大学课程版本、377 条课堂／专题记录及其文档 URL 统计。官方网页及 GitHub README 已核对课程描述和资源存在；**未逐个下载或执行全部 notebooks**，故不标为已验证 PDF/PPTX。
+
+### LC-DEEP-01 · Deep Agents from Scratch（LangChain 官方代码教程）
+
+- **来源／学期**：LangChain 官方开源教程；持续维护，无大学学期编号。
+- **课程及代码**：[官方 GitHub 仓库](https://github.com/langchain-ai/deep-agents-from-scratch)。
+- **内容**：5 个渐进式 Jupyter notebooks：`0_create_agent.ipynb`（ReAct / agent loop）、`1_todo.ipynb`（task planning）、`2_files.ipynb`（filesystem / context offloading）、`3_subagents.ipynb`（独立上下文与 delegation）、`4_full_agent.ipynb`（综合 research agent）。
+- **Topic**：[Agent Architecture](#topic-architecture)、[Context Engineering](#topic-context)、[Memory / Skills](#topic-memory)、[Multi-Agent](#topic-multi)、[Tool Use / MCP](#topic-tools)、[Coding Agents](#topic-coding)（后者为可迁移的 agent harness 模式，并非专门的 coding-agent 课程）。
+- **核验状态**：2026-11-07 公开 GitHub README 可检索，具体 notebooks 内容及运行结果未逐项检查；运行示例可能需要模型与搜索服务 API Key。
+- **添加日期**：2026-11-07。
+
+### LC-DEEP-02 · Introduction to Deep Agents（LangChain Academy）
+
+- **来源／学期**：LangChain Academy 官方课程；无大学学期编号。
+- **课程**：[官方课程目录](https://academy.langchain.com/courses/foundation-introduction-to-deepagents)；**配套代码**：[官方课程仓库 langchain-ai/lca-deepagents](https://github.com/langchain-ai/lca-deepagents)。
+- **内容**：Agent harness、Tools 与 MCP、threads/checkpointers、human-in-the-loop、filesystem backends 与 sandbox、summarization、Skills / Memory、subagent delegation / dynamic subagents、local deployment 与 asynchronous subagents；课程目录同时提供 Python 与 TypeScript setup。
+- **Topic**：[Agent Architecture](#topic-architecture)、[Tool Use / MCP](#topic-tools)、[Context Engineering](#topic-context)、[Memory / Skills](#topic-memory)、[Multi-Agent](#topic-multi)、[Production](#topic-production)。
+- **核验状态**：2026-11-07 官方课程目录与官方 GitHub README 可检索；未逐课登录观看或运行全部代码；课程内容免费不代表练习使用的第三方模型/API 必然免费。
+- **添加日期**：2026-11-07。
+
+**按 Topic 快速定位（本节新增资源）**
+
+| Topic | 官方实战资源 | 学习重点 |
+|---|---|---|
+| Agent Frameworks / Orchestration | LC-DEEP-01、LC-DEEP-02 | Agent loop、planning、harness |
+| Multi-Agent | LC-DEEP-01、LC-DEEP-02 | subagents、delegation、context isolation |
+| MCP / Tool Calling | LC-DEEP-02 | tools、MCP integration |
+| Memory / Context Engineering | LC-DEEP-01、LC-DEEP-02 | filesystem、summarization、Skills、checkpointers |
+| Coding Agents | LC-DEEP-01（相关架构） | 长任务与文件工具模式，可迁移至 coding agents |
+| Production | LC-DEEP-02 | sandbox、HITL、deployment、async subagents |
 
 <a id="limitations"></a>
 ## 核验局限与待补齐项
