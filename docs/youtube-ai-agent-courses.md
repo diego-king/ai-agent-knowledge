@@ -2,7 +2,7 @@
 
 > **范围**：面向有软件工程基础、但刚开始系统学习 AI Agent 的学习者；优先 **General-purpose AI Agent Engineering** 的短视频，而非 Voice / Vision / Multimodal 专项。与仅收录大学课程的 `docs/university-ai-agent-courses.md` 严格分离。
 >
-> **更新日期**：2026-11-07 · **版本**：v1.2 · **状态**：新选课标准已生效，首批 21 节候选课程按 Topic 收录；尚未逐条完成官方元数据复核的候选统一标记 `Needs Review`，不冒充 `Current`。
+> **更新日期**：2026-11-07 · **版本**：v1.3 · **状态**：新选课标准已生效，首批 21 节候选课程按 Topic 收录；尚未逐条完成官方元数据复核的候选统一标记 `Needs Review`，不冒充 `Current`。
 >
 > **唯一维护路径**：`diego-king/ai-agent-knowledge` / `main` / `docs/youtube-ai-agent-courses.md`。每次提交前读取最新全文与 blob SHA，原路径合并，不创建副本。
 
@@ -99,7 +99,7 @@
 | **A** | [How to add persistent memory to your AI agent](https://www.youtube.com/watch?v=HDqzJJhZsxw) | 7:24 | AI Agent Crash Course · **已翻译（zh-CN）** | Session Persistence、跨会话恢复；区别于语义记忆 |
 | **A** | [AI agent long-term memory with memory bank](https://www.youtube.com/watch?v=KZPo15M2DbM) | 6:44 | AI Agent Crash Course · **已翻译（zh-CN）** | Long-term Memory、Memory Bank、Semantic Recall |
 | **A** | [Context engineering explained: What every AI developer should know](https://www.youtube.com/watch?v=BBPQYtR7oUk) | 10:05 | Modern AI Agents | Context Selection、Compression、Isolation；Context vs Prompt Engineering |
-| **B** | [AI Agent Memory Architecture: Structured SQL, Semantic Vector Search & Memory Bank](https://www.youtube.com/watch?v=8C4bh59FtsI) | 12:26 | The Omni App | SQL 精确事实 + Vector 语义检索 + Memory Bank、Async Extraction；Voice 案例，但**架构通用** |
+| **B** | [AI Agent Memory Architecture: Structured SQL, Semantic Vector Search & Memory Bank](https://www.youtube.com/watch?v=8C4bh59FtsI) | 12:26 | The Omni App · **已翻译（Mandarin）** | SQL 精确事实 + Vector 语义检索 + Memory Bank、Async Extraction；Voice 案例，但**架构通用** |
 
 ### 2.5 Multi-Agent Systems
 
@@ -139,7 +139,9 @@
 | [HDqzJJhZsxw](https://www.youtube.com/watch?v=HDqzJJhZsxw) · Persistent memory | **Translated** | zh-CN | \`b5095067e5d88966ff36399a2d599026-zh_zh-CN\` | [中文 MP4](https://resource2.heygen.ai/video_translate/b5095067e5d88966ff36399a2d599026-zh_zh-CN/original.mp4) |
 | [KZPo15M2DbM](https://www.youtube.com/watch?v=KZPo15M2DbM) · Long-term memory bank | **Translated** | zh-CN | \`9fa3f46c520142437236c86d3179ef70-zh_zh-CN\` | [中文 MP4](https://resource2.heygen.ai/video_translate/9fa3f46c520142437236c86d3179ef70-zh_zh-CN/original.mp4) |
 
-**未来操作规范**：新视频默认 \`Not Translated\`；提交后记录 \`Submitted/Running\` 和 HeyGen ID；确认成功后改为 \`Translated\` 并保存结果 URL；失败标记 \`Failed\`。每次更新先读取 main 最新文件、按 YouTube ID 合并原路径，不复制条目。结果 URL 可能随 HeyGen 保留策略失效，翻译状态和任务 ID 仍须保留以防重复扣费。
+| [8C4bh59FtsI](https://www.youtube.com/watch?v=8C4bh59FtsI) · AI Agent Memory Architecture: Structured SQL, Semantic Vector Search & Memory Bank | **Translated** | Mandarin | `ca1aaca42e4b49d18d75abcce9f38da4-zh` | [中文 MP4](https://resource2.heygen.ai/video_translate/ca1aaca42e4b49d18d75abcce9f38da4-zh/original.mp4) |
+
+**未来操作规范**：新视频默认 \`Not Translated\`；提交后记录 \`Submitted/Running\` 和 HeyGen ID；确认成功后改为 \`Translated\` 并保存结果 URL；失败标记 \`Failed\`。每次更新先读取 main 最新文件，并检查 HeyGen 账号历史作品（包括非本次对话创建的任务），按 YouTube ID 合并原路径，不复制条目。结果 URL 可能随 HeyGen 保留策略失效，翻译状态和任务 ID 仍须保留以防重复扣费。
 
 ## 3. 第一轮学习路线（精选 11 节，约 89 分钟）
 
