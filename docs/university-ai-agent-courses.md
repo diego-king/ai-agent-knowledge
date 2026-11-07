@@ -71,6 +71,17 @@
 | UA25 | UC San Diego · CSE291 · AI Agents（Prithviraj Ammanabrolu） | 2025 冬 | 16 / 16 | [课程目录](https://pearls-lab.github.io/ai-agents-course/lectures.html) |
 | H26 | Harvard · CS2680 · Modern AI Systems: Agents and System Optimizations | 2026 秋 | 12 / 22 | [课程目录](https://cs2680.seas.harvard.edu/) |
 
+### 2026-11-07 增量核验：新增大学课程目录（v1.1.0）
+
+> **核验日期 / 更新日期**：2026-11-07；**条目添加日期**：2026-11-07。以下为本次新增的 **2 个大学课程版本**，仅计入此后增量；上文“21 个课程版本、377 条记录”等统计属于 **2026-10-23 历史基线**，不回溯修改。当前仅核验官方课程身份、学期和 syllabus / schedule 页面；**未取得并验证逐讲 PDF/PPTX 直链**，不得计入“已验证课件”数量，也不将课程阅读清单中的外部论文当成大学讲义。
+
+| 增量编码 | 学校／课程 | 学期 | 主题（交叉索引） | 大学或教师官方来源 | 资源状态 |
+|---|---|---|---|---|---|
+| S146S26 | Stanford · CS146S · The Modern Software Developer（Mihail Eric） | 2026 秋 | [Coding Agents](#topic-coding)、[Tool Use / MCP](#topic-tools)、[Context Engineering](#topic-context)、[Production](#topic-production) | [官方课程站 / Syllabus](https://themodernsoftware.dev/)；[Stanford 课程目录](https://www.stanfordroot.com/CS146S) | **课程身份及 syllabus 已核验**；具体 2026 slides、课程代码直链待逐条核验 |
+| S329A25 | Stanford · CS329A · Self-Improving AI Agents（Aakanksha Chowdhery、Azalia Mirhoseini） | 2025 秋 | [Reasoning / Planning](#topic-reasoning)、[Optimization](#topic-optimization)、[Memory](#topic-memory)、[Evaluation](#topic-eval)、[Coding Agents](#topic-coding) | [官方课程网站及逐讲日程 / Readings](https://cs329a.stanford.edu/)；[Stanford 官方课程目录](https://bulletin.stanford.edu/courses/2263721) | **课程身份及 syllabus / readings 已核验**；外部论文不是官方课件，slides / 教学代码尚待核验 |
+
+**本轮去重与边界**：CS146S 聚焦 coding-agent-driven 软件开发流程，与既有 Stanford CS329Z 的通用 agent engineering 不同；CS329A 聚焦 self-improvement、test-time compute、verifiers 和 RL，与 CS329Z 不同。两者均为大学正式课程，不属于厂商培训。2026-11-07 仅新增课程级目录，不虚构 lecture 资源 URL 或将非大学 YouTube 短课混入本索引。
+
 版本辨析：CS329T 本版采用 2025 秋季面向 Agent 构建与评估的 syllabus，不能与 2021 年 Trustworthy ML 老版本混用。CS224G、CS329X、CS336 均保留 2025 和 2026 版本。CMU 11-766 的旧版常见课号为 11-667，本版不把它写成同一学期。UIUC CS598 是专题课号，本版特指 Jiaxuan You 的 Topics in LLM Agents，不混入其他 CS598 班。
 
 UCSD 特别注意：2026 春 CSE/DSC234（Arun Kumar）侧重 Data-Centric AI / AI Engineering；2025 冬 CSE234（Hao Zhang）侧重 ML Systems。CSE291A 另分别有 Yiying Zhang 的 Systems for LLMs and AI Agents 与 Prithviraj Ammanabrolu 的 AI Agents。Yiying Zhang 的 [2026 秋主页](https://cseweb.ucsd.edu/~yiying/cse291a-fall26/)已确认存在，但本次无法读取其 lecture 目录，未把 2025 讲义冒充为 2026。
