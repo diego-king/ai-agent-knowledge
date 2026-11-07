@@ -2,7 +2,7 @@
 
 > **范围**：面向有软件工程基础、但刚开始系统学习 AI Agent 的学习者；优先 **General-purpose AI Agent Engineering** 的短视频，而非 Voice / Vision / Multimodal 专项。与仅收录大学课程的 `docs/university-ai-agent-courses.md` 严格分离。
 >
-> **更新日期**：2026-11-07 · **版本**：v1.4 · **状态**：新选课标准已生效，原有 21 节及新增 RAG/Graph 候选按 Topic 收录；尚未逐条完成官方元数据复核的候选统一标记 `Needs Review`，不冒充 `Current`。
+> **更新日期**：2026-11-07 · **版本**：v1.5 · **状态**：新选课标准已生效，原有 21 节及新增 RAG/Graph 候选按 Topic 收录；尚未逐条完成官方元数据复核的候选统一标记 `Needs Review`，不冒充 `Current`。
 >
 > **唯一维护路径**：`diego-king/ai-agent-knowledge` / `main` / `docs/youtube-ai-agent-courses.md`。每次提交前读取最新全文与 blob SHA，原路径合并，不创建副本。
 
@@ -61,7 +61,7 @@
 
 ## 2. 按 Topic 的 25 节候选索引（2026-11-07）
 
-**原始 21 节统计（保留历史基线）**：AI Agent Crash Course **11**、Modern AI Agents: From Theory to Production **6**、The Agent Factory **3**、The Omni App **1**。原始候选中 **18 节 ≤20 分钟**、**3 节 20–30 分钟**。本次另新增 **4 节候选（RAG 2 + Graph 2）**，合计 **25 节**；新增视频精确时长未全部核验，不计入原始时长统计。全部为候选，**统一元数据状态：`Needs Review`（最后候选整理：2026-11-07）**；部分视频链接和时长已交叉核对，但并非全部完成 YouTube 官方页面/发布日期核验，不应错误展示为正式“已验证”。
+**原始 21 节统计（保留历史基线）**：AI Agent Crash Course **11**、Modern AI Agents: From Theory to Production **6**、The Agent Factory **3**、The Omni App **1**。原始候选中 **18 节 ≤20 分钟**、**3 节 20–30 分钟**。本次另新增 **4 节候选（RAG 2 + Graph 2）**，合计 **25 节**；新增视频已核对时长区间，Google RAG 精确总时长仍待核验，不计入原始时长统计。全部为候选，**统一元数据状态：`Needs Review`（最后候选整理：2026-11-07）**；部分视频链接和时长已交叉核对，但并非全部完成 YouTube 官方页面/发布日期核验，不应错误展示为正式“已验证”。
 
 以下 **A / B** 为学习优先级初筛；具体分项评分待核验后补写。YouTube 链接为**单视频直达链接**，不以搜索结果 URL 冒充已确定的视频 ID。
 
@@ -86,8 +86,8 @@ Agent Loop 负责迭代决策与工具调用；Graph 定义 Nodes、Edges、Rout
 
 | 级别 | 视频 | 时长 | 来源 | 中文核心知识点 | 元数据状态 |
 |---|---|---:|---|---|---|
-| **A** | [Graph Engineering 101](https://www.youtube.com/watch?v=IrW0_f-w4kA) | 待核（须确认 ≤30 分钟） | Google Cloud Tech | Graph vs Loop、Fan-out、Join、Router | Needs Review |
-| **B** | [Graph Engineering with ADK](https://www.youtube.com/watch?v=Mzr7byMFy_4) | 待核（须确认 ≤30 分钟） | Google Cloud Tech | Node、Parallel、Join、Deterministic / LLM Router | Needs Review |
+| **A** | [Graph Engineering 101](https://www.youtube.com/watch?v=IrW0_f-w4kA) | **5:56** | Google Cloud Tech | Graph vs Loop、Fan-out、Join、Router | Needs Review |
+| **B** | [Graph Engineering with ADK](https://www.youtube.com/watch?v=Mzr7byMFy_4) | **6:10** | Google Cloud Tech | Node、Parallel、Join、Deterministic / LLM Router | Needs Review |
 
 ### 2.3 Tool Calling & MCP
 
@@ -123,8 +123,8 @@ RAG 是独立知识主题：Retrieval Pipeline、Embedding、Chunking、Vector /
 
 | 级别 | 视频 | 时长* | 来源 | 中文核心知识点 | 元数据状态 |
 |---|---|---:|---|---|---|
-| **A** | [How to use Retrieval Augmented Generation (RAG)](https://www.youtube.com/watch?v=oVtlp72f9NQ) | 约 6–7 分钟（精确待核） | Google Cloud Tech · 2024-10-24 | RAG 数据流、Retrieval + Generation、质量优化；新手主线 | Needs Review |
-| **B** | [What is Agentic RAG?](https://www.youtube.com/watch?v=0z9_MhcYvcY) | 待核（须确认 ≤30 分钟） | IBM Technology · 2024-10-28 | Agent 参与检索决策；与基础 RAG 对比；与前一节互补 | Needs Review |
+| **A** | [How to use Retrieval Augmented Generation (RAG)](https://www.youtube.com/watch?v=oVtlp72f9NQ) | 约 6 分钟（官方章节至 6:05，精确总长待核） | Google Cloud Tech · 2024-10-24 | RAG 数据流、Retrieval + Generation、质量优化；新手主线 | Needs Review |
+| **B** | [What is Agentic RAG?](https://www.youtube.com/watch?v=0z9_MhcYvcY) | **5:42** | IBM Technology · 2024-10-28 | Agent 参与检索决策；与基础 RAG 对比；与前一节互补 | Needs Review |
 
 下一步优先寻找通用的 Chunking、Hybrid Search / Reranking、RAG Evaluation 短课，避免重复纯框架 Demo。
 
