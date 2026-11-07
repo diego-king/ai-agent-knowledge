@@ -1,101 +1,181 @@
 # AI Agent YouTube 精品短课索引（按 Topic 分类）
 
-> **范围**：YouTube 上的 AI Agent / LLM Engineering 概念教学短课；**单个视频时长 ≤ 30:00**。优先 Google for Developers、Google Cloud Tech、OpenAI、Anthropic 等官方频道及可信教育者。与仅收录大学课程的 `university-ai-agent-courses.md` 严格分离。
+> **范围**：面向有软件工程基础、但刚开始系统学习 AI Agent 的学习者；优先 **General-purpose AI Agent Engineering** 的短视频，而非 Voice / Vision / Multimodal 专项。与仅收录大学课程的 `docs/university-ai-agent-courses.md` 严格分离。
 >
-> **更新日期**：2026-11-07 · **版本**：v1.0 · **状态**：索引框架已建立，待首次完成逐条核验的视频收录。
+> **更新日期**：2026-11-07 · **版本**：v1.1 · **状态**：新选课标准已生效，首批 21 节候选课程按 Topic 收录；尚未逐条完成官方元数据复核的候选统一标记 `Needs Review`，不冒充 `Current`。
 >
-> **唯一维护路径**：`docs/youtube-ai-agent-courses.md`（GitHub main）；每次更新先读取最新内容和 SHA，在原文件合并，不创建副本。
+> **唯一维护路径**：`diego-king/ai-agent-knowledge` / `main` / `docs/youtube-ai-agent-courses.md`。每次提交前读取最新全文与 blob SHA，原路径合并，不创建副本。
 
-## 收录标准与评分
+## 1. 新手优先：选课标准（每次人工或自动更新必须执行）
 
-- **时长硬限制**：≤ 30:00（30:00 可收录；30:01 不可）。
-- **形式**：课程式概念解释、原理、架构、图解、案例分析为主；排除逐行读代码、长时间 IDE 操作、纯 Demo、营销、产品广告、无实质教学内容。
-- **真实性**：逐条验证视频 URL、频道身份、发布日期、准确时长、视频是否仍可访问；无法验证不收录。
-- **优先推荐**：综合评分 ≥ 80/100；概念清晰度 35、技术准确性 25、课程结构 20、Agent Engineer 实用性 20。评分为编辑判断，非 YouTube 官方评分。
-- **避免重复**：以 YouTube Video ID 去重；同一视频只在最相关的主 Topic 收录，其他 Topic 可使用内部交叉链接。
-- **新增候选**：每次优先检索最近 14 天发布的视频；若不足则如实说明，不用旧视频冒充新发布。
-- **语言**：中文解释，保留必要英文技术名词。
+### 1.1 学习目标、优先级
 
-## 时效与复核
+- **学习路径**：Beginner → General AI Agent Engineer → Production-ready Agent Systems。已有编程背景，但 AI Agent 知识从基础开始；按知识依赖推荐，不要求每个 Playlist 全看。
+- **核心必修**：Agent Fundamentals、LLM / Agent / Workflow 区别、ReAct / Agent Loop、Tool / Function Calling、MCP、Context Engineering、Session / State / Memory、Design Patterns、Multi-Agent、Agent Evaluation / Reliability / Safety。
+- **逐步补充**：RAG / Agentic RAG、Router / Worker、Event-driven / Long-running Agent、Persistence / Retry、Human-in-the-loop、Tracing / Observability、Production Engineering。
+- **通用性优先**：先学可迁移到 LangGraph、Google ADK、OpenAI Agents SDK 的概念，再选学具体 Framework / Cloud API 实操；避免被单一厂商技术栈绑住。
+- **暂缓专项**：Voice AI、Vision AI、Gemini Live、音视频流处理、实时多模态、单一产品使用演示、营销宣传及纯 Coding Demo。只有具备明确跨场景价值（例如通用 SQL / Vector / Memory Bank 架构）的专项视频才可作为 **B 补充** 收录，不进入通用新手主线。
 
-| 内容类型 | 复核建议 | 过时判定 |
+### 1.2 时长与教学形式
+
+- **首选 ≤ 20:00**，尤其是能完整解释一个问题的 5–15 分钟课程。
+- **20:01–30:00** 仅当概念深度、跨框架价值明显、且缺少更短且同样清晰的替代课程时收录；默认标 B 补充。
+- **硬上限 ≤ 30:00**；30:01 起不得纳入主索引。
+- 以原理解释、架构图、设计权衡、概念对比为主；可以少量代码辅助，但不收以 IDE 跟练、逐行 Coding 为主体的视频。
+- 不因出自官方频道或属于某个播放列表就自动全收；**逐个视频独立评分**。
+
+### 1.3 硬性核验与评分
+
+**正式标记 `Current` / `Evergreen` 前必须确认**：直接 YouTube 视频 URL / Video ID、真实频道、可访问性、发布日期、准确时长、内容与标题及收录主题相符；框架 / API 内容还需对照当前官方文档。证据不足保留在候选表并标记 `Needs Review`，不能宣称已核验。
+
+| 评分维度 | 权重 | 判断原则 |
+|---|---:|---|
+| 新手适用性与通用 Agent 相关性 | **30** | 基础性、可迁移性；专项 Voice / Vision 降低权重 |
+| 技术准确性与时效 | **25** | 原理正确；MCP、SDK、云服务需核对最新官方文档 |
+| 讲解清晰度 | **20** | 定义、图解、示例、设计权衡 |
+| 课程结构与系统性 | **15** | 知识衔接、独立完整、不重复 |
+| 时长与信息密度 | **10** | ≤20 分钟优先；20–30 分钟须有显著价值 |
+| **合计** | **100** | **A ≥85（主线优先）**；**B 75–84（补充）**；**C <75（暂缓/排除）** |
+
+评分是编辑判断，非 YouTube 官方评分。初筛 A/B 是依据主题的**推荐级别**，不是未经复核的视频真实性评分；只有核验完毕才能给出完整分项数值。
+
+### 1.4 双层去重（每次更新必做）
+
+1. **硬去重：Video ID**。规范化 youtu.be / watch / share / 参数链接，提取 11 字符 YouTube Video ID；全文扫描主 Topic、交叉引用、历史条目和归档。同一个 ID 仅有一个正式主条目。
+2. **语义去重：同一知识点**。比较新课程与已有条目的学习目标、关键概念、教学深度和目标人群，而不只比较标题。若是换标题重讲同一主题，优先保留更短、清晰、较新、准确的课程；另一条如有独立价值才列为 B 级替代课程，并注明“内容重叠 / 二选一”。
+3. **跨 Topic / Playlist**：同一视频只挂一个主 Topic；其他地方用内部链接或简单引用，不重复建立条目。任何播放列表都不能绕过去重。
+4. **每月添加节制**：优先新增最多 **5 节真正高价值、非重复** 精品短课；没有符合条件的新课就写“本月无新增”，不得为了数量凑课程或重收旧课。
+
+### 1.5 视频元信息和维护
+
+每个条目至少保存英文标题、完整直达 URL、时长、来源频道、系列、中文知识点、推荐级别、主 Topic、时效状态、核验日期。发布日期、细分评分、实际播放时长如果无法核准，必须标明待核实，**不得填猜测**。
+
+| 内容类型 | 深度复核建议 | 主要风险 |
 |---|---|---|
-| Agent Fundamentals、ReAct、RAG 基础原理 | 每 6 个月 | 概念性错误或已有重要新共识 |
-| Architecture、MCP、Context Engineering、Multi-Agent | 每 3 个月 | 标准、能力、推荐实践发生实质变化 |
-| ADK、Agents SDK、具体框架/API/版本 | 每次双周扫描检查 | API 废弃、示例与当前版本不兼容、官方替代方案出现 |
-| 所有视频 | 每两周检查可用性及明显时效问题 | 删除、私有化、无法访问、标题/内容严重不符 |
+| Agent Fundamentals、ReAct、RAG 原理 | 每 6 个月 | 核心概念明显错误 |
+| Architecture、MCP、Context / Memory、Multi-Agent | 每 3 个月 | 协议或最佳实践实质变化 |
+| ADK、Agents SDK、LangGraph、Cloud API、具体代码 | **每月扫描时** 与官方文档对照 | SDK / API 过时、示例无法复现 |
+| 视频可用性和明显过时信号 | **每月扫描时** | 私有化、删除、内容失配 |
 
-**状态**：`Current`（当前可推荐）、`Evergreen`（经典基础内容仍准确）、`Needs Review`（待核实）、`Outdated`（已过时；从主推荐区移至归档）、`Unavailable`（失效；保留简要记录便于审计）。
+状态：`Current`、`Evergreen`、`Needs Review`、`Outdated`、`Unavailable`。经典原理不因发布时间较早而自动归档；确实过时的课程注明原因并移至文末归档，保留可追溯记录。
 
-不要仅凭发布时间将经典原理视频判定为过时；也不要因为视频新就认定其技术准确。对于框架教程，核对官方文档/版本及视频具体主张；无法核实标记 `Needs Review`，不得写成 `Current`。
+## 2. 今日课程：21 节 Topic 候选索引（2026-11-07）
 
-## 主题索引
+**来源统计**：AI Agent Crash Course **11**、Modern AI Agents: From Theory to Production **6**、The Agent Factory **3**、The Omni App **1**。其中 **18 节 ≤20 分钟**、**3 节 20–30 分钟**。全部为候选，**统一元数据状态：`Needs Review`（最后候选整理：2026-11-07）**；部分视频链接和时长已交叉核对，但并非全部完成 YouTube 官方页面/发布日期核验，不应错误展示为正式“已验证”。
 
-### 1. AI Agent Fundamentals
-Agent 与 Workflow 的区别、LLM 决策循环、ReAct、Planning、工具使用基础。
+以下 **A / B** 为学习优先级初筛；具体分项评分待核验后补写。YouTube 链接为**单视频直达链接**，不以搜索结果 URL 冒充已确定的视频 ID。
 
-_待收录已核验课程。_
+### 2.1 AI Agent Fundamentals
 
-### 2. Agent Architecture
-Router / Worker、Orchestration、Event-driven Agent、状态与执行模型。
+| 级别 | 视频（YouTube 直达） | 时长* | 系列 | 中文核心知识点 |
+|---|---|---:|---|---|
+| **A** | [AI agents explained: Build your first agent in 8 minutes](https://www.youtube.com/watch?v=Zqno_vux6d8) | 8:29 | Modern AI Agents | LLM vs Agent、ReAct、Planning、简单 Agent 构建；后半段 ADK 实操可选看 |
+| **A** | [AI agent design patterns](https://www.youtube.com/watch?v=GDm_uH6VxPY) | 8:21 | AI Agent Crash Course | Single / Sequential / Parallel、Workflow vs Agent |
+| **A** | [3 Advanced AI agent design patterns](https://www.youtube.com/watch?v=89KKm_a4M7A) | 8:00 | AI Agent Crash Course | Loop、Coordinator / Router、Agent-as-Tool |
 
-_待收录已核验课程。_
+### 2.2 Agent Architecture
 
-### 3. Tool Calling & MCP
-Function Calling、Tool Discovery、Model Context Protocol、工具权限与边界。
+| 级别 | 视频 | 时长* | 系列 | 中文核心知识点 |
+|---|---|---:|---|---|
+| **A** | [Workflow agents and communication in ADK](https://www.youtube.com/watch?v=WfJcCeLZD2I) | 4:53 | AI Agent Crash Course | Sequential / Parallel / Loop、Shared Session State、Delegation、Agent-as-Tool |
+| **B** | [Agents, their frameworks and when to use them](https://www.youtube.com/watch?v=aLYrV61rJG4) | 27:46 | The Agent Factory | 是否需要框架；LangGraph / CrewAI / ADK 的架构权衡；偏进阶长访谈 |
 
-_待收录已核验课程。_
+### 2.3 Tool Calling & MCP
 
-### 4. Context Engineering & Memory
-Context Window、记忆、压缩、检索、上下文管理。
+| 级别 | 视频 | 时长* | 系列 | 中文核心知识点 |
+|---|---|---:|---|---|
+| **A** | [How Model Context Protocol (MCP) actually works](https://www.youtube.com/watch?v=cGuyrANVi4A) | 7:58 | Modern AI Agents | MCP Client / Server / Tools、协议价值 |
+| **A** | [MCP vs API: Why traditional APIs are failing AI agents](https://www.youtube.com/watch?v=185XGEMefgc) | 12:25 | Modern AI Agents | MCP 与 API 的职责比较；注意：**MCP 并不替代 API**，标题较夸张 |
+| **B** | [Building your own MCP server with ADK](https://www.youtube.com/watch?v=XwlVHm3JKWU) | 9:02 | AI Agent Crash Course | MCP Server 及 ADK 示例；先学协议概念 |
+| **B** | [Connecting ADK Agents to MCP Servers](https://www.youtube.com/watch?v=JnKkdHaatwU) | 7:39 | AI Agent Crash Course | MCP Client 连接与 MCPToolset；版本细节需复查 |
+| **B** | [How to build an AI Agent and MCP Server (step-by-step)](https://www.youtube.com/watch?v=wBnnA8aIxUs) | 7:54 | Modern AI Agents | Agent + MCP 实操；**与前两节 MCP 实操部分重叠，二选一即可** |
+| **B** | [Building custom tools for agents](https://www.youtube.com/watch?v=NiLb5DK4_rU) | 22:09 | The Agent Factory | Function / MCP / Agent-as-Tool / Authenticated Tool 的选择；较长，第二轮 |
 
-_待收录已核验课程。_
+### 2.4 Context Engineering & Memory
 
-### 5. Multi-Agent Systems
-Agent Teams、协作、任务分配、并行执行、共享状态。
+| 级别 | 视频 | 时长* | 系列 | 中文核心知识点 |
+|---|---|---:|---|---|
+| **A** | [How to add short-term memory to your AI agent](https://www.youtube.com/watch?v=vfVcDUCucSs) | 6:03 | AI Agent Crash Course | Session / Event / State、当前会话记忆 |
+| **A** | [How to add persistent memory to your AI agent](https://www.youtube.com/watch?v=HDqzJJhZsxw) | 7:24 | AI Agent Crash Course | Session Persistence、跨会话恢复；区别于语义记忆 |
+| **A** | [AI agent long-term memory with memory bank](https://www.youtube.com/watch?v=KZPo15M2DbM) | 6:44 | AI Agent Crash Course | Long-term Memory、Memory Bank、Semantic Recall |
+| **A** | [Context engineering explained: What every AI developer should know](https://www.youtube.com/watch?v=BBPQYtR7oUk) | 10:05 | Modern AI Agents | Context Selection、Compression、Isolation；Context vs Prompt Engineering |
+| **B** | [AI Agent Memory Architecture: Structured SQL, Semantic Vector Search & Memory Bank](https://www.youtube.com/watch?v=8C4bh59FtsI) | 12:26 | The Omni App | SQL 精确事实 + Vector 语义检索 + Memory Bank、Async Extraction；Voice 案例，但**架构通用** |
 
-_待收录已核验课程。_
+### 2.5 Multi-Agent Systems
 
-### 6. RAG & Knowledge Retrieval
-Retrieval、Embedding、Chunking、Reranking、Agentic RAG。
+| 级别 | 视频 | 时长* | 系列 | 中文核心知识点 |
+|---|---|---:|---|---|
+| **A** | [Foundations of multi-agent systems with ADK](https://www.youtube.com/watch?v=pX0_iIfRilU) | 5:17 | AI Agent Crash Course | 多 Agent 协作、LLM / Workflow / Custom Agent、Hierarchy |
+| **B** | [Multi-agent systems, concepts & patterns](https://www.youtube.com/watch?v=TGNScswE0kU) | 23:06 | The Agent Factory | Supervisor / Swarm、协作、Context 分工；第二轮 |
 
-_待收录已核验课程。_
+### 2.6 RAG & Knowledge Retrieval
 
-### 7. Agent Evaluation & Safety
-评估指标、Tracing、可靠性、Prompt Injection、安全与权限。
+本轮暂无足够符合“**新手 + 通用 Agent + ≤20 分钟**”的独立 RAG 候选。未来补齐 Retrieval Pipeline、Embeddings、Chunking、Reranking、Agentic RAG、Retrieval Evaluation；**不将 Memory 视频充当 RAG 教学**。
 
-_待收录已核验课程。_
+### 2.7 Agent Evaluation & Safety
 
-### 8. Agent Frameworks
-Google ADK、OpenAI Agents SDK、LangGraph 等框架的概念和架构课程；不收纯 Coding Demo。
+| 级别 | 视频 | 时长* | 系列 | 中文核心知识点 |
+|---|---|---:|---|---|
+| **A** | [The agent evaluation revolution](https://www.youtube.com/watch?v=WZZLtwnZ4w0) | 8:32 | AI Agent Crash Course | Agent 全过程/工具/状态评估，不只评价最终回答 |
+| **A** | [How to evaluate agents in practice](https://www.youtube.com/watch?v=vuBvf7ZRKTA) | 10:53–10:54（待核） | AI Agent Crash Course | Component / Trajectory / Human Evaluation |
 
-_待收录已核验课程。_
+**后续优先补齐**：Prompt Injection、Tool Permissions、Guardrails、Tracing、Agent Reliability。安全内容不能只看一个 Evaluation 视频就视为完整覆盖。
 
-## 视频条目模板（每个视频填写）
+### 2.8 Agent Frameworks & Deployment
 
-```markdown
-#### 视频英文标题（中文主题）
-- **YouTube**: https://www.youtube.com/watch?v=<verified-video-id>
-- **频道 / 发布日期**: <official-channel> / YYYY-MM-DD
-- **时长**: MM:SS（≤ 30:00）
-- **评分**: XX/100（概念 XX/35、准确 XX/25、结构 XX/20、实用 XX/20）
-- **核心知识点**: ...
-- **适合人群与推荐理由**: ...
-- **代码演示比例**: 低 / 中（以概念讲解为主）
-- **涉及框架 / 版本**: ...
-- **时效状态**: Current / Evergreen / Needs Review / Outdated / Unavailable
-- **最后核验**: YYYY-MM-DD
-- **核验依据**: 视频页面 + 必要时的官方技术文档
-```
+| 级别 | 视频 | 时长* | 系列 | 中文核心知识点 |
+|---|---|---:|---|---|
+| **B** | [How to deploy an AI agent to Cloud Run (step by step)](https://www.youtube.com/watch?v=bjZ2M7ThOBc) | 13:44 | Modern AI Agents | Deployment Lifecycle、Cloud Run；偏 Google Cloud 特定实现，基础学完再看 |
 
-## 每两周更新流程
+\* 时长是候选索引记录；部分来源存在 ±1 秒差异，**最终以视频页复核为准**。发布日期未逐一可靠确定，不填写假日期。候选的整体“最后整理日期”不是逐条官方核验日期。
 
-1. 读取 GitHub `main` 最新 `AGENTS.md` 与本文件（包括 SHA），保留全部既有有效条目。
-2. 搜索近 14 天官方及可信频道的 Agent 概念教学视频；核验 URL、准确时长、发布日期和教学形式，评分后按 Topic 去重合并。
-3. 对已有视频检查可访问性与技术时效，必要时查官方文档；更新状态、最后核验日期。过时视频从主推荐区转移到下方归档，不无故删除历史。
-4. 仅在确有变更时更新版本、日期并提交原路径；并发冲突时重新读取并合并。
-5. 输出中文简报：新增、保留、过时/失效、无新增、实际 Commit 链接；GitHub 写入失败时明确报告，绝不声称成功。
+## 3. 第一轮学习路线（精选 11 节，约 89 分钟）
 
-## 过时与失效视频归档
+先学通用概念，不必按播放列表一次刷完；其余 A 级课可按主题补齐：
 
-_暂无条目。_
+1. [AI agents explained](https://www.youtube.com/watch?v=Zqno_vux6d8)（8:29）— LLM / Agent / ReAct。
+2. [AI agent design patterns](https://www.youtube.com/watch?v=GDm_uH6VxPY)（8:21）— Single / Sequential / Parallel。
+3. [3 Advanced AI agent design patterns](https://www.youtube.com/watch?v=89KKm_a4M7A)（8:00）— Router / Loop / Agent-as-Tool。
+4. [How MCP actually works](https://www.youtube.com/watch?v=cGuyrANVi4A)（7:58）— MCP 角色。
+5. [MCP vs API](https://www.youtube.com/watch?v=185XGEMefgc)（12:25）— 协议边界。
+6. [Short-term memory](https://www.youtube.com/watch?v=vfVcDUCucSs)（6:03）— Session / State。
+7. [Persistent memory](https://www.youtube.com/watch?v=HDqzJJhZsxw)（7:24）— 跨会话保存。
+8. [Long-term memory](https://www.youtube.com/watch?v=KZPo15M2DbM)（6:44）— Recall / Memory Bank。
+9. [Context engineering](https://www.youtube.com/watch?v=BBPQYtR7oUk)（10:05）— Context 选择与压缩。
+10. [Foundations of multi-agent systems](https://www.youtube.com/watch?v=pX0_iIfRilU)（5:17）— Agent 分工。
+11. [The agent evaluation revolution](https://www.youtube.com/watch?v=WZZLtwnZ4w0)（8:32）— Agent 评估。
+
+**第二轮推荐**：Workflow Communication、Evaluation in Practice、MCP 实操三选一、The Omni App Memory Architecture，再酌情看 The Agent Factory 的长讨论。
+
+**轻量实战验证**：构建一个无 Voice/Vision 的 Document / Research Assistant：单 Agent + Tool → Session State → Persistence → MCP Tool →（确有必要时）Router / Worker → 10 个测试用例的 Tool Selection、成功率、失败恢复 Evaluation。
+
+## 4. 视频来源与系列入口
+
+- [Google Cloud Tech：AI Agent Crash Course 播放列表](https://www.youtube.com/playlist?list=PLIivdWyY5sqLNeW9MPxldbbevMEJGMWBG)
+- [Google Cloud Tech：The Agent Factory 播放列表](https://www.youtube.com/playlist?list=PLIivdWyY5sqLXR1eSkiM5bE6pFlXC-OSs)
+- Modern AI Agents: From Theory to Production：六节直达链接见各 Topic；未核实唯一官方 Playlist ID，不猜测。
+- The Omni App：仅纳入通用 [Memory Architecture](https://www.youtube.com/watch?v=8C4bh59FtsI)；其他 Voice / Vision 专项暂缓。
+- 技术核验：[Google ADK 官方文档](https://google.github.io/adk-docs/) · [Google Cloud Agent Architecture 官方文档](https://docs.cloud.google.com/architecture/choose-agentic-ai-architecture-components)
+
+## 5. 视频条目长期模板
+
+未来逐条核验后按主 Topic 添加标准条目（现有紧凑表格可逐步转换，不能复制重复 ID）：
+
+- **英文标题 / 直达 URL（11 字符 Video ID）**、**所属系列与频道**、**视频发布日期**、**准确时长**。
+- **主 Topic**、**中文重点 / 适合阶段**、**A/B/C 推荐级别**、**与已有课的重叠或互补关系**。
+- **综合评分及五个分项**（相关性 /30、准确性 /25、清晰度 /20、结构 /15、时长密度 /10）。
+- **所涉框架和版本**（若有）、**状态**（Current / Evergreen / Needs Review / Outdated / Unavailable）、**最后官方核验日期及依据**。
+- 无法证实的字段留空或标“待核”，不要猜测。
+
+## 6. 每月双索引更新流程（先大学、再 YouTube）
+
+1. 读取 GitHub main 最新 `AGENTS.md`、`docs/university-ai-agent-courses.md`、`docs/youtube-ai-agent-courses.md` 及 SHA；遵守大学课程与 YouTube 短视频各自的严格边界。
+2. **A 大学课程**：核实大学、正式课程身份 / 学期 / 官方课件链接，按课程+学期+URL 去重，仅在有真实新信息时合并原路径。
+3. **B YouTube**：首先重新阅读**本文件第 1 节最新标准**；优先检索上次扫描以来的新片，优先 General AI Agent 概念和 ≤20 分钟，放宽至 30 分钟需给出理由；专项 Voice / Vision 默认不收。
+4. 对每条候选核验视频 ID、频道、发布日期、时长、可访问性、实际内容；**全索引按 Video ID + 语义内容双层去重**。对同质视频只保留最有教学价值的主推荐，其他写替代或不添加；优先最多 5 条高质量新课。
+5. 既有视频每月检查可用性 / 技术时效；过时内容注明原因归档，暂无法核实则保留 `Needs Review`，不得把旧视频充作当月新增。维护按 Topic 的学习顺序与课程重叠备注。
+6. 有实质变更时重新读取最新 SHA、合并并只提交原路径；无更新则报告“无新增”。写入成功返回**实际 Commit URL**；失败如实说明。每月中文报告包括大学与 YouTube 的新增、更正、核验/过时状况、去重决策及 GitHub Commit 链接。
+
+## 7. 过时与失效视频归档
+
+_目前无已确认过时/失效条目；候选待核状态不是“已归档”。_
