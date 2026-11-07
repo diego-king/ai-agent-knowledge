@@ -3,10 +3,11 @@
 ## Canonical repository
 - GitHub: `diego-king/ai-agent-knowledge`
 - Branch: `main`
-- Only three persistent study files:
+- Persistent study files (four canonical paths):
   - Python language/general interview: `docs/python-interview.html`
   - Python data structures and algorithms: `docs/data-structures.html`
   - University AI Agent / LLM Engineering course material index, organized by topic: `docs/university-ai-agent-courses.md`
+- YouTube AI Agent conceptual short-video course index: `docs/youtube-ai-agent-courses.md` (user-authorized fourth study source; vendor/creator content is allowed here only).
 - `README.md` and this `AGENTS.md` are maintenance metadata, not additional knowledge sources.
 
 ## Required read / write workflow
