@@ -79,7 +79,9 @@
 
 **原始 21 节统计（保留历史基线）**：AI Agent Crash Course **11**、Modern AI Agents: From Theory to Production **6**、The Agent Factory **3**、The Omni App **1**。原始候选中 **18 节 ≤20 分钟**、**3 节 20–30 分钟**。此前另新增 **4 节候选（RAG 2 + Graph 2）**；本次手动扩充 **8 节 RAG 候选**，合计 **33 节**，其中 RAG 主题共 10 节；精确时长未确认时保持待核，不计入原始 21 节统计。本次专题人工补录不改变每月例行更新优先最多 5 节的规则。全部为候选，**统一元数据状态：`Needs Review`（最后候选整理：2026-11-07）**；部分视频链接和时长已交叉核对，但并非全部完成 YouTube 官方页面/发布日期核验，不应错误展示为正式“已验证”。
 
-**日期字段说明**：`待核` = 发布日期尚无充分证据；`†` = 文档已有资料给出的候选发布日期，待官方复核；`未公开` = 没有可信的内容更新日；`未完成` = 尚未做充分的逐视频技术审核，不能把文档更新日期当成审核日期。2024-10-28 的 Agentic RAG 日期已用带原视频 ID 的独立资料交叉检索。\n\n以下 **A / B** 为学习优先级初筛；具体分项评分待核验后补写。YouTube 链接为**单视频直达链接**，不以搜索结果 URL 冒充已确定的视频 ID。
+**日期字段说明**：`待核` = 发布日期尚无充分证据；`†` = 文档已有资料给出的候选发布日期，待官方复核；`未公开` = 没有可信的内容更新日；`未完成` = 尚未做充分的逐视频技术审核，不能把文档更新日期当成审核日期。2024-10-28 的 Agentic RAG 日期见 [独立视频索引](https://www.hendryadrian.com/what-is-agentic-rag/)（仍需 YouTube 官方页核实）。
+
+以下 **A / B** 为学习优先级初筛；具体分项评分待核验后补写。YouTube 链接为**单视频直达链接**，不以搜索结果 URL 冒充已确定的视频 ID。
 
 ### 2.1 AI Agent Fundamentals
 
@@ -143,7 +145,7 @@ RAG 独立覆盖 Retrieval Pipeline、Embeddings、Chunking、Hybrid Search、Re
 |---|---|---:|---|---|---|---|---|---|---|
 | **A** | [How to use Retrieval Augmented Generation (RAG)](https://www.youtube.com/watch?v=oVtlp72f9NQ) | 约6分钟（待核） |待核|未公开|未完成| **Google Cloud Tech** | 待核实 | 基础 RAG 数据流、Retrieval + Generation；与 IBM RAG 入门二选一；原有条目 | Needs Review |
 | **B · 入门替代** | [What is Retrieval-Augmented Generation (RAG)?](https://www.youtube.com/watch?v=T-D1OfcDW1M) | 6:35 |2023-08-23†|未公开|未完成| **IBM Technology** | Marina Danilevsky | 基础 RAG、检索/增强/生成、Grounded Answers；和 Google 入门视频二选一；2023-08-23 | Needs Review |
-| **A** | [What is Agentic RAG?](https://www.youtube.com/watch?v=0z9_MhcYvcY) | 5:42 |2024-10-28|未公开|未完成| **IBM Technology** | 待核实 | Agent 主动决定何时检索；原有条目；2024-10-28 | Needs Review |
+| **A** | [What is Agentic RAG?](https://www.youtube.com/watch?v=0z9_MhcYvcY) | 5:42 |2024-10-28†|未公开|未完成| **IBM Technology** | 待核实 | Agent 主动决定何时检索；原有条目；2024-10-28 | Needs Review |
 | **B · 延伸** | [RAG's Evolution: From Simple Retrieval to Agentic AI](https://www.youtube.com/watch?v=JB2P5Gk23VI) | 8:48 |2026-05-05†|未公开|未完成| **IBM Technology** | Sam Anthony | Keyword → Semantic → Hybrid → Agentic Retrieval；与 Agentic RAG 入门略有重叠，但突出检索演进；2026-05-05 | Needs Review |
 | **B · 进阶** | [Every RAG Strategy Explained in 13 Minutes (No Fluff)](https://www.youtube.com/watch?v=tLMViADvSNE) | 12:52 |2025-11-02†|未公开|未完成| **Cole Medin** | Cole Medin | Chunking、Reranking、Multi-Query、Contextual / Hierarchical / Agentic RAG；基础学完再看；2025-11-02 | Needs Review |
 | **A · 架构** | [Are Vector Databases Still Needed? RAG, AI Agents & Search](https://www.youtube.com/watch?v=rXFV1ivDe6c) | 10:01 |2026-11-05†|未公开|未完成| **IBM Technology** | Martin Keen | Vector DB vs SQL Index vs Keyword Search vs Long Context：选择与权衡；2026-11-05 | Needs Review |
