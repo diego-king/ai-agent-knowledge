@@ -2,7 +2,7 @@
 
 > **范围**：面向有软件工程基础、但刚开始系统学习 AI Agent 的学习者；优先 **General-purpose AI Agent Engineering** 的短视频，而非 Voice / Vision / Multimodal 专项。与仅收录大学课程的 `docs/university-ai-agent-courses.md` 严格分离。
 >
-> **更新日期**：2026-11-08 · **版本**：v1.12 · **状态**：新选课标准已生效，原有课程与新增的 8 节 RAG 视频按 Topic 收录，所有 31 节候选课程均含 Publisher / Presenter 与 YouTube 原视频发布日期；尚未逐条完成官方元数据复核的候选统一标记 `Needs Review`，不冒充 `Current`。
+> **更新日期**：2026-11-08 · **版本**：v1.13 · **状态**：新选课标准已生效，原有课程与新增的 8 节 RAG 视频按 Topic 收录，所有 31 节候选课程均含 Publisher / Presenter 与 YouTube 原视频发布日期；尚未逐条完成官方元数据复核的候选统一标记 `Needs Review`，不冒充 `Current`。
 >
 > **唯一维护路径**：`diego-king/ai-agent-knowledge` / `main` / `docs/youtube-ai-agent-courses.md`。每次提交前读取最新全文与 blob SHA，原路径合并，不创建副本。
 
@@ -193,14 +193,14 @@ RAG 独立覆盖 Retrieval Pipeline、Embeddings、Chunking、Hybrid Search、Re
 
 **HeyGen Loop & Graph 翻译批次（2026-11-07）**：已获用户对五节课程及讲师声音处理的授权，批量任务 `a6ae822d0f3942d6bac4b18c0f6f23a1`；简体中文（Mandarin Simplified）、`translate_audio_only=true`、`mode=speed`、`disable_music_track=false`、保留视频画面/尝试保留原背景音。5 项均已由 HeyGen 确认为 `completed`，中文 MP4 链接见上表。**Running 不等于 Translated**；须在 HeyGen 返回 `completed` 后才填写中文 MP4 URL；遇失败记录 `Failed` 及错误，不重复发起收费任务。
 
-**HeyGen 新一批翻译（2026-11-08）**：用户已明确授权以下四节视频及讲师声音处理；批次 `fcc3e74c634f4e0fafa03e1e569a632f`，简体中文、`translate_audio_only=true`、`mode=speed`、`disable_music_track=false`；HeyGen 返回 4 项 `processing`，不得视为完成。
+**HeyGen 新一批翻译（2026-11-08）**：用户已明确授权以下四节视频及讲师声音处理；批次 `fcc3e74c634f4e0fafa03e1e569a632f`，简体中文、`translate_audio_only=true`、`mode=speed`、`disable_music_track=false`；HeyGen 已确认 4 项全部 `completed`，中文 MP4 链接见下表。
 
 | YouTube Video ID / 原视频 | Translation State | 目标语言 | HeyGen Translation ID | 中文视频 |
 |---|---|---|---|---|
-| [GDm_uH6VxPY](https://www.youtube.com/watch?v=GDm_uH6VxPY) · AI agent design patterns | **Running** | zh-CN | `40f1d78a41a0e92845bcc99ba95713f1-zh_zh-CN` | 待翻译完成 |
-| [cGuyrANVi4A](https://www.youtube.com/watch?v=cGuyrANVi4A) · How Model Context Protocol (MCP) actually works | **Running** | zh-CN | `4bec0f474581cc67ebefd12aabe11e80-zh_zh-CN` | 待翻译完成 |
-| [BBPQYtR7oUk](https://www.youtube.com/watch?v=BBPQYtR7oUk) · Context engineering explained | **Running** | zh-CN | `2446576cb57ce4b442af63429fdb7468-zh_zh-CN` | 待翻译完成 |
-| [0z9_MhcYvcY](https://www.youtube.com/watch?v=0z9_MhcYvcY) · What is Agentic RAG? | **Running** | zh-CN | `fecd26e9f62c93f1e5346394aa4dca91-zh_zh-CN` | 待翻译完成 |
+| [GDm_uH6VxPY](https://www.youtube.com/watch?v=GDm_uH6VxPY) · AI agent design patterns | **Translated** | zh-CN | `40f1d78a41a0e92845bcc99ba95713f1-zh_zh-CN` | [中文 MP4](https://resource2.heygen.ai/video_translate/40f1d78a41a0e92845bcc99ba95713f1-zh_zh-CN/original.mp4) |
+| [cGuyrANVi4A](https://www.youtube.com/watch?v=cGuyrANVi4A) · How Model Context Protocol (MCP) actually works | **Translated** | zh-CN | `4bec0f474581cc67ebefd12aabe11e80-zh_zh-CN` | [中文 MP4](https://resource2.heygen.ai/video_translate/4bec0f474581cc67ebefd12aabe11e80-zh_zh-CN/original.mp4) |
+| [BBPQYtR7oUk](https://www.youtube.com/watch?v=BBPQYtR7oUk) · Context engineering explained | **Translated** | zh-CN | `2446576cb57ce4b442af63429fdb7468-zh_zh-CN` | [中文 MP4](https://resource2.heygen.ai/video_translate/2446576cb57ce4b442af63429fdb7468-zh_zh-CN/original.mp4) |
+| [0z9_MhcYvcY](https://www.youtube.com/watch?v=0z9_MhcYvcY) · What is Agentic RAG? | **Translated** | zh-CN | `fecd26e9f62c93f1e5346394aa4dca91-zh_zh-CN` | [中文 MP4](https://resource2.heygen.ai/video_translate/fecd26e9f62c93f1e5346394aa4dca91-zh_zh-CN/original.mp4) |
 
 **未来操作规范**：新视频默认 `Not Translated`；提交后记录 `Submitted/Running` 和 HeyGen ID；确认成功后改为 `Translated` 并保存结果 URL；失败标记 `Failed`。每次更新先读取 main 最新文件，并检查 HeyGen 账号历史作品（包括非本次对话创建的任务），按 YouTube ID 合并原路径，不复制条目。结果 URL 可能随 HeyGen 保留策略失效，翻译状态和任务 ID 仍须保留以防重复扣费。
 
