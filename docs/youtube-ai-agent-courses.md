@@ -2,7 +2,7 @@
 
 > **范围**：面向有软件工程基础、但刚开始系统学习 AI Agent 的学习者；优先 **General-purpose AI Agent Engineering** 的短视频，而非 Voice / Vision / Multimodal 专项。与仅收录大学课程的 `docs/university-ai-agent-courses.md` 严格分离。
 >
-> **更新日期**：2026-11-07 · **版本**：v1.10 · **状态**：新选课标准已生效，原有课程与新增的 8 节 RAG 视频按 Topic 收录，所有 30 节候选课程均含 Publisher / Presenter 与 YouTube 原视频发布日期；尚未逐条完成官方元数据复核的候选统一标记 `Needs Review`，不冒充 `Current`。
+> **更新日期**：2026-11-07 · **版本**：v1.11 · **状态**：新选课标准已生效，原有课程与新增的 8 节 RAG 视频按 Topic 收录，所有 31 节候选课程均含 Publisher / Presenter 与 YouTube 原视频发布日期；尚未逐条完成官方元数据复核的候选统一标记 `Needs Review`，不冒充 `Current`。
 >
 > **唯一维护路径**：`diego-king/ai-agent-knowledge` / `main` / `docs/youtube-ai-agent-courses.md`。每次提交前读取最新全文与 blob SHA，原路径合并，不创建副本。
 
@@ -68,11 +68,11 @@
 - 证实技术错误、API 已不兼容、视频失效或有显著更好的重复替代课程时，将条目从当前 Topic 主推荐移到归档，记录 YouTube ID、**原始发布日期**、具体过时原因、替代课程（可用时），并永久保留 HeyGen 已翻译 ID 去重记录。
 - 每月报告新增、过时、归档和替代数量；对内容是否准确的判断可以写在维护报告或状态说明，但**不新增任何视频日期列**。
 
-## 2. 按 Topic 的 30 节候选索引（2026-11-07）
+## 2. 按 Topic 的 31 节候选索引（2026-11-07）
 
-**原始 21 节的历史统计**：AI Agent Crash Course 11、Modern AI Agents 6、The Agent Factory 3、The Omni App 1；其中 18 节 ≤20 分钟，3 节 >20 分钟。**这 3 节超时视频已从当前 Markdown 视频列表及推荐引用移除**。此前另新增 **4 节候选（RAG 2 + Graph 2）**；本次手动扩充 **8 节 RAG 候选**，按 ≤20 分钟硬标准去除 3 节超时视频后，共 **30 节**，其中 RAG 主题共 10 节；精确时长未确认时保持待核，不计入原始 21 节统计。本次专题人工补录不改变每月例行更新优先最多 5 节的规则。**现有 30 节按所记载时长均 ≤20:00；近似时长仍需官方核验，若实测超时即移除。**全部为候选，**统一元数据状态：`Needs Review`（最后候选整理：2026-11-07）**；部分视频链接和时长已交叉核对，但并非全部完成 YouTube 官方页面/发布日期核验，不应错误展示为正式“已验证”。
+**原始 21 节的历史统计**：AI Agent Crash Course 11、Modern AI Agents 6、The Agent Factory 3、The Omni App 1；其中 18 节 ≤20 分钟，3 节 >20 分钟。**这 3 节超时视频已从当前 Markdown 视频列表及推荐引用移除**。此前另新增 **4 节候选（RAG 2 + Graph 2）**；本次手动扩充 **8 节 RAG 候选**，按 ≤20 分钟硬标准去除 3 节超时视频后，加上 1 节新核对的 Loop Engineering 短课后，共 **31 节**，其中 RAG 主题共 10 节；精确时长未确认时保持待核，不计入原始 21 节统计。本次专题人工补录不改变每月例行更新优先最多 5 节的规则。**现有 31 节按所记载时长均 ≤20:00；近似时长仍需官方核验，若实测超时即移除。**全部为候选，**统一元数据状态：`Needs Review`（最后候选整理：2026-11-07）**；部分视频链接和时长已交叉核对，但并非全部完成 YouTube 官方页面/发布日期核验，不应错误展示为正式“已验证”。
 
-**发布日期说明**：仅记录各视频的 YouTube 原始发布日期。已根据 YouTube 搜索中的视频资料和按原视频 ID 的交叉核对整理 30 个保留视频日期；此更新仅代表发布日期核验，不代表已对 33 节视频的技术内容完成全面审核。
+**发布日期说明**：仅记录各视频的 YouTube 原始发布日期。已根据 YouTube 搜索中的视频资料和按原视频 ID 的交叉核对整理原 30 个保留视频日期；新增 Loop 工程视频的 YouTube 日期另记于视频条目；此更新仅代表发布日期核验，不代表已对 33 节视频的技术内容完成全面审核。
 
 以下 **A / B** 为学习优先级初筛；具体分项评分待核验后补写。YouTube 链接为**单视频直达链接**，不以搜索结果 URL 冒充已确定的视频 ID。
 
@@ -96,6 +96,7 @@ Agent Loop 负责迭代决策与工具调用；Graph 定义 Nodes、Edges、Rout
 
 | 级别 | 视频 | 时长 |发布日期| 来源 | 发布频道 Publisher | 主讲人 Presenter | 中文核心知识点 | 元数据状态 |
 |---|---|---:|---|---|---|---|---|---|
+| **A** | [4 ways loop engineering fails (and how to fix them)](https://www.youtube.com/watch?v=ruNekO9De8E) | **4:38** |2026-08-25| Google Cloud Tech | **Google Cloud Tech** | Tilde Thurium、Annie Wang | Loop 失败模式、无限循环、Token/Cost 消耗、自我评估偏差、终止条件；偏概念和可靠性 | Needs Review |
 | **A** | [Graph Engineering 101](https://www.youtube.com/watch?v=IrW0_f-w4kA) | **5:56** |2026-09-03| Google Cloud Tech | **Google Cloud Tech** | Tilde Thurium、Annie Wang | Graph vs Loop、Fan-out、Join、Router | Needs Review |
 | **B** | [Graph Engineering with ADK](https://www.youtube.com/watch?v=Mzr7byMFy_4) | **6:10** |2026-09-10| Google Cloud Tech | **Google Cloud Tech** | 待核实 | Node、Parallel、Join、Deterministic / LLM Router | Needs Review |
 
@@ -183,6 +184,14 @@ RAG 独立覆盖 Retrieval Pipeline、Embeddings、Chunking、Hybrid Search、Re
 | [HDqzJJhZsxw](https://www.youtube.com/watch?v=HDqzJJhZsxw) · Persistent memory | **Translated** | zh-CN | `b5095067e5d88966ff36399a2d599026-zh_zh-CN` | [中文 MP4](https://resource2.heygen.ai/video_translate/b5095067e5d88966ff36399a2d599026-zh_zh-CN/original.mp4) |
 | [KZPo15M2DbM](https://www.youtube.com/watch?v=KZPo15M2DbM) · Long-term memory bank | **Translated** | zh-CN | `9fa3f46c520142437236c86d3179ef70-zh_zh-CN` | [中文 MP4](https://resource2.heygen.ai/video_translate/9fa3f46c520142437236c86d3179ef70-zh_zh-CN/original.mp4) |
 | [8C4bh59FtsI](https://www.youtube.com/watch?v=8C4bh59FtsI) · AI Agent Memory Architecture: Structured SQL, Semantic Vector Search & Memory Bank | **Translated** | Mandarin | `ca1aaca42e4b49d18d75abcce9f38da4-zh` | [中文 MP4](https://resource2.heygen.ai/video_translate/ca1aaca42e4b49d18d75abcce9f38da4-zh/original.mp4) |
+
+| [89KKm_a4M7A](https://www.youtube.com/watch?v=89KKm_a4M7A) · 3 Advanced AI agent design patterns | **Running** | zh-CN | `c3b6daf18df6d50314578036adf52215-zh_zh-CN` | 待翻译完成 |
+| [WfJcCeLZD2I](https://www.youtube.com/watch?v=WfJcCeLZD2I) · Workflow agents and communication in ADK | **Running** | zh-CN | `d67e58b58fae63835b62ffb4e2f796fa-zh_zh-CN` | 待翻译完成 |
+| [ruNekO9De8E](https://www.youtube.com/watch?v=ruNekO9De8E) · 4 ways loop engineering fails (and how to fix them) | **Running** | zh-CN | `2b53b5beea8673f6779cc6daac558fbf-zh_zh-CN` | 待翻译完成 |
+| [IrW0_f-w4kA](https://www.youtube.com/watch?v=IrW0_f-w4kA) · Graph Engineering 101 | **Running** | zh-CN | `37d9880a8b5762aeb3cb8f70ab51d2f2-zh_zh-CN` | 待翻译完成 |
+| [Mzr7byMFy_4](https://www.youtube.com/watch?v=Mzr7byMFy_4) · Graph Engineering with ADK | **Running** | zh-CN | `48f7f94fc3904bac32a48952094544f7-zh_zh-CN` | 待翻译完成 |
+
+**HeyGen Loop & Graph 翻译批次（2026-11-07）**：已获用户对五节课程及讲师声音处理的授权，批量任务 `a6ae822d0f3942d6bac4b18c0f6f23a1`；简体中文（Mandarin Simplified）、`translate_audio_only=true`、`mode=speed`、`disable_music_track=false`、保留视频画面/尝试保留原背景音。5 项提交成功并处于 `processing`。**Running 不等于 Translated**；须在 HeyGen 返回 `completed` 后才填写中文 MP4 URL；遇失败记录 `Failed` 及错误，不重复发起收费任务。
 
 **未来操作规范**：新视频默认 `Not Translated`；提交后记录 `Submitted/Running` 和 HeyGen ID；确认成功后改为 `Translated` 并保存结果 URL；失败标记 `Failed`。每次更新先读取 main 最新文件，并检查 HeyGen 账号历史作品（包括非本次对话创建的任务），按 YouTube ID 合并原路径，不复制条目。结果 URL 可能随 HeyGen 保留策略失效，翻译状态和任务 ID 仍须保留以防重复扣费。
 
