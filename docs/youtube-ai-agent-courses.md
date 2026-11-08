@@ -2,7 +2,7 @@
 
 > **范围**：面向有软件工程基础、但刚开始系统学习 AI Agent 的学习者；优先 **General-purpose AI Agent Engineering** 的短视频，而非 Voice / Vision / Multimodal 专项。与仅收录大学课程的 `docs/university-ai-agent-courses.md` 严格分离。
 >
-> **更新日期**：2026-11-08 · **版本**：v1.13 · **状态**：新选课标准已生效，原有课程与新增的 8 节 RAG 视频按 Topic 收录，所有 31 节候选课程均含 Publisher / Presenter 与 YouTube 原视频发布日期；尚未逐条完成官方元数据复核的候选统一标记 `Needs Review`，不冒充 `Current`。
+> **更新日期**：2026-11-08 · **版本**：v1.14 · **状态**：新选课标准已生效，原有课程与新增的 8 节 RAG 视频按 Topic 收录，所有 31 节候选课程均含 Publisher / Presenter 与 YouTube 原视频发布日期；尚未逐条完成官方元数据复核的候选统一标记 `Needs Review`，不冒充 `Current`。
 >
 > **唯一维护路径**：`diego-king/ai-agent-knowledge` / `main` / `docs/youtube-ai-agent-courses.md`。每次提交前读取最新全文与 blob SHA，原路径合并，不创建副本。
 
@@ -201,6 +201,12 @@ RAG 独立覆盖 Retrieval Pipeline、Embeddings、Chunking、Hybrid Search、Re
 | [cGuyrANVi4A](https://www.youtube.com/watch?v=cGuyrANVi4A) · How Model Context Protocol (MCP) actually works | **Translated** | zh-CN | `4bec0f474581cc67ebefd12aabe11e80-zh_zh-CN` | [中文 MP4](https://resource2.heygen.ai/video_translate/4bec0f474581cc67ebefd12aabe11e80-zh_zh-CN/original.mp4) |
 | [BBPQYtR7oUk](https://www.youtube.com/watch?v=BBPQYtR7oUk) · Context engineering explained | **Translated** | zh-CN | `2446576cb57ce4b442af63429fdb7468-zh_zh-CN` | [中文 MP4](https://resource2.heygen.ai/video_translate/2446576cb57ce4b442af63429fdb7468-zh_zh-CN/original.mp4) |
 | [0z9_MhcYvcY](https://www.youtube.com/watch?v=0z9_MhcYvcY) · What is Agentic RAG? | **Translated** | zh-CN | `fecd26e9f62c93f1e5346394aa4dca91-zh_zh-CN` | [中文 MP4](https://resource2.heygen.ai/video_translate/fecd26e9f62c93f1e5346394aa4dca91-zh_zh-CN/original.mp4) |
+
+**手动创建的 Multi-Agent 翻译任务（2026-11-08）**：用户已自行在 HeyGen 创建，任务 ID 已通过 HeyGen 账号核验；当前 `running`，尚无成品 URL。请勿重复提交或计入已完成数量。
+
+| YouTube Video ID / 原视频 | Translation State | 目标语言 | HeyGen Translation ID | 中文视频 |
+|---|---|---|---|---|
+| [pX0_iIfRilU](https://www.youtube.com/watch?v=pX0_iIfRilU) · Foundations of multi-agent systems with ADK | **Running** | Mandarin | `073463f7b49a42db95a810f4896bc94b-zh` | 待翻译完成 |
 
 **未来操作规范**：新视频默认 `Not Translated`；提交后记录 `Submitted/Running` 和 HeyGen ID；确认成功后改为 `Translated` 并保存结果 URL；失败标记 `Failed`。每次更新先读取 main 最新文件，并检查 HeyGen 账号历史作品（包括非本次对话创建的任务），按 YouTube ID 合并原路径，不复制条目。结果 URL 可能随 HeyGen 保留策略失效，翻译状态和任务 ID 仍须保留以防重复扣费。
 
