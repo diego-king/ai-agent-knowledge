@@ -2,7 +2,7 @@
 
 > **范围**：面向有软件工程基础、但刚开始系统学习 AI Agent 的学习者；优先 **General-purpose AI Agent Engineering** 的短视频，而非 Voice / Vision / Multimodal 专项。与仅收录大学课程的 `docs/university-ai-agent-courses.md` 严格分离。
 >
-> **更新日期**：2026-11-07 · **版本**：v1.5 · **状态**：新选课标准已生效，原有 21 节及新增 RAG/Graph 候选按 Topic 收录；尚未逐条完成官方元数据复核的候选统一标记 `Needs Review`，不冒充 `Current`。
+> **更新日期**：2026-11-07 · **版本**：v1.6 · **状态**：新选课标准已生效，原有课程与新增的 8 节 RAG 视频按 Topic 收录，增加发布频道与主讲人字段；尚未逐条完成官方元数据复核的候选统一标记 `Needs Review`，不冒充 `Current`。
 >
 > **唯一维护路径**：`diego-king/ai-agent-knowledge` / `main` / `docs/youtube-ai-agent-courses.md`。每次提交前读取最新全文与 blob SHA，原路径合并，不创建副本。
 
@@ -48,7 +48,7 @@
 
 ### 1.5 视频元信息和维护
 
-每个条目至少保存英文标题、完整直达 URL、时长、来源频道、系列、中文知识点、推荐级别、主 Topic、时效状态、核验日期。发布日期、细分评分、实际播放时长如果无法核准，必须标明待核实，**不得填猜测**。
+每个条目至少保存英文标题、完整直达 URL、时长、**发布频道 / Publisher**、**实际主讲人 / Presenter（未核实则标“待核实”）**、系列、中文知识点、推荐级别、主 Topic、时效状态、核验日期。发布日期、细分评分、实际播放时长如果无法核准，必须标明待核实，**不得填猜测**。
 
 | 内容类型 | 深度复核建议 | 主要风险 |
 |---|---|---|
@@ -59,9 +59,9 @@
 
 状态：`Current`、`Evergreen`、`Needs Review`、`Outdated`、`Unavailable`。经典原理不因发布时间较早而自动归档；确实过时的课程注明原因并移至文末归档，保留可追溯记录。
 
-## 2. 按 Topic 的 25 节候选索引（2026-11-07）
+## 2. 按 Topic 的 33 节候选索引（2026-11-07）
 
-**原始 21 节统计（保留历史基线）**：AI Agent Crash Course **11**、Modern AI Agents: From Theory to Production **6**、The Agent Factory **3**、The Omni App **1**。原始候选中 **18 节 ≤20 分钟**、**3 节 20–30 分钟**。本次另新增 **4 节候选（RAG 2 + Graph 2）**，合计 **25 节**；新增视频已核对时长区间，Google RAG 精确总时长仍待核验，不计入原始时长统计。全部为候选，**统一元数据状态：`Needs Review`（最后候选整理：2026-11-07）**；部分视频链接和时长已交叉核对，但并非全部完成 YouTube 官方页面/发布日期核验，不应错误展示为正式“已验证”。
+**原始 21 节统计（保留历史基线）**：AI Agent Crash Course **11**、Modern AI Agents: From Theory to Production **6**、The Agent Factory **3**、The Omni App **1**。原始候选中 **18 节 ≤20 分钟**、**3 节 20–30 分钟**。此前另新增 **4 节候选（RAG 2 + Graph 2）**；本次手动扩充 **8 节 RAG 候选**，合计 **33 节**，其中 RAG 主题共 10 节；精确时长未确认时保持待核，不计入原始 21 节统计。本次专题人工补录不改变每月例行更新优先最多 5 节的规则。全部为候选，**统一元数据状态：`Needs Review`（最后候选整理：2026-11-07）**；部分视频链接和时长已交叉核对，但并非全部完成 YouTube 官方页面/发布日期核验，不应错误展示为正式“已验证”。
 
 以下 **A / B** 为学习优先级初筛；具体分项评分待核验后补写。YouTube 链接为**单视频直达链接**，不以搜索结果 URL 冒充已确定的视频 ID。
 
@@ -119,14 +119,32 @@ Agent Loop 负责迭代决策与工具调用；Graph 定义 Nodes、Edges、Rout
 
 ### 2.6 RAG & Agentic RAG
 
-RAG 是独立知识主题：Retrieval Pipeline、Embedding、Chunking、Vector / Hybrid Search、Reranking、Grounding、Agentic Retrieval、Retrieval Evaluation。**RAG 不等于 Memory**；已翻译的 SQL + Vector + Memory Bank 视频仍属于 Memory Architecture，不重复计入 RAG 主课程。
+RAG 独立覆盖 Retrieval Pipeline、Embeddings、Chunking、Hybrid Search、Reranking、Agentic Retrieval、Grounding、Evaluation。**RAG 不等于 Memory**；此前已翻译的 SQL / Vector / Memory Bank 视频仍只放在 Memory Topic，避免跨 Topic 重复。
 
-| 级别 | 视频 | 时长* | 来源 | 中文核心知识点 | 元数据状态 |
-|---|---|---:|---|---|---|
-| **A** | [How to use Retrieval Augmented Generation (RAG)](https://www.youtube.com/watch?v=oVtlp72f9NQ) | 约 6 分钟（官方章节至 6:05，精确总长待核） | Google Cloud Tech · 2024-10-24 | RAG 数据流、Retrieval + Generation、质量优化；新手主线 | Needs Review |
-| **B** | [What is Agentic RAG?](https://www.youtube.com/watch?v=0z9_MhcYvcY) | **5:42** | IBM Technology · 2024-10-28 | Agent 参与检索决策；与基础 RAG 对比；与前一节互补 | Needs Review |
+**字段定义：Publisher / Channel（视频发布方）与 Presenter（实际主讲人）必须分开。** 例如 IBM Technology 是频道，Marina Danilevsky 是其中一节课的主讲人；没有可信资料时标注“待核实”，不猜人名。**本表 10 个唯一视频 ID**：原有 2 节 + 本轮人工选择的 8 节；相同知识点提供“二选一/补充”标识，非全部必学。
 
-下一步优先寻找通用的 Chunking、Hybrid Search / Reranking、RAG Evaluation 短课，避免重复纯框架 Demo。
+| 优先级 | 视频（YouTube 直达） | 时长 | 发布频道 Publisher | 主讲人 Presenter | 核心知识点 / 去重说明 | 元数据状态 |
+|---|---|---:|---|---|---|---|
+| **A** | [How to use Retrieval Augmented Generation (RAG)](https://www.youtube.com/watch?v=oVtlp72f9NQ) | 约6分钟（待核） | **Google Cloud Tech** | 待核实 | 基础 RAG 数据流、Retrieval + Generation；与 IBM RAG 入门二选一；原有条目 | Needs Review |
+| **B · 入门替代** | [What is Retrieval-Augmented Generation (RAG)?](https://www.youtube.com/watch?v=T-D1OfcDW1M) | 6:35 | **IBM Technology** | Marina Danilevsky | 基础 RAG、检索/增强/生成、Grounded Answers；和 Google 入门视频二选一；2023-08-23 | Needs Review |
+| **A** | [What is Agentic RAG?](https://www.youtube.com/watch?v=0z9_MhcYvcY) | 5:42 | **IBM Technology** | 待核实 | Agent 主动决定何时检索；原有条目；2024-10-28 | Needs Review |
+| **B · 延伸** | [RAG's Evolution: From Simple Retrieval to Agentic AI](https://www.youtube.com/watch?v=JB2P5Gk23VI) | 8:48 | **IBM Technology** | Sam Anthony | Keyword → Semantic → Hybrid → Agentic Retrieval；与 Agentic RAG 入门略有重叠，但突出检索演进；2026-05-05 | Needs Review |
+| **B · 进阶** | [Every RAG Strategy Explained in 13 Minutes (No Fluff)](https://www.youtube.com/watch?v=tLMViADvSNE) | 12:52 | **Cole Medin** | Cole Medin | Chunking、Reranking、Multi-Query、Contextual / Hierarchical / Agentic RAG；基础学完再看；2025-11-02 | Needs Review |
+| **A · 架构** | [Are Vector Databases Still Needed? RAG, AI Agents & Search](https://www.youtube.com/watch?v=rXFV1ivDe6c) | 10:01 | **IBM Technology** | Martin Keen | Vector DB vs SQL Index vs Keyword Search vs Long Context：选择与权衡；2026-11-05 | Needs Review |
+| **A · 通用概念** | [Skills vs MCP vs RAG vs Memory: What AI Agents Need to Know](https://www.youtube.com/watch?v=X4FVEEegCbk) | 约9:10（待核） | **IBM Technology** | Martin Keen | Skills/可复用流程、MCP/工具接入、RAG/知识检索、Memory/跨会话记忆边界；2026-09-03 | Needs Review |
+| **B · 进阶** | [What Is Chunkless RAG? How Docling & AI Agents Navigate Documents](https://www.youtube.com/watch?v=vRZNJWw78BQ) | 约7:00（待核） | **IBM Technology** | 待核实 | Document Structure / Tree Navigation、Docling；补充替代传统 Chunking 的方法 | Needs Review |
+| **B · 替代** | [How Do RAG and Agentic AI Enhance LLM Capabilities?](https://www.youtube.com/watch?v=fB2JQXEH_94) | 约10分钟（待核） | **IBM Technology** | 待核实 | RAG 与 Agentic AI 分工；与 What is Agentic RAG 部分重复，二选一；2025-12-08 | Needs Review |
+| **B · 实操** | [RAG Reranking Explained: How To Improve RAG Results](https://www.youtube.com/watch?v=R5MPqm0V6aQ) | 约14分钟（待核） | **pixegami** | pixegami（频道作者；个人姓名待核） | Reranker、Cohere API、Cross-Encoder、Latency/成本权衡；代码偏多，选学；2025-10-06 | Needs Review |
+
+**建议学习顺序**：① Google Cloud Tech 或 IBM RAG Fundamentals（二选一）→ ② IBM Agentic RAG → ③ IBM Vector DB 选型 → ④ IBM Skills / MCP / RAG / Memory 区分 → ⑤ Cole Medin 的 RAG Strategies → ⑥ 按需学 Chunkless 与 Reranking 实操。IBM 的 RAG Evolution 与 RAG vs Agentic AI 作为可替代补充课，不必全部观看。
+
+**作者与元数据来源（2026-11-07）**：
+- IBM 官方 [RAG’s Evolution 页面](https://mediacenter.ibm.com/media/RAGs%2BEvolution%3A%2BFrom%2BSimple%2BRetrieval%2Bto%2BAgentic%2BAI/1_jl9mb1q2) 注明 **Sam Anthony**；IBM RAG Fundamentals 的视频讲解者为 **Marina Danilevsky**。
+- [Cole Medin 自维护课程笔记](https://github.com/coleam00/cole-medin-knowledge-base/blob/main/sources/every-rag-strategy-explained-in-13-minutes-no-fluff.md) 给出视频 ID、12:52、课程知识点。
+- [IBM Vector Database 视频索引](https://chooseto.ai/watch/rXFV1ivDe6c) 注明 **Martin Keen**、2026-11-05；[pixegami 课程索引](https://www.classcentral.com/course/youtube-rag-reranking-explained-how-to-improve-rag-results-488821) 给出约 14 分钟与 Python 实操大纲。其余无法确认具体出镜人的条目标“待核实”。
+- 本轮使用官方与第三方交叉证据；**并非每条都已完成 YouTube 官方页面、精确时长与主讲人全面核验**，因此保留 `Needs Review`。无法确认的分钟数只写近似，不能伪称精确。
+
+**后续补齐**：RAG Retrieval Evaluation（Recall@K / MRR、Groundedness / Faithfulness）、Hybrid Search / BM25、索引时效、访问控制与 Citation Accuracy；未来新增优先 <=20 分钟、概念教学、与现有 10 节不重复。
 
 ### 2.7 Agent Evaluation & Safety
 
@@ -190,7 +208,7 @@ RAG 是独立知识主题：Retrieval Pipeline、Embedding、Chunking、Vector /
 
 未来逐条核验后按主 Topic 添加标准条目（现有紧凑表格可逐步转换，不能复制重复 ID）：
 
-- **英文标题 / 直达 URL（11 字符 Video ID）**、**所属系列与频道**、**视频发布日期**、**准确时长**。
+- **英文标题 / 直达 URL（11 字符 Video ID）**、**发布频道 / Publisher**、**主讲人 / Presenter（未核实标待核）**、**所属系列**、**视频发布日期**、**准确时长**。
 - **主 Topic**、**中文重点 / 适合阶段**、**A/B/C 推荐级别**、**与已有课的重叠或互补关系**。
 - **综合评分及五个分项**（相关性 /30、准确性 /25、清晰度 /20、结构 /15、时长密度 /10）。
 - **所涉框架和版本**（若有）、**状态**（Current / Evergreen / Needs Review / Outdated / Unavailable）、**最后官方核验日期及依据**。
