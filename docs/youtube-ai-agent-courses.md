@@ -2,7 +2,7 @@
 
 > **范围**：面向有软件工程基础、但刚开始系统学习 AI Agent 的学习者；优先 **General-purpose AI Agent Engineering** 的短视频，而非 Voice / Vision / Multimodal 专项。与仅收录大学课程的 `docs/university-ai-agent-courses.md` 严格分离。
 >
-> **更新日期**：2026-11-07 · **版本**：v1.7 · **状态**：新选课标准已生效，原有课程与新增的 8 节 RAG 视频按 Topic 收录，所有 33 节候选课程均含发布频道与主讲人字段；尚未逐条完成官方元数据复核的候选统一标记 `Needs Review`，不冒充 `Current`。
+> **更新日期**：2026-11-07 · **版本**：v1.8 · **状态**：新选课标准已生效，原有课程与新增的 8 节 RAG 视频按 Topic 收录，所有 33 节候选课程均含 Publisher / Presenter、发布日期、内容更新日和最后技术审核字段；尚未逐条完成官方元数据复核的候选统一标记 `Needs Review`，不冒充 `Current`。
 >
 > **唯一维护路径**：`diego-king/ai-agent-knowledge` / `main` / `docs/youtube-ai-agent-courses.md`。每次提交前读取最新全文与 blob SHA，原路径合并，不创建副本。
 
@@ -48,7 +48,7 @@
 
 ### 1.5 视频元信息和维护
 
-每个条目至少保存英文标题、完整直达 URL、时长、**发布频道 / Publisher**、**实际主讲人 / Presenter（未核实则标“待核实”）**、系列、中文知识点、推荐级别、主 Topic、时效状态、核验日期。发布日期、细分评分、实际播放时长如果无法核准，必须标明待核实，**不得填猜测**。
+每个条目至少保存英文标题、完整直达 URL、时长、**发布日期、可证实的内容更新日、最后技术审核日**、**发布频道 / Publisher**、**实际主讲人 / Presenter（未核实则标“待核实”）**、系列、中文知识点、推荐级别、主 Topic、时效状态、核验日期。发布日期、细分评分、实际播放时长如果无法核准，必须标明待核实，**不得填猜测**。
 
 | 内容类型 | 深度复核建议 | 主要风险 |
 |---|---|---|
@@ -59,63 +59,79 @@
 
 状态：`Current`、`Evergreen`、`Needs Review`、`Outdated`、`Unavailable`。经典原理不因发布时间较早而自动归档；确实过时的课程注明原因并移至文末归档，保留可追溯记录。
 
+### 1.6 视频日期、技术时效和归档规则（必执行）
+
+**每个视频都有三个独立日期字段，切勿混淆：**
+
+1. **发布日期（Published Date）**：视频首次公开的日期，优先从视频官方页面/官方频道确认；来源不够强写 `待核`。本索引中带 `†` 的日期是从此前已有的课程笔记/引用中提取的候选日期，**还需官方交叉确认**，不能视为已经完成元数据核验。
+2. **内容更新日（Content Updated Date）**：仅当作者/平台明确公示修改、勘误、新版内容的准确日期时记录；YouTube 普通页面通常没有可靠、统一公开的“视频最后修改日”，因此默认 `未公开`，**不能把发布日期、播放时间或我们编辑 Markdown 的时间冒充内容更新日期**。若发行的是另一个新版视频，应另记新 Video ID，旧条目与新版的替代关系单独注明。
+3. **最后技术审核（Last Reviewed）**：最近一次**实际检查视频关键技术陈述、所涉 API/SDK 及链接是否仍准确**的日期，格式 YYYY-MM-DD；只有实质复核完成后才写日期，纯粹加表格字段或检索标题**不算技术审核**，统一写 `未完成`。审核有缺口时保留 `Needs Review`，不得假称 `Current`。
+
+**每月过时监控和退出主推荐列表的规则：**
+
+- 根据第 1.5 节的 **6个月 / 3个月 / 每月**复核周期，以 `最后技术审核` 计算是否需要重新复核；`未完成` 的条目列为待审核队列，优先处理最新技术细节相关视频。
+- 发布超过 **12 个月**的 MCP / Architecture / Memory / Multi-Agent 课程列入**优先评估**；发布超过 **6 个月**的 ADK / LangGraph / Agents SDK / Cloud API 具体实现视频列入**优先评估**。这两个阈值只触发审核，**不等于自动过时、自动移除**。
+- 只有证据确认**核心技术结论错误、SDK/API 已不兼容且影响教学、链接长期不可访问、或已被明显更清晰/准确的新视频取代且高度重复**时，才将状态改为 `Outdated` / `Unavailable`，从当前 Topic 主表移到文末「过时与失效视频归档」，注明 Video ID、原始发布日期、最后审核日期、具体原因、替代视频 URL 和归档日期。若仅缺少核验证据，继续 `Needs Review`，绝不凭年龄删除。
+- 可长期复用的 Agent / ReAct / RAG 基本原理可标记 `Evergreen`（必须实际验证后），保留在主表。**归档是移出主推荐，不是抹除历史记录**：HeyGen `Translated` 和 Translation ID、视频去重键永久保留，避免重复翻译和重复收录。
+- 每月报告必须单列：`本月审核数 / 待审核数 / 到期需审核 / 发现过时 / 已归档 / 已替换`；未能完成全部视频检查时，明确报告覆盖范围，不得声称已全面核验。
+
 ## 2. 按 Topic 的 33 节候选索引（2026-11-07）
 
 **原始 21 节统计（保留历史基线）**：AI Agent Crash Course **11**、Modern AI Agents: From Theory to Production **6**、The Agent Factory **3**、The Omni App **1**。原始候选中 **18 节 ≤20 分钟**、**3 节 20–30 分钟**。此前另新增 **4 节候选（RAG 2 + Graph 2）**；本次手动扩充 **8 节 RAG 候选**，合计 **33 节**，其中 RAG 主题共 10 节；精确时长未确认时保持待核，不计入原始 21 节统计。本次专题人工补录不改变每月例行更新优先最多 5 节的规则。全部为候选，**统一元数据状态：`Needs Review`（最后候选整理：2026-11-07）**；部分视频链接和时长已交叉核对，但并非全部完成 YouTube 官方页面/发布日期核验，不应错误展示为正式“已验证”。
 
-以下 **A / B** 为学习优先级初筛；具体分项评分待核验后补写。YouTube 链接为**单视频直达链接**，不以搜索结果 URL 冒充已确定的视频 ID。
+**日期字段说明**：`待核` = 发布日期尚无充分证据；`†` = 文档已有资料给出的候选发布日期，待官方复核；`未公开` = 没有可信的内容更新日；`未完成` = 尚未做充分的逐视频技术审核，不能把文档更新日期当成审核日期。2024-10-28 的 Agentic RAG 日期已用带原视频 ID 的独立资料交叉检索。\n\n以下 **A / B** 为学习优先级初筛；具体分项评分待核验后补写。YouTube 链接为**单视频直达链接**，不以搜索结果 URL 冒充已确定的视频 ID。
 
 ### 2.1 AI Agent Fundamentals
 
-| 级别 | 视频（YouTube 直达） | 时长* | 系列 | 发布频道 Publisher | 主讲人 Presenter | 中文核心知识点 |
-|---|---|---:|---|---|---|---|
-| **A** | [AI agents explained: Build your first agent in 8 minutes](https://www.youtube.com/watch?v=Zqno_vux6d8) | 8:29 | Modern AI Agents | **Google Cloud Tech** | Smitha Kolan | LLM vs Agent、ReAct、Planning、简单 Agent 构建；后半段 ADK 实操可选看 |
-| **A** | [AI agent design patterns](https://www.youtube.com/watch?v=GDm_uH6VxPY) | 8:21 | AI Agent Crash Course | **Google Cloud Tech** | Annie Wang | Single / Sequential / Parallel、Workflow vs Agent |
-| **A** | [3 Advanced AI agent design patterns](https://www.youtube.com/watch?v=89KKm_a4M7A) | 8:00 | AI Agent Crash Course | **Google Cloud Tech** | Annie Wang | Loop、Coordinator / Router、Agent-as-Tool |
+| 级别 | 视频（YouTube 直达） | 时长* |发布日期|内容更新日|最后技术审核| 系列 | 发布频道 Publisher | 主讲人 Presenter | 中文核心知识点 |
+|---|---|---:|---|---|---|---|---|---|---|
+| **A** | [AI agents explained: Build your first agent in 8 minutes](https://www.youtube.com/watch?v=Zqno_vux6d8) | 8:29 |待核|未公开|未完成| Modern AI Agents | **Google Cloud Tech** | Smitha Kolan | LLM vs Agent、ReAct、Planning、简单 Agent 构建；后半段 ADK 实操可选看 |
+| **A** | [AI agent design patterns](https://www.youtube.com/watch?v=GDm_uH6VxPY) | 8:21 |待核|未公开|未完成| AI Agent Crash Course | **Google Cloud Tech** | Annie Wang | Single / Sequential / Parallel、Workflow vs Agent |
+| **A** | [3 Advanced AI agent design patterns](https://www.youtube.com/watch?v=89KKm_a4M7A) | 8:00 |待核|未公开|未完成| AI Agent Crash Course | **Google Cloud Tech** | Annie Wang | Loop、Coordinator / Router、Agent-as-Tool |
 
 ### 2.2 Agent Architecture
 
-| 级别 | 视频 | 时长* | 系列 | 发布频道 Publisher | 主讲人 Presenter | 中文核心知识点 |
-|---|---|---:|---|---|---|---|
-| **A** | [Workflow agents and communication in ADK](https://www.youtube.com/watch?v=WfJcCeLZD2I) | 4:53 | AI Agent Crash Course | **Google Cloud Tech** | Annie Wang | Sequential / Parallel / Loop、Shared Session State、Delegation、Agent-as-Tool |
-| **B** | [Agents, their frameworks and when to use them](https://www.youtube.com/watch?v=aLYrV61rJG4) | 27:46 | The Agent Factory | **Google Cloud Tech** | Shir Meir Lador、Ivan Nardini（嘉宾：Julia Wiesinger） | 是否需要框架；LangGraph / CrewAI / ADK 的架构权衡；偏进阶长访谈 |
+| 级别 | 视频 | 时长* |发布日期|内容更新日|最后技术审核| 系列 | 发布频道 Publisher | 主讲人 Presenter | 中文核心知识点 |
+|---|---|---:|---|---|---|---|---|---|---|
+| **A** | [Workflow agents and communication in ADK](https://www.youtube.com/watch?v=WfJcCeLZD2I) | 4:53 |待核|未公开|未完成| AI Agent Crash Course | **Google Cloud Tech** | Annie Wang | Sequential / Parallel / Loop、Shared Session State、Delegation、Agent-as-Tool |
+| **B** | [Agents, their frameworks and when to use them](https://www.youtube.com/watch?v=aLYrV61rJG4) | 27:46 |待核|未公开|未完成| The Agent Factory | **Google Cloud Tech** | Shir Meir Lador、Ivan Nardini（嘉宾：Julia Wiesinger） | 是否需要框架；LangGraph / CrewAI / ADK 的架构权衡；偏进阶长访谈 |
 
 ### 2.2A Loop & Graph Engineering（Architecture 子主题）
 
 Agent Loop 负责迭代决策与工具调用；Graph 定义 Nodes、Edges、Router、Fan-out / Join 等显式流程。**以下为新增候选，原有 2.1 的 Loop Patterns 与 2.2 的 Workflow ADK 不重复建立条目。**
 
-| 级别 | 视频 | 时长 | 来源 | 发布频道 Publisher | 主讲人 Presenter | 中文核心知识点 | 元数据状态 |
-|---|---|---:|---|---|---|---|---|
-| **A** | [Graph Engineering 101](https://www.youtube.com/watch?v=IrW0_f-w4kA) | **5:56** | Google Cloud Tech | **Google Cloud Tech** | Tilde Thurium、Annie Wang | Graph vs Loop、Fan-out、Join、Router | Needs Review |
-| **B** | [Graph Engineering with ADK](https://www.youtube.com/watch?v=Mzr7byMFy_4) | **6:10** | Google Cloud Tech | **Google Cloud Tech** | 待核实 | Node、Parallel、Join、Deterministic / LLM Router | Needs Review |
+| 级别 | 视频 | 时长 |发布日期|内容更新日|最后技术审核| 来源 | 发布频道 Publisher | 主讲人 Presenter | 中文核心知识点 | 元数据状态 |
+|---|---|---:|---|---|---|---|---|---|---|---|
+| **A** | [Graph Engineering 101](https://www.youtube.com/watch?v=IrW0_f-w4kA) | **5:56** |待核|未公开|未完成| Google Cloud Tech | **Google Cloud Tech** | Tilde Thurium、Annie Wang | Graph vs Loop、Fan-out、Join、Router | Needs Review |
+| **B** | [Graph Engineering with ADK](https://www.youtube.com/watch?v=Mzr7byMFy_4) | **6:10** |待核|未公开|未完成| Google Cloud Tech | **Google Cloud Tech** | 待核实 | Node、Parallel、Join、Deterministic / LLM Router | Needs Review |
 
 ### 2.3 Tool Calling & MCP
 
-| 级别 | 视频 | 时长* | 系列 | 发布频道 Publisher | 主讲人 Presenter | 中文核心知识点 |
-|---|---|---:|---|---|---|---|
-| **A** | [How Model Context Protocol (MCP) actually works](https://www.youtube.com/watch?v=cGuyrANVi4A) | 7:58 | Modern AI Agents | **Google Cloud Tech** | Smitha Kolan | MCP Client / Server / Tools、协议价值 |
-| **A** | [MCP vs API: Why traditional APIs are failing AI agents](https://www.youtube.com/watch?v=185XGEMefgc) | 12:25 | Modern AI Agents | **Google Cloud Tech** | Smitha Kolan | MCP 与 API 的职责比较；注意：**MCP 并不替代 API**，标题较夸张 |
-| **B** | [Building your own MCP server with ADK](https://www.youtube.com/watch?v=XwlVHm3JKWU) | 9:02 | AI Agent Crash Course | **Google Cloud Tech** | Annie Wang | MCP Server 及 ADK 示例；先学协议概念 |
-| **B** | [Connecting ADK Agents to MCP Servers](https://www.youtube.com/watch?v=JnKkdHaatwU) | 7:39 | AI Agent Crash Course | **Google Cloud Tech** | Annie Wang | MCP Client 连接与 MCPToolset；版本细节需复查 |
-| **B** | [How to build an AI Agent and MCP Server (step-by-step)](https://www.youtube.com/watch?v=wBnnA8aIxUs) | 7:54 | Modern AI Agents | **Google Cloud Tech** | Smitha Kolan | Agent + MCP 实操；**与前两节 MCP 实操部分重叠，二选一即可** |
-| **B** | [Building custom tools for agents](https://www.youtube.com/watch?v=NiLb5DK4_rU) | 22:09 | The Agent Factory | **Google Cloud Tech** | Smitha Kolan、Amit Maraj | Function / MCP / Agent-as-Tool / Authenticated Tool 的选择；较长，第二轮 |
+| 级别 | 视频 | 时长* |发布日期|内容更新日|最后技术审核| 系列 | 发布频道 Publisher | 主讲人 Presenter | 中文核心知识点 |
+|---|---|---:|---|---|---|---|---|---|---|
+| **A** | [How Model Context Protocol (MCP) actually works](https://www.youtube.com/watch?v=cGuyrANVi4A) | 7:58 |待核|未公开|未完成| Modern AI Agents | **Google Cloud Tech** | Smitha Kolan | MCP Client / Server / Tools、协议价值 |
+| **A** | [MCP vs API: Why traditional APIs are failing AI agents](https://www.youtube.com/watch?v=185XGEMefgc) | 12:25 |待核|未公开|未完成| Modern AI Agents | **Google Cloud Tech** | Smitha Kolan | MCP 与 API 的职责比较；注意：**MCP 并不替代 API**，标题较夸张 |
+| **B** | [Building your own MCP server with ADK](https://www.youtube.com/watch?v=XwlVHm3JKWU) | 9:02 |待核|未公开|未完成| AI Agent Crash Course | **Google Cloud Tech** | Annie Wang | MCP Server 及 ADK 示例；先学协议概念 |
+| **B** | [Connecting ADK Agents to MCP Servers](https://www.youtube.com/watch?v=JnKkdHaatwU) | 7:39 |待核|未公开|未完成| AI Agent Crash Course | **Google Cloud Tech** | Annie Wang | MCP Client 连接与 MCPToolset；版本细节需复查 |
+| **B** | [How to build an AI Agent and MCP Server (step-by-step)](https://www.youtube.com/watch?v=wBnnA8aIxUs) | 7:54 |待核|未公开|未完成| Modern AI Agents | **Google Cloud Tech** | Smitha Kolan | Agent + MCP 实操；**与前两节 MCP 实操部分重叠，二选一即可** |
+| **B** | [Building custom tools for agents](https://www.youtube.com/watch?v=NiLb5DK4_rU) | 22:09 |待核|未公开|未完成| The Agent Factory | **Google Cloud Tech** | Smitha Kolan、Amit Maraj | Function / MCP / Agent-as-Tool / Authenticated Tool 的选择；较长，第二轮 |
 
 ### 2.4 Context Engineering & Memory
 
-| 级别 | 视频 | 时长* | 系列 | 发布频道 Publisher | 主讲人 Presenter | 中文核心知识点 |
-|---|---|---:|---|---|---|---|
-| **A** | [How to add short-term memory to your AI agent](https://www.youtube.com/watch?v=vfVcDUCucSs) | 6:03 | AI Agent Crash Course · **已翻译（zh-CN）** | **Google Cloud Tech** | Annie Wang | Session / Event / State、当前会话记忆 |
-| **A** | [How to add persistent memory to your AI agent](https://www.youtube.com/watch?v=HDqzJJhZsxw) | 7:24 | AI Agent Crash Course · **已翻译（zh-CN）** | **Google Cloud Tech** | Annie Wang | Session Persistence、跨会话恢复；区别于语义记忆 |
-| **A** | [AI agent long-term memory with memory bank](https://www.youtube.com/watch?v=KZPo15M2DbM) | 6:44 | AI Agent Crash Course · **已翻译（zh-CN）** | **Google Cloud Tech** | Annie Wang | Long-term Memory、Memory Bank、Semantic Recall |
-| **A** | [Context engineering explained: What every AI developer should know](https://www.youtube.com/watch?v=BBPQYtR7oUk) | 10:05 | Modern AI Agents | **Google Cloud Tech** | Smitha Kolan | Context Selection、Compression、Isolation；Context vs Prompt Engineering |
-| **B** | [AI Agent Memory Architecture: Structured SQL, Semantic Vector Search & Memory Bank](https://www.youtube.com/watch?v=8C4bh59FtsI) | 12:26 | The Omni App · **已翻译（Mandarin）** | **Google Cloud Tech** | Annie Wang | SQL 精确事实 + Vector 语义检索 + Memory Bank、Async Extraction；Voice 案例，但**架构通用** |
+| 级别 | 视频 | 时长* |发布日期|内容更新日|最后技术审核| 系列 | 发布频道 Publisher | 主讲人 Presenter | 中文核心知识点 |
+|---|---|---:|---|---|---|---|---|---|---|
+| **A** | [How to add short-term memory to your AI agent](https://www.youtube.com/watch?v=vfVcDUCucSs) | 6:03 |待核|未公开|未完成| AI Agent Crash Course · **已翻译（zh-CN）** | **Google Cloud Tech** | Annie Wang | Session / Event / State、当前会话记忆 |
+| **A** | [How to add persistent memory to your AI agent](https://www.youtube.com/watch?v=HDqzJJhZsxw) | 7:24 |待核|未公开|未完成| AI Agent Crash Course · **已翻译（zh-CN）** | **Google Cloud Tech** | Annie Wang | Session Persistence、跨会话恢复；区别于语义记忆 |
+| **A** | [AI agent long-term memory with memory bank](https://www.youtube.com/watch?v=KZPo15M2DbM) | 6:44 |待核|未公开|未完成| AI Agent Crash Course · **已翻译（zh-CN）** | **Google Cloud Tech** | Annie Wang | Long-term Memory、Memory Bank、Semantic Recall |
+| **A** | [Context engineering explained: What every AI developer should know](https://www.youtube.com/watch?v=BBPQYtR7oUk) | 10:05 |待核|未公开|未完成| Modern AI Agents | **Google Cloud Tech** | Smitha Kolan | Context Selection、Compression、Isolation；Context vs Prompt Engineering |
+| **B** | [AI Agent Memory Architecture: Structured SQL, Semantic Vector Search & Memory Bank](https://www.youtube.com/watch?v=8C4bh59FtsI) | 12:26 |待核|未公开|未完成| The Omni App · **已翻译（Mandarin）** | **Google Cloud Tech** | Annie Wang | SQL 精确事实 + Vector 语义检索 + Memory Bank、Async Extraction；Voice 案例，但**架构通用** |
 
 ### 2.5 Multi-Agent Systems
 
-| 级别 | 视频 | 时长* | 系列 | 发布频道 Publisher | 主讲人 Presenter | 中文核心知识点 |
-|---|---|---:|---|---|---|---|
-| **A** | [Foundations of multi-agent systems with ADK](https://www.youtube.com/watch?v=pX0_iIfRilU) | 5:17 | AI Agent Crash Course | **Google Cloud Tech** | Annie Wang | 多 Agent 协作、LLM / Workflow / Custom Agent、Hierarchy |
-| **B** | [Multi-agent systems, concepts & patterns](https://www.youtube.com/watch?v=TGNScswE0kU) | 23:06 | The Agent Factory | **Google Cloud Tech** | Vlad Kolesnikov、Shir Meir Lador | Supervisor / Swarm、协作、Context 分工；第二轮 |
+| 级别 | 视频 | 时长* |发布日期|内容更新日|最后技术审核| 系列 | 发布频道 Publisher | 主讲人 Presenter | 中文核心知识点 |
+|---|---|---:|---|---|---|---|---|---|---|
+| **A** | [Foundations of multi-agent systems with ADK](https://www.youtube.com/watch?v=pX0_iIfRilU) | 5:17 |待核|未公开|未完成| AI Agent Crash Course | **Google Cloud Tech** | Annie Wang | 多 Agent 协作、LLM / Workflow / Custom Agent、Hierarchy |
+| **B** | [Multi-agent systems, concepts & patterns](https://www.youtube.com/watch?v=TGNScswE0kU) | 23:06 |待核|未公开|未完成| The Agent Factory | **Google Cloud Tech** | Vlad Kolesnikov、Shir Meir Lador | Supervisor / Swarm、协作、Context 分工；第二轮 |
 
 ### 2.6 RAG & Agentic RAG
 
@@ -123,18 +139,18 @@ RAG 独立覆盖 Retrieval Pipeline、Embeddings、Chunking、Hybrid Search、Re
 
 **字段定义：Publisher / Channel（视频发布方）与 Presenter（实际主讲人）必须分开。** 例如 IBM Technology 是频道，Marina Danilevsky 是其中一节课的主讲人；没有可信资料时标注“待核实”，不猜人名。**本表 10 个唯一视频 ID**：原有 2 节 + 本轮人工选择的 8 节；相同知识点提供“二选一/补充”标识，非全部必学。
 
-| 优先级 | 视频（YouTube 直达） | 时长 | 发布频道 Publisher | 主讲人 Presenter | 核心知识点 / 去重说明 | 元数据状态 |
-|---|---|---:|---|---|---|---|
-| **A** | [How to use Retrieval Augmented Generation (RAG)](https://www.youtube.com/watch?v=oVtlp72f9NQ) | 约6分钟（待核） | **Google Cloud Tech** | 待核实 | 基础 RAG 数据流、Retrieval + Generation；与 IBM RAG 入门二选一；原有条目 | Needs Review |
-| **B · 入门替代** | [What is Retrieval-Augmented Generation (RAG)?](https://www.youtube.com/watch?v=T-D1OfcDW1M) | 6:35 | **IBM Technology** | Marina Danilevsky | 基础 RAG、检索/增强/生成、Grounded Answers；和 Google 入门视频二选一；2023-08-23 | Needs Review |
-| **A** | [What is Agentic RAG?](https://www.youtube.com/watch?v=0z9_MhcYvcY) | 5:42 | **IBM Technology** | 待核实 | Agent 主动决定何时检索；原有条目；2024-10-28 | Needs Review |
-| **B · 延伸** | [RAG's Evolution: From Simple Retrieval to Agentic AI](https://www.youtube.com/watch?v=JB2P5Gk23VI) | 8:48 | **IBM Technology** | Sam Anthony | Keyword → Semantic → Hybrid → Agentic Retrieval；与 Agentic RAG 入门略有重叠，但突出检索演进；2026-05-05 | Needs Review |
-| **B · 进阶** | [Every RAG Strategy Explained in 13 Minutes (No Fluff)](https://www.youtube.com/watch?v=tLMViADvSNE) | 12:52 | **Cole Medin** | Cole Medin | Chunking、Reranking、Multi-Query、Contextual / Hierarchical / Agentic RAG；基础学完再看；2025-11-02 | Needs Review |
-| **A · 架构** | [Are Vector Databases Still Needed? RAG, AI Agents & Search](https://www.youtube.com/watch?v=rXFV1ivDe6c) | 10:01 | **IBM Technology** | Martin Keen | Vector DB vs SQL Index vs Keyword Search vs Long Context：选择与权衡；2026-11-05 | Needs Review |
-| **A · 通用概念** | [Skills vs MCP vs RAG vs Memory: What AI Agents Need to Know](https://www.youtube.com/watch?v=X4FVEEegCbk) | 约9:10（待核） | **IBM Technology** | Martin Keen | Skills/可复用流程、MCP/工具接入、RAG/知识检索、Memory/跨会话记忆边界；2026-09-03 | Needs Review |
-| **B · 进阶** | [What Is Chunkless RAG? How Docling & AI Agents Navigate Documents](https://www.youtube.com/watch?v=vRZNJWw78BQ) | 约7:00（待核） | **IBM Technology** | 待核实 | Document Structure / Tree Navigation、Docling；补充替代传统 Chunking 的方法 | Needs Review |
-| **B · 替代** | [How Do RAG and Agentic AI Enhance LLM Capabilities?](https://www.youtube.com/watch?v=fB2JQXEH_94) | 约10分钟（待核） | **IBM Technology** | 待核实 | RAG 与 Agentic AI 分工；与 What is Agentic RAG 部分重复，二选一；2025-12-08 | Needs Review |
-| **B · 实操** | [RAG Reranking Explained: How To Improve RAG Results](https://www.youtube.com/watch?v=R5MPqm0V6aQ) | 约14分钟（待核） | **pixegami** | pixegami（频道作者；个人姓名待核） | Reranker、Cohere API、Cross-Encoder、Latency/成本权衡；代码偏多，选学；2025-10-06 | Needs Review |
+| 优先级 | 视频（YouTube 直达） | 时长 |发布日期|内容更新日|最后技术审核| 发布频道 Publisher | 主讲人 Presenter | 核心知识点 / 去重说明 | 元数据状态 |
+|---|---|---:|---|---|---|---|---|---|---|
+| **A** | [How to use Retrieval Augmented Generation (RAG)](https://www.youtube.com/watch?v=oVtlp72f9NQ) | 约6分钟（待核） |待核|未公开|未完成| **Google Cloud Tech** | 待核实 | 基础 RAG 数据流、Retrieval + Generation；与 IBM RAG 入门二选一；原有条目 | Needs Review |
+| **B · 入门替代** | [What is Retrieval-Augmented Generation (RAG)?](https://www.youtube.com/watch?v=T-D1OfcDW1M) | 6:35 |2023-08-23†|未公开|未完成| **IBM Technology** | Marina Danilevsky | 基础 RAG、检索/增强/生成、Grounded Answers；和 Google 入门视频二选一；2023-08-23 | Needs Review |
+| **A** | [What is Agentic RAG?](https://www.youtube.com/watch?v=0z9_MhcYvcY) | 5:42 |2024-10-28|未公开|未完成| **IBM Technology** | 待核实 | Agent 主动决定何时检索；原有条目；2024-10-28 | Needs Review |
+| **B · 延伸** | [RAG's Evolution: From Simple Retrieval to Agentic AI](https://www.youtube.com/watch?v=JB2P5Gk23VI) | 8:48 |2026-05-05†|未公开|未完成| **IBM Technology** | Sam Anthony | Keyword → Semantic → Hybrid → Agentic Retrieval；与 Agentic RAG 入门略有重叠，但突出检索演进；2026-05-05 | Needs Review |
+| **B · 进阶** | [Every RAG Strategy Explained in 13 Minutes (No Fluff)](https://www.youtube.com/watch?v=tLMViADvSNE) | 12:52 |2025-11-02†|未公开|未完成| **Cole Medin** | Cole Medin | Chunking、Reranking、Multi-Query、Contextual / Hierarchical / Agentic RAG；基础学完再看；2025-11-02 | Needs Review |
+| **A · 架构** | [Are Vector Databases Still Needed? RAG, AI Agents & Search](https://www.youtube.com/watch?v=rXFV1ivDe6c) | 10:01 |2026-11-05†|未公开|未完成| **IBM Technology** | Martin Keen | Vector DB vs SQL Index vs Keyword Search vs Long Context：选择与权衡；2026-11-05 | Needs Review |
+| **A · 通用概念** | [Skills vs MCP vs RAG vs Memory: What AI Agents Need to Know](https://www.youtube.com/watch?v=X4FVEEegCbk) | 约9:10（待核） |2026-09-03†|未公开|未完成| **IBM Technology** | Martin Keen | Skills/可复用流程、MCP/工具接入、RAG/知识检索、Memory/跨会话记忆边界；2026-09-03 | Needs Review |
+| **B · 进阶** | [What Is Chunkless RAG? How Docling & AI Agents Navigate Documents](https://www.youtube.com/watch?v=vRZNJWw78BQ) | 约7:00（待核） |待核|未公开|未完成| **IBM Technology** | 待核实 | Document Structure / Tree Navigation、Docling；补充替代传统 Chunking 的方法 | Needs Review |
+| **B · 替代** | [How Do RAG and Agentic AI Enhance LLM Capabilities?](https://www.youtube.com/watch?v=fB2JQXEH_94) | 约10分钟（待核） |2025-12-08†|未公开|未完成| **IBM Technology** | 待核实 | RAG 与 Agentic AI 分工；与 What is Agentic RAG 部分重复，二选一；2025-12-08 | Needs Review |
+| **B · 实操** | [RAG Reranking Explained: How To Improve RAG Results](https://www.youtube.com/watch?v=R5MPqm0V6aQ) | 约14分钟（待核） |2025-10-06†|未公开|未完成| **pixegami** | pixegami（频道作者；个人姓名待核） | Reranker、Cohere API、Cross-Encoder、Latency/成本权衡；代码偏多，选学；2025-10-06 | Needs Review |
 
 **建议学习顺序**：① Google Cloud Tech 或 IBM RAG Fundamentals（二选一）→ ② IBM Agentic RAG → ③ IBM Vector DB 选型 → ④ IBM Skills / MCP / RAG / Memory 区分 → ⑤ Cole Medin 的 RAG Strategies → ⑥ 按需学 Chunkless 与 Reranking 实操。IBM 的 RAG Evolution 与 RAG vs Agentic AI 作为可替代补充课，不必全部观看。
 
@@ -148,18 +164,18 @@ RAG 独立覆盖 Retrieval Pipeline、Embeddings、Chunking、Hybrid Search、Re
 
 ### 2.7 Agent Evaluation & Safety
 
-| 级别 | 视频 | 时长* | 系列 | 发布频道 Publisher | 主讲人 Presenter | 中文核心知识点 |
-|---|---|---:|---|---|---|---|
-| **A** | [The agent evaluation revolution](https://www.youtube.com/watch?v=WZZLtwnZ4w0) | 8:32 | AI Agent Crash Course | **Google Cloud Tech** | Annie Wang | Agent 全过程/工具/状态评估，不只评价最终回答 |
-| **A** | [How to evaluate agents in practice](https://www.youtube.com/watch?v=vuBvf7ZRKTA) | 10:53–10:54（待核） | AI Agent Crash Course | **Google Cloud Tech** | Annie Wang | Component / Trajectory / Human Evaluation |
+| 级别 | 视频 | 时长* |发布日期|内容更新日|最后技术审核| 系列 | 发布频道 Publisher | 主讲人 Presenter | 中文核心知识点 |
+|---|---|---:|---|---|---|---|---|---|---|
+| **A** | [The agent evaluation revolution](https://www.youtube.com/watch?v=WZZLtwnZ4w0) | 8:32 |待核|未公开|未完成| AI Agent Crash Course | **Google Cloud Tech** | Annie Wang | Agent 全过程/工具/状态评估，不只评价最终回答 |
+| **A** | [How to evaluate agents in practice](https://www.youtube.com/watch?v=vuBvf7ZRKTA) | 10:53–10:54（待核） |待核|未公开|未完成| AI Agent Crash Course | **Google Cloud Tech** | Annie Wang | Component / Trajectory / Human Evaluation |
 
 **后续优先补齐**：Prompt Injection、Tool Permissions、Guardrails、Tracing、Agent Reliability。安全内容不能只看一个 Evaluation 视频就视为完整覆盖。
 
 ### 2.8 Agent Frameworks & Deployment
 
-| 级别 | 视频 | 时长* | 系列 | 发布频道 Publisher | 主讲人 Presenter | 中文核心知识点 |
-|---|---|---:|---|---|---|---|
-| **B** | [How to deploy an AI agent to Cloud Run (step by step)](https://www.youtube.com/watch?v=bjZ2M7ThOBc) | 13:44 | Modern AI Agents | **Google Cloud Tech** | Smitha Kolan | Deployment Lifecycle、Cloud Run；偏 Google Cloud 特定实现，基础学完再看 |
+| 级别 | 视频 | 时长* |发布日期|内容更新日|最后技术审核| 系列 | 发布频道 Publisher | 主讲人 Presenter | 中文核心知识点 |
+|---|---|---:|---|---|---|---|---|---|---|
+| **B** | [How to deploy an AI agent to Cloud Run (step by step)](https://www.youtube.com/watch?v=bjZ2M7ThOBc) | 13:44 |待核|未公开|未完成| Modern AI Agents | **Google Cloud Tech** | Smitha Kolan | Deployment Lifecycle、Cloud Run；偏 Google Cloud 特定实现，基础学完再看 |
 
 **非 RAG 视频主讲人核验说明（2026-11-07）**：Google Cloud Tech 的 [AI Agent Crash Course](https://www.youtube.com/playlist?list=PLIivdWyY5sqLNeW9MPxldbbevMEJGMWBG) 多集视频说明注明 Annie Wang；[Modern AI Agents](https://www.youtube.com/watch?v=Zqno_vux6d8) 系列由 Smitha Kolan 主讲。The Agent Factory 三节的实际主持人分别为 [Shir Meir Lador + Ivan Nardini（嘉宾 Julia Wiesinger）](https://www.youtube.com/watch?v=aLYrV61rJG4)、[Vlad Kolesnikov + Shir Meir Lador](https://www.youtube.com/watch?v=TGNScswE0kU)、[Smitha Kolan + Amit Maraj](https://www.youtube.com/watch?v=NiLb5DK4_rU)；[Graph Engineering 101](https://www.youtube.com/watch?v=IrW0_f-w4kA) 标注 Tilde Thurium 和 Annie Wang；[The Omni App Memory Architecture](https://www.youtube.com/watch?v=8C4bh59FtsI) 标注 Annie Wang。**Graph Engineering with ADK** 的个人主讲人未能充分独立核实，保留“待核实”。以上 Publisher / Presenter 为独立字段，**不代表其他元数据已通过全量复核**，故仍维持 `Needs Review`。
 
@@ -213,7 +229,7 @@ RAG 独立覆盖 Retrieval Pipeline、Embeddings、Chunking、Hybrid Search、Re
 - **英文标题 / 直达 URL（11 字符 Video ID）**、**发布频道 / Publisher**、**主讲人 / Presenter（未核实标待核）**、**所属系列**、**视频发布日期**、**准确时长**。
 - **主 Topic**、**中文重点 / 适合阶段**、**A/B/C 推荐级别**、**与已有课的重叠或互补关系**。
 - **综合评分及五个分项**（相关性 /30、准确性 /25、清晰度 /20、结构 /15、时长密度 /10）。
-- **所涉框架和版本**（若有）、**状态**（Current / Evergreen / Needs Review / Outdated / Unavailable）、**最后官方核验日期及依据**。
+- **所涉框架和版本**（若有）、**状态**（Current / Evergreen / Needs Review / Outdated / Unavailable）、**发布日期、能核实的内容更新日、最后技术审核日**、审核依据以及下一次到期时间。
 - 无法证实的字段留空或标“待核”，不要猜测。
 
 ## 6. 每月双索引更新流程（先大学、再 YouTube）
@@ -221,10 +237,10 @@ RAG 独立覆盖 Retrieval Pipeline、Embeddings、Chunking、Hybrid Search、Re
 1. 读取 GitHub main 最新 `AGENTS.md`、`docs/university-ai-agent-courses.md`、`docs/youtube-ai-agent-courses.md` 及 SHA；遵守大学课程与 YouTube 短视频各自的严格边界。
 2. **A 大学课程**：核实大学、正式课程身份 / 学期 / 官方课件链接，按课程+学期+URL 去重，仅在有真实新信息时合并原路径。
 3. **B YouTube**：首先重新阅读**本文件第 1 节最新标准**；优先检索上次扫描以来的新片，优先 General AI Agent 概念和 ≤20 分钟，放宽至 30 分钟需给出理由；专项 Voice / Vision 默认不收。
-4. 对每条候选核验视频 ID、**Publisher / Channel 与 Presenter（分别记录，未知主讲人标待核实）**、发布日期、时长、可访问性、实际内容；**全索引按 Video ID + 语义内容双层去重**。对同质视频只保留最有教学价值的主推荐，其他写替代或不添加；优先最多 5 条高质量新课。
-5. 既有视频每月检查可用性 / 技术时效；过时内容注明原因归档，暂无法核实则保留 `Needs Review`，不得把旧视频充作当月新增。维护按 Topic 的学习顺序与课程重叠备注。
+4. 对每条候选核验视频 ID、**Publisher / Channel 与 Presenter（分别记录，未知主讲人标待核实）**、发布日期、内容更新日（仅官方有据时记录）、最后技术审核日期、时长、可访问性、实际内容；**全索引按 Video ID + 语义内容双层去重**。对同质视频只保留最有教学价值的主推荐，其他写替代或不添加；优先最多 5 条高质量新课。
+5. 既有视频每月检查可用性 / 技术时效，按第 1.6 节的日期与阈值分级审核；未做充分审核不填写虚假 Last Reviewed 日期。确认过时内容注明原因并移至归档而非直接删除，暂无法核实则保留 `Needs Review`，不得把旧视频充作当月新增。维护按 Topic 的学习顺序与课程重叠备注。
 6. 有实质变更时重新读取最新 SHA、合并并只提交原路径；无更新则报告“无新增”。写入成功返回**实际 Commit URL**；失败如实说明。每月中文报告包括大学与 YouTube 的新增、更正、核验/过时状况、去重决策及 GitHub Commit 链接。
 
 ## 7. 过时与失效视频归档
 
-_目前无已确认过时/失效条目；候选待核状态不是“已归档”。_
+_目前无已确认过时/失效条目；候选待核状态不是“已归档”。此处未来保留归档时间、原始发布日期、最后技术审核日期、原因、替代课程以及已翻译 ID 的交叉引用。_
