@@ -2,7 +2,7 @@
 
 > **范围**：面向有软件工程基础、但刚开始系统学习 AI Agent 的学习者；优先 **General-purpose AI Agent Engineering** 的短视频，而非 Voice / Vision / Multimodal 专项。与仅收录大学课程的 `docs/university-ai-agent-courses.md` 严格分离。
 >
-> **更新日期**：2026-11-08 · **版本**：v1.14 · **状态**：新选课标准已生效，原有课程与新增的 8 节 RAG 视频按 Topic 收录，所有 31 节候选课程均含 Publisher / Presenter 与 YouTube 原视频发布日期；尚未逐条完成官方元数据复核的候选统一标记 `Needs Review`，不冒充 `Current`。
+> **更新日期**：2026-11-08 · **版本**：v1.15 · **状态**：新选课标准已生效，原有课程与新增的 8 节 RAG 视频按 Topic 收录，所有 31 节候选课程均含 Publisher / Presenter 与 YouTube 原视频发布日期；尚未逐条完成官方元数据复核的候选统一标记 `Needs Review`，不冒充 `Current`。
 >
 > **唯一维护路径**：`diego-king/ai-agent-knowledge` / `main` / `docs/youtube-ai-agent-courses.md`。每次提交前读取最新全文与 blob SHA，原路径合并，不创建副本。
 
@@ -207,6 +207,15 @@ RAG 独立覆盖 Retrieval Pipeline、Embeddings、Chunking、Hybrid Search、Re
 | YouTube Video ID / 原视频 | Translation State | 目标语言 | HeyGen Translation ID | 中文视频 |
 |---|---|---|---|---|
 | [pX0_iIfRilU](https://www.youtube.com/watch?v=pX0_iIfRilU) · Foundations of multi-agent systems with ADK | **Running** | Mandarin | `073463f7b49a42db95a810f4896bc94b-zh` | 待翻译完成 |
+
+**HeyGen MCP & Evaluation 翻译批次（2026-11-08）**：用户已授权处理以下四节视频及讲师音色；提交前已比对 GitHub 主索引与 HeyGen 全部 15 项历史任务，均无已有翻译任务。新批次 `da3c7e46da0545ba8ff60b4672e84faf`，按下表顺序创建；简体中文（Chinese Mandarin Simplified）、`translate_audio_only=true`、`mode=speed`、`disable_music_track=false`。HeyGen 已确认 4 个任务均为 `processing`；**尚未完成，不得重复提交**。确认每项 `completed` 后才改为 `Translated` 并补充中文 MP4 URL。
+
+| YouTube Video ID / 原视频 | Translation State | 目标语言 | HeyGen Translation ID | 中文视频 |
+|---|---|---|---|---|
+| [JnKkdHaatwU](https://www.youtube.com/watch?v=JnKkdHaatwU) · Connecting ADK Agents to MCP Servers | **Running** | zh-CN | `22c81b3a55bd68b9102c90e892c962fa-zh_zh-CN` | 待翻译完成 |
+| [XwlVHm3JKWU](https://www.youtube.com/watch?v=XwlVHm3JKWU) · Building your own MCP server with ADK | **Running** | zh-CN | `c96c0e0474d7c4fc8dd5115b9630b3df-zh_zh-CN` | 待翻译完成 |
+| [WZZLtwnZ4w0](https://www.youtube.com/watch?v=WZZLtwnZ4w0) · The agent evaluation revolution | **Running** | zh-CN | `a410a62f0e961f5b7f598f8b03b5a1b7-zh_zh-CN` | 待翻译完成 |
+| [vuBvf7ZRKTA](https://www.youtube.com/watch?v=vuBvf7ZRKTA) · How to evaluate agents in practice | **Running** | zh-CN | `b0c94b5f8f250151ceb88f14b50f0575-zh_zh-CN` | 待翻译完成 |
 
 **未来操作规范**：新视频默认 `Not Translated`；提交后记录 `Submitted/Running` 和 HeyGen ID；确认成功后改为 `Translated` 并保存结果 URL；失败标记 `Failed`。每次更新先读取 main 最新文件，并检查 HeyGen 账号历史作品（包括非本次对话创建的任务），按 YouTube ID 合并原路径，不复制条目。结果 URL 可能随 HeyGen 保留策略失效，翻译状态和任务 ID 仍须保留以防重复扣费。
 
