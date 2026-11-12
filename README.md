@@ -5,7 +5,7 @@
 ## 核心学习资料（仅三份）
 
 1. [Python General Interview（HTML）](docs/python-interview.html) — 完整的 Python Interview Prep Guide，包含类型、装饰器、OOP、并发、asyncio、标准库、面试陷阱与交互式复习。
-2. [Python Data Structures & Algorithms（HTML）](docs/data-structures.html) — 完整的算法备考指南、模式判断、Union Find / Heap 模板、题目与折叠解答。
+2. [Python Data Structures & Algorithms（HTML）](docs/python-data-structures-and-algortihm.html) — 完整的算法备考指南、模式判断、Union Find / Heap 模板、题目与折叠解答。
 3. [AI Agent / LLM Engineering 大学课程课件主题索引（Markdown）](docs/university-ai-agent-courses.md) — 以用户于 2026-10-23 整理的完整大学课程主题索引为准，保留讲义链接、课程版本与核验说明。
 
 `README.md` 和 `AGENTS.md` 只是仓库说明与编辑规范，不属于额外的学习资料。

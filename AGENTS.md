@@ -5,7 +5,7 @@
 - Branch: `main`
 - Persistent study files (four canonical paths):
   - Python language/general interview: `docs/python-interview.html`
-  - Python data structures and algorithms: `docs/data-structures.html`
+  - Python data structures and algorithms: `docs/python-data-structures-and-algortihm.html`
   - University AI Agent / LLM Engineering course material index, organized by topic: `docs/university-ai-agent-courses.md`
 - YouTube AI Agent conceptual short-video course index: `docs/youtube-ai-agent-courses.md` (user-authorized fourth study source; vendor/creator content is allowed here only).
 - `README.md` and this `AGENTS.md` are maintenance metadata, not additional knowledge sources.
@@ -19,10 +19,20 @@
 6. Commit changes and return the actual GitHub commit URL only after verifying the write.
 7. If the current environment cannot read or write GitHub, clearly state the limitation instead of claiming an update is saved.
 
+## Dropbox mirror after Python updates
+- GitHub `main` is the only source of truth. Dropbox contains reading mirrors only; never merge Dropbox edits back into GitHub automatically.
+- Keep stable filenames (no date/version suffixes). Exact mappings:
+  - `docs/python-interview.html` → `/Study/Agentic AI Prep/python-interview.html`
+  - `docs/python-data-structures-and-algortihm.html` → `/Study/Agentic AI Prep/python-data-structures-and-algortihm.html`
+- After every assistant-made update to either Python guide has been committed to GitHub, immediately fetch the latest committed guides and synchronize these two Dropbox paths, replacing outdated mirrors in place. The user authorized this ongoing replacement workflow on 2026-11-12; do not create timestamped duplicates. Preserve exact HTML bytes and mutual links.
+- Check the current GitHub head and Dropbox destination contents before writing; skip unchanged files. Use an available overwrite-capable Dropbox API or the user's locally synchronized Dropbox folder when available. The upload-only connector cannot overwrite existing files: do not retry it on a name conflict or delete files merely to work around that limitation.
+- Verify the saved mirrors against the committed GitHub content (byte equality or SHA-256; check remote completion where available). Report actual success, partial success, or a blocked mirror honestly. A successful GitHub commit alone is not a completed Dropbox sync.
+- Preserve unrelated files and historical study material. This is an after-edit workflow, not a scheduled polling task or a webhook for changes made by others.
+
 ## Format requirements
 - The two Python sources are FULL HTML guides; preserve their inline CSS/JavaScript, diagrams, responsive styling, interactive exercises, and mutual links:
-  - `python-interview.html` → `data-structures.html`
-  - `data-structures.html` → `python-interview.html`
+  - `python-interview.html` → `python-data-structures-and-algortihm.html`
+  - `python-data-structures-and-algortihm.html` → `python-interview.html`
 - University courses remain ONE comprehensive Markdown file, organized by Topic, with official lecture / PDF / PPTX / notes links, course-and-semester labels, cross-topic indexing and original verification status. Do not replace it with a brief course summary.
 - **University-only scope (mandatory for all future updates):** `docs/university-ai-agent-courses.md` contains exclusively university-provided AI Agent / LLM Engineering courses and their official university or instructor-linked lecture slides, lecture notes, syllabi, and course code. Before adding or editing an entry, verify the university affiliation, course identity, semester/year when available, and the official source URL. A university course's explicitly linked GitHub teaching repository is allowed; a standalone vendor course or generic open-source tutorial is not. Exclude LangChain Academy, commercial/vendor training, standalone framework tutorials, and non-university bootcamps, even when their topics match. Preserve historical statistics and avoid inflating university course counts. Apply this rule to manual edits and scheduled automations alike.
 - **YouTube beginner-first scope (mandatory for all future manual and scheduled edits):** `docs/youtube-ai-agent-courses.md` is for a learner new to AI Agent Engineering who wants a systematic **general-purpose** Agent foundation (Fundamentals, Tool Calling/MCP, Memory/Context, Architectures, Multi-Agent, RAG, Evaluation/Safety, Production Reliability). Include only concept/architecture teaching **≤20:00 minutes** (strict maximum), ideally 5–15 minutes; **videos over 20:00 must not be added even as supplementary recommendations**. If duration is unverified, retain `Needs Review` and remove the entry if it proves >20:00. Deprioritize Voice/Vision/real-time multimodal specialties, product marketing, and code-only demos; a specialty course is eligible only as an explicitly labelled supplemental exception when its underlying architecture broadly transfers.
