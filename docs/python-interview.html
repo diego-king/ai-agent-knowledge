@@ -1128,6 +1128,64 @@ float('-inf')   # 负无穷, 初始化最大值
 bin(10)         # '0b1010'   hex(255) -> '0xff'
 int('1010', 2)  # 10    按进制解析字符串
 </script>
+<h4 id="k-exceptions">异常捕获与处理 · Exception Handling (try / except / else / finally)</h4>
+<p>Python 的异常处理使用 <code>try</code> / <code>except</code>（相当于其他语言的 try / catch）。只捕获<b>能够合理处理</b>的异常；不想吞掉错误就用 <code>raise</code> 重新抛出。</p>
+<div class="tablewrap"><table>
+<tr><th>语法 / 操作</th><th>作用与面试要点</th></tr>
+<tr><td><code>try: ... except ValueError: ...</code></td><td>捕获指定异常；<b>异常出现后</b>，try 中剩余语句跳过</td></tr>
+<tr><td><code>except ValueError as exc:</code></td><td>拿到异常对象；<code>str(exc)</code> 查看错误信息</td></tr>
+<tr><td><code>except (ValueError, TypeError) as exc:</code></td><td>同时捕获多种异常；用<b>元组</b>，而非 <code>or</code></td></tr>
+<tr><td><code>except SpecificError: ... except Exception: ...</code></td><td>多个处理分支按顺序匹配；<b>具体异常放前面</b>，父类放后面</td></tr>
+<tr><td><code>else:</code></td><td><b>try 没抛异常</b>且正常执行结束时运行；适合放成功后续处理</td></tr>
+<tr><td><code>finally:</code></td><td>无论成功、异常或 <code>return</code>，通常都会运行；用于关闭文件、释放资源。不要在 finally 里 <code>return</code> 覆盖原结果/异常</td></tr>
+<tr><td><code>raise ValueError("message")</code></td><td>主动抛出异常；<code>except</code> 中单独写 <code>raise</code> 可<b>原样重新抛出</b>当前异常</td></tr>
+<tr><td><code>raise MyError("message") from exc</code></td><td>异常链（exception chaining）：保留原始原因 <code>exc</code>，方便调试</td></tr>
+<tr><td><code>class MyError(Exception): pass</code></td><td>自定义异常类，通常继承 <code>Exception</code></td></tr>
+</table></div>
+<p><b>基础模板：捕获 → 处理 → 成功分支 → 清理</b></p>
+<script type="sourcecode">
+def parse_int(raw):
+    try:
+        value = int(raw)              # 可能抛 ValueError / TypeError
+    except (ValueError, TypeError) as exc:
+        print("Invalid input:", exc)  # catch 多种异常
+        return None                   # 已处理错误
+    else:
+        print("Parsed successfully")  # 仅 try 正常完成时执行
+        return value
+    finally:
+        print("Parsing finished")     # 即使 return 也执行
+
+parse_int("42")       # 42
+parse_int("oops")     # None
+
+# 更精确的捕获与原样重抛
+try:
+    int("abc")
+except ValueError as exc:
+    print(type(exc).__name__, str(exc))
+    # raise  # 若当前层无法处理, 去掉注释让调用者处理
+
+# 自定义异常 + 异常链（preserve the original cause）
+class InvalidIdError(Exception):
+    pass
+
+def parse_id(raw):
+    try:
+        return int(raw)
+    except (ValueError, TypeError) as exc:
+        raise InvalidIdError(f"Bad ID: {raw!r}") from exc
+
+try:
+    parse_id("bad")
+except InvalidIdError as exc:
+    print(exc)  # Bad ID: 'bad'
+</script>
+<div class="box warn"><div class="bt">⚠️ 面试高频陷阱 · Exception Gotchas</div>
+<p><b>①</b> <code>except Exception:</code> 可以抓大多数普通运行时错误，但会掩盖 bug；优先捕获 <code>ValueError</code>、<code>KeyError</code>、<code>IndexError</code>、<code>TypeError</code>、<code>ZeroDivisionError</code>、<code>FileNotFoundError</code> 等明确类型。<b>②</b> 避免裸 <code>except:</code> 和随意 <code>except BaseException:</code>：它们还会捕获 <code>KeyboardInterrupt</code>、<code>SystemExit</code>；在 Python 3.8+ 中 <code>asyncio.CancelledError</code> 也继承 <code>BaseException</code>。<b>③</b> <code>finally</code> 执行不代表异常被处理；未匹配的异常在清理后仍继续传播。<b>④</b> <code>try</code> 的 <code>else</code> 块里新抛出的异常不会被同一组 <code>except</code> 捕获。<b>⑤</b> 文件/锁优先用 <code>with</code> 或 <code>async with</code> 自动清理。</p>
+</div>
+<div class="box say"><div class="bt">🗣️ Say it in English</div>
+<p class="en">“I catch specific exceptions with try and except. The else block runs only if the try block succeeds, while finally performs cleanup even when an exception occurs or a return is executed. I use raise to propagate an error and raise ... from ... to preserve the original cause.”</p></div>
 <h4>必背惯用法 · Must-know idioms</h4>
 <script type="sourcecode">
 # 交换 / 解包
