@@ -85,28 +85,69 @@ pages = {
     None: {"items": [{"id": 1}], "next": "p2"},
     "p2": {"items": [{"id": 1}, {"id": 2}], "next": None}
 }
-assert len(fetch_all(lambda c: pages[c])) == 2</code></pre></details></section><section id="q4"><h3><span class="tag">P1</span>4. Time-Based Key-Value Store</h3><p>按时间戳获取不晚于查询时间的最新值；要求写入时间戳递增。</p><p class="muted">关键语法：bisect_right · sorted timestamps</p><details><summary>展开 Python 参考实现 + assert 测试</summary><button class="btn" data-copy="code3">复制代码</button><pre><code id="code3">from bisect import bisect_right
+assert len(fetch_all(lambda c: pages[c])) == 2</code></pre></details></section><section id="q4"><h3><span class="tag">P0</span>4. Time-Based Key-Value Store — 乱序 timestamp</h3><p><strong>升级：</strong>不要求 timestamp 递增；同一 key、同一 timestamp 再次写入时覆盖旧值。get(key, t) 返回 timestamp ≤ t 的最近值，若不存在则返回空字符串。</p><p class="muted">方案 A（优先背）：dict + sorted timestamp list + bisect.insort；新时间戳 set O(n)，重复时间戳覆盖平均 O(1)，get O(log n)。列表插入需要移动元素，因此 insort 不是 O(log n) 写入。</p><details><summary>方案 A：实时有序索引（推荐）</summary><button class="btn" data-copy="code3">复制代码</button><pre><code id="code3">from bisect import bisect_left, bisect_right, insort
 
 class TimeMap:
     def __init__(self):
-        self.store = {}
+        self.times = {}   # key -&gt; sorted timestamps
+        self.values = {}  # key -&gt; {timestamp: value}
 
     def set(self, key, value, timestamp):
-        arr = self.store.setdefault(key, [])
-        if arr and timestamp &lt; arr[-1][0]:
-            raise ValueError("Timestamps must be sorted")
-        arr.append((timestamp, value))
+        if key not in self.values:
+            self.values[key] = {}
+            self.times[key] = []
+        if timestamp not in self.values[key]:
+            insort(self.times[key], timestamp)
+        self.values[key][timestamp] = value
 
     def get(self, key, timestamp):
-        arr = self.store.get(key, [])
-        i = bisect_right(arr, timestamp, key=lambda x: x[0])
-        return arr[i - 1][1] if i else ""
+        if key not in self.times:
+            return ""
+        times = self.times[key]
+        i = bisect_right(times, timestamp) - 1
+        if i &lt; 0:
+            return ""
+        return self.values[key][times[i]]
 
 tm = TimeMap()
-tm.set("a", "old", 1)
-tm.set("a", "new", 5)
-assert tm.get("a", 4) == "old"
-assert tm.get("a", 5) == "new"</code></pre></details></section><section id="q5"><h3><span class="tag">P1</span>5. Command Parser + JSON File I/O</h3><p>将命令列表转为数据库操作，处理未知命令、缺少字段和文件输入输出。</p><p class="muted">关键语法：json · with open · try/except</p><details><summary>展开 Python 参考实现 + assert 测试</summary><button class="btn" data-copy="code4">复制代码</button><pre><code id="code4">import json
+tm.set("foo", "v10", 10)
+tm.set("foo", "v3", 3)
+tm.set("foo", "v7", 7)
+tm.set("foo", "updated", 7)
+assert tm.get("foo", 8) == "updated"
+assert tm.get("foo", 5) == "v3"
+assert tm.get("foo", 2) == ""
+assert tm.get("foo", 10) == "v10"
+assert tm.get("missing", 100) == ""</code></pre></details><p class="muted">方案 B：Lazy Sorting。set 平均 O(1)，查询时如有新写入则排序 O(n log n)，后续未修改时 get O(log n)。适合大量写入、少量查询。</p><details><summary>方案 B：Lazy Sorting + Cache</summary><button class="btn" data-copy="code3lazy">复制代码</button><pre><code id="code3lazy">from bisect import bisect_right
+
+class LazyTimeMap:
+    def __init__(self):
+        self.values = {}  # key -&gt; {timestamp: value}
+        self.sorted_times = {}  # key -&gt; cached sorted timestamps
+        self.dirty = set()
+
+    def set(self, key, value, timestamp):
+        self.values.setdefault(key, {})[timestamp] = value
+        self.dirty.add(key)
+
+    def get(self, key, timestamp):
+        if key not in self.values:
+            return ""
+        if key in self.dirty:
+            self.sorted_times[key] = sorted(self.values[key])
+            self.dirty.remove(key)
+        times = self.sorted_times[key]
+        i = bisect_right(times, timestamp) - 1
+        return self.values[key][times[i]] if i &gt;= 0 else ""
+
+tm = LazyTimeMap()
+tm.set("foo", "v10", 10)
+tm.set("foo", "v3", 3)
+tm.set("foo", "v7", 7)
+tm.set("foo", "new", 7)
+assert tm.get("foo", 8) == "new"
+assert tm.get("foo", 10) == "v10"
+assert tm.get("foo", 2) == ""</code></pre></details><p><strong>面试解释：</strong>如果第三方 SortedContainers 可用，可以使用 SortedDict / SortedList；但不能假设面试环境安装了额外依赖。Python 标准库的 bisect 提供二分查找，但 list 插入仍为 O(n)。</p></section><section id="q5"><h3><span class="tag">P1</span>5. Command Parser + JSON File I/O</h3><p>将命令列表转为数据库操作，处理未知命令、缺少字段和文件输入输出。</p><p class="muted">关键语法：json · with open · try/except</p><details><summary>展开 Python 参考实现 + assert 测试</summary><button class="btn" data-copy="code4">复制代码</button><pre><code id="code4">import json
 
 def execute(commands):
     db, output = {}, []
