@@ -4,7 +4,7 @@
 <style>:root{color-scheme:light dark;--bg:#f5f7fb;--card:#fff;--text:#182436;--muted:#566478;--line:#dce3ed;--accent:#2563eb}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}header{background:#13233d;color:#fff;padding:38px max(18px,calc((100vw - 1000px)/2))}header p{color:#d0def3}main{max-width:1000px;margin:auto;padding:24px 16px 70px}.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin:16px 0}h1{line-height:1.2}h2{margin-top:0}nav a{display:inline-block;margin:5px 12px 5px 0;color:var(--accent)}details{border-top:1px solid var(--line);padding:15px 0}summary{font-weight:700;cursor:pointer}pre{overflow:auto;background:#0e1726;color:#e8f0ff;padding:18px;border-radius:10px;font-size:13px;line-height:1.5;tab-size:4}code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.tag{display:inline-block;background:#dbeafe;color:#1d4ed8;padding:2px 8px;border-radius:99px;font-size:12px;margin-right:8px}.muted{color:var(--muted)}.btn{border:0;background:#2563eb;color:white;padding:9px 14px;border-radius:8px;cursor:pointer}.check{display:block;padding:5px 0}footer{color:var(--muted);font-size:13px;margin-top:30px}@media(prefers-color-scheme:dark){:root{--bg:#0e1522;--card:#182437;--text:#edf3ff;--muted:#afbdd0;--line:#33445a;--accent:#93c5fd}.tag{background:#1e3a5f;color:#bfdbfe}}</style></head><body>
 <header><h1>Lyft AI Entity · Python Laptop Coding Exercise</h1><p>第二轮 Onsite · 90分钟 · 中文讲解 + 英文技术术语 · 更新于 2026-11-17</p><p>独立专项备考指南｜可折叠答案、必背代码、测试与模拟流程</p></header>
 <main><div class="card"><h2>考试定位</h2><p>这份指南针对你描述的 <strong>90-minute Laptop Coding Exercise</strong>。题型来自公开 Lyft SWE 面试经验及工程类实战练习的归纳，<strong>不代表 Lyft AI Entity 团队确认会考这些题</strong>。重点是完整可运行实现，而非只背 LeetCode 答案。</p><p><strong>时间安排：</strong>0–10 分钟确认需求；10–25 分钟数据结构与接口；25–65 分钟实现；65–80 分钟测试；80–90 分钟解释复杂度和改进。</p><nav><a href="#q1">1. Transactional Key-Value Store</a><a href="#q2">2. Priority Job Scheduler</a><a href="#q3">3. Pagination API Wrapper</a><a href="#q4">4. Time-Based Key-Value Store</a><a href="#q5">5. Command Parser + JSON File I/O</a><a href="#q6">6. Merge Intervals</a><a href="#q7">7. Two Heaps Median</a><a href="#q8">8. Lyft Minimum Workers</a><a href="#q9">9. Nested KV + COUNT</a><a href="#q10">10. Stateful Fetch N</a></nav></div>
-<div class="card"><h2>10 道必背 Python 实现</h2><p class="muted">建议先自己在 IDE 写出来，再展开参考答案。P0 优先于 P1。每题至少写 3 个测试：正常输入、空输入、异常/边界。</p><section id="q1"><h3><span class="tag">P0</span>1. Transactional Key-Value Store</h3><p>写出 set/get/delete/begin/rollback/commit；解释 snapshot 的 O(n) 复制成本。</p><p class="muted">关键语法：dict · snapshots · transactions</p><details><summary>展开 Python 参考实现 + assert 测试</summary><button class="btn" data-copy="code0">复制代码</button><pre><code id="code0">class Database:
+<div class="card"><h2>10 道 Python 实现速记</h2><p class="muted">建议先自己在 IDE 写出来，再展开参考答案。P0 优先于 P1。每题只保留 Python 实现，重点记住重要数据结构与核心算法。</p><section id="q1"><h3><span class="tag">P0</span>1. Transactional Key-Value Store</h3><p><strong>重要数据结构：</strong>Hash Map（dict）、Stack（list snapshots）；<strong>核心算法：</strong>Snapshot Copy、事务回滚、LIFO</p><p>写出 set/get/delete/begin/rollback/commit；解释 snapshot 的 O(n) 复制成本。</p><p class="muted">关键语法：dict · snapshots · transactions</p><details><summary>展开 Python 实现</summary><button class="btn" data-copy="code0">复制代码</button><pre><code id="code0">class Database:
     def __init__(self):
         self.data = {}
         self.history = []
@@ -29,18 +29,7 @@
     def commit(self):
         if not self.history:
             raise RuntimeError("No transaction")
-        self.history.pop()
-
-db = Database()
-db.set("a", 1)
-db.begin()
-db.set("a", 2)
-db.rollback()
-assert db.get("a") == 1
-db.begin()
-db.set("b", 3)
-db.commit()
-assert db.get("b") == 3</code></pre></details></section><section id="q2"><h3><span class="tag">P0</span>2. Priority Job Scheduler</h3><p>最大优先级先执行；相同优先级保持 FIFO。</p><p class="muted">关键语法：heapq · itertools.count</p><details><summary>展开 Python 参考实现 + assert 测试</summary><button class="btn" data-copy="code1">复制代码</button><pre><code id="code1">import heapq
+        self.history.pop()</code></pre></details></section><section id="q2"><h3><span class="tag">P0</span>2. Priority Job Scheduler</h3><p><strong>重要数据结构：</strong>Min Heap（heapq）、Sequence Counter；<strong>核心算法：</strong>Priority Queue、负数模拟最大优先级、FIFO Tie-break</p><p>最大优先级先执行；相同优先级保持 FIFO。</p><p class="muted">关键语法：heapq · itertools.count</p><details><summary>展开 Python 实现</summary><button class="btn" data-copy="code1">复制代码</button><pre><code id="code1">import heapq
 from itertools import count
 
 class Scheduler:
@@ -54,15 +43,7 @@ class Scheduler:
     def pop(self):
         if not self.heap:
             return None
-        return heapq.heappop(self.heap)[2]
-
-s = Scheduler()
-s.add(1, "low")
-s.add(5, "first")
-s.add(5, "second")
-assert [s.pop(), s.pop(), s.pop(), s.pop()] == [
-    "first", "second", "low", None
-]</code></pre></details></section><section id="q3"><h3><span class="tag">P0</span>3. Pagination API Wrapper</h3><p>逐页获取、按 id 去重、检测重复 cursor 防止死循环。</p><p class="muted">关键语法：loop · cursor · set · validation</p><details><summary>展开 Python 参考实现 + assert 测试</summary><button class="btn" data-copy="code2">复制代码</button><pre><code id="code2">def fetch_all(fetch_page):
+        return heapq.heappop(self.heap)[2]</code></pre></details></section><section id="q3"><h3><span class="tag">P0</span>3. Pagination API Wrapper</h3><p><strong>重要数据结构：</strong>Hash Set（set）、List、Cursor；<strong>核心算法：</strong>迭代分页、去重、Cycle Detection</p><p>逐页获取、按 id 去重、检测重复 cursor 防止死循环。</p><p class="muted">关键语法：loop · cursor · set · validation</p><details><summary>展开 Python 实现</summary><button class="btn" data-copy="code2">复制代码</button><pre><code id="code2">def fetch_all(fetch_page):
     results, ids, cursors = [], set(), set()
     cursor = None
     while True:
@@ -79,13 +60,7 @@ assert [s.pop(), s.pop(), s.pop(), s.pop()] == [
         if next_cursor in cursors:
             raise ValueError("Cursor loop")
         cursors.add(next_cursor)
-        cursor = next_cursor
-
-pages = {
-    None: {"items": [{"id": 1}], "next": "p2"},
-    "p2": {"items": [{"id": 1}, {"id": 2}], "next": None}
-}
-assert len(fetch_all(lambda c: pages[c])) == 2</code></pre></details></section><section id="q4"><h3><span class="tag">P0</span>4. Time-Based Key-Value Store — 乱序 timestamp</h3><p><strong>升级：</strong>不要求 timestamp 递增；同一 key、同一 timestamp 再次写入时覆盖旧值。get(key, t) 返回 timestamp ≤ t 的最近值，若不存在则返回空字符串。</p><p class="muted">推荐实现：dict + sorted timestamp list + bisect.insort；新时间戳 set O(n)，重复时间戳覆盖平均 O(1)，get O(log n)。列表插入需要移动元素，因此 insort 不是 O(log n) 写入。</p><details><summary>乱序 timestamp：实时有序索引</summary><button class="btn" data-copy="code3">复制代码</button><pre><code id="code3">from bisect import bisect_right, insort
+        cursor = next_cursor</code></pre></details></section><section id="q4"><h3><span class="tag">P0</span>4. Time-Based Key-Value Store — 乱序 timestamp</h3><p><strong>重要数据结构：</strong>Hash Map（dict）、Sorted List；<strong>核心算法：</strong>Binary Search（bisect_right）、Ordered Insertion（insort）</p><p><strong>升级：</strong>不要求 timestamp 递增；同一 key、同一 timestamp 再次写入时覆盖旧值。get(key, t) 返回 timestamp ≤ t 的最近值，若不存在则返回空字符串。</p><p class="muted">推荐实现：dict + sorted timestamp list + bisect.insort；新时间戳 set O(n)，重复时间戳覆盖平均 O(1)，get O(log n)。列表插入需要移动元素，因此 insort 不是 O(log n) 写入。</p><details><summary>展开 Python 实现</summary><button class="btn" data-copy="code3">复制代码</button><pre><code id="code3">from bisect import bisect_right, insort
 
 class TimeMap:
     def __init__(self):
@@ -107,18 +82,7 @@ class TimeMap:
         i = bisect_right(times, timestamp) - 1
         if i &lt; 0:
             return ""
-        return self.values[key][times[i]]
-
-tm = TimeMap()
-tm.set("foo", "v10", 10)
-tm.set("foo", "v3", 3)
-tm.set("foo", "v7", 7)
-tm.set("foo", "updated", 7)
-assert tm.get("foo", 8) == "updated"
-assert tm.get("foo", 5) == "v3"
-assert tm.get("foo", 2) == ""
-assert tm.get("foo", 10) == "v10"
-assert tm.get("missing", 100) == ""</code></pre></details><p><strong>面试解释：</strong>如果第三方 SortedContainers 可用，可以使用 SortedDict / SortedList；但不能假设面试环境安装了额外依赖。Python 标准库的 bisect 提供二分查找，但 list 插入仍为 O(n)。</p></section><section id="q5"><h3><span class="tag">P1</span>5. Command Parser + JSON File I/O</h3><p>将命令列表转为数据库操作，处理未知命令、缺少字段和文件输入输出。</p><p class="muted">关键语法：json · with open · try/except</p><details><summary>展开 Python 参考实现 + assert 测试</summary><button class="btn" data-copy="code4">复制代码</button><pre><code id="code4">import json
+        return self.values[key][times[i]]</code></pre></details><p><strong>面试解释：</strong>如果第三方 SortedContainers 可用，可以使用 SortedDict / SortedList；但不能假设面试环境安装了额外依赖。Python 标准库的 bisect 提供二分查找，但 list 插入仍为 O(n)。</p></section><section id="q5"><h3><span class="tag">P1</span>5. Command Parser + JSON File I/O</h3><p><strong>重要数据结构：</strong>Hash Map（dict）、List、JSON 文件；<strong>核心算法：</strong>Command Dispatch、异常处理、序列化/反序列化</p><p>将命令列表转为数据库操作，处理未知命令、缺少字段和文件输入输出。</p><p class="muted">关键语法：json · with open · try/except</p><details><summary>展开 Python 实现</summary><button class="btn" data-copy="code4">复制代码</button><pre><code id="code4">import json
 
 def execute(commands):
     db, output = {}, []
@@ -142,12 +106,7 @@ def process_file(input_file, output_file):
         commands = json.load(f)
     result = execute(commands)
     with open(output_file, "w", encoding="utf-8") as f:
-        json.dump(result, f, ensure_ascii=False, indent=2)
-
-assert execute([
-    {"op": "SET", "key": "x", "value": 42},
-    {"op": "GET", "key": "x"}
-]) == [42]</code></pre></details></section><section id="q6"><h3><span class="tag">P1</span>6. Merge Intervals</h3><p>按起点排序并合并重叠区间，O(n log n)。</p><p class="muted">关键语法：sorted · greedy · max</p><details><summary>展开 Python 参考实现 + assert 测试</summary><button class="btn" data-copy="code5">复制代码</button><pre><code id="code5">def merge_intervals(intervals):
+        json.dump(result, f, ensure_ascii=False, indent=2)</code></pre></details></section><section id="q6"><h3><span class="tag">P1</span>6. Merge Intervals</h3><p><strong>重要数据结构：</strong>Array / List；<strong>核心算法：</strong>Sorting、Greedy、Interval Merging</p><p>按起点排序并合并重叠区间，O(n log n)。</p><p class="muted">关键语法：sorted · greedy · max</p><details><summary>展开 Python 实现</summary><button class="btn" data-copy="code5">复制代码</button><pre><code id="code5">def merge_intervals(intervals):
     if not intervals:
         return []
     intervals = sorted(intervals, key=lambda x: x[0])
@@ -157,11 +116,7 @@ assert execute([
             merged[-1][1] = max(merged[-1][1], end)
         else:
             merged.append([start, end])
-    return merged
-
-assert merge_intervals([[1, 3], [2, 6], [8, 10]]) == [
-    [1, 6], [8, 10]
-]</code></pre></details></section><section id="q7"><h3><span class="tag">P0</span>7. Find Median from Data Stream — Two Heaps</h3><p>一个 Max Heap 保存较小一半，一个 Min Heap 保存较大一半。插入 O(log n)，查询中位数 O(1)。</p><p class="muted">Python heapq 只有 Min Heap；存负数实现 Max Heap。关键是不变量：low 的数量等于 high 或多一个。</p><details><summary>展开 Python 实现 + assert 测试</summary><button class="btn" data-copy="code6">复制代码</button><pre><code id="code6">import heapq
+    return merged</code></pre></details></section><section id="q7"><h3><span class="tag">P0</span>7. Find Median from Data Stream — Two Heaps</h3><p><strong>重要数据结构：</strong>Max Heap（负数 heapq）、Min Heap；<strong>核心算法：</strong>Two Heaps、Rebalancing、Streaming Median</p><p>一个 Max Heap 保存较小一半，一个 Min Heap 保存较大一半。插入 O(log n)，查询中位数 O(1)。</p><p class="muted">Python heapq 只有 Min Heap；存负数实现 Max Heap。关键是不变量：low 的数量等于 high 或多一个。</p><details><summary>展开 Python 实现</summary><button class="btn" data-copy="code6">复制代码</button><pre><code id="code6">import heapq
 
 class MedianFinder:
     def __init__(self):
@@ -179,12 +134,7 @@ class MedianFinder:
             raise ValueError("No numbers")
         if len(self.low) &gt; len(self.high):
             return -self.low[0]
-        return (-self.low[0] + self.high[0]) / 2
-
-m = MedianFinder()
-for x, expected in [(1, 1), (5, 3), (2, 2), (10, 3.5)]:
-    m.add_num(x)
-    assert m.find_median() == expected</code></pre></details></section><section id="q8"><h3><span class="tag">P0</span>8. Lyft Minimum Workers with Assignment History — Two Min Heaps</h3><p><strong>候选人面经相关：</strong>输入每个 Job 的开始时间与持续时间；最少 Worker 覆盖所有 Job，返回按原始输入顺序排列的 Worker ID。空闲 Worker 多于一个时，优先使用最小 ID。任务结束时间等于新任务开始时间时允许复用。</p><p><strong>两个 Min Heap：</strong>busy 保存 (end_time, worker_id)，available 保存 worker_id。先释放所有 end_time ≤ start 的 Worker，再复用最小 ID，否则创建新 Worker。<strong>关键：</strong>排序时保留原始 index；HHMM 必须先转分钟，不能直接做整数加法。</p><p class="muted">排序与堆操作总体 O(n log n) 时间；O(n) 空间。下方包括分钟版与 HHMM 输入适配版。要求 duration &gt; 0，跨午夜任务以绝对分钟表示或单独约定。</p><details><summary>展开 Lyft Worker Assignment Python 实现 + 测试</summary><button class="btn" data-copy="code7">复制代码</button><pre><code id="code7">import heapq
+        return (-self.low[0] + self.high[0]) / 2</code></pre></details></section><section id="q8"><h3><span class="tag">P0</span>8. Lyft Minimum Workers with Assignment History — Two Min Heaps</h3><p><strong>重要数据结构：</strong>两个 Min Heap（busy / available）、Array；<strong>核心算法：</strong>Sorting、Greedy Worker Assignment、Event Simulation</p><p><strong>候选人面经相关：</strong>输入每个 Job 的开始时间与持续时间；最少 Worker 覆盖所有 Job，返回按原始输入顺序排列的 Worker ID。空闲 Worker 多于一个时，优先使用最小 ID。任务结束时间等于新任务开始时间时允许复用。</p><p><strong>两个 Min Heap：</strong>busy 保存 (end_time, worker_id)，available 保存 worker_id。先释放所有 end_time ≤ start 的 Worker，再复用最小 ID，否则创建新 Worker。<strong>关键：</strong>排序时保留原始 index；HHMM 必须先转分钟，不能直接做整数加法。</p><p class="muted">排序与堆操作总体 O(n log n) 时间；O(n) 空间。下方包括分钟版与 HHMM 输入适配版。要求 duration &gt; 0，跨午夜任务以绝对分钟表示或单独约定。</p><details><summary>展开 Python 实现</summary><button class="btn" data-copy="code7">复制代码</button><pre><code id="code7">import heapq
 
 def assign_workers(jobs):
     # jobs[i] = (start_minute, duration_minute)
@@ -224,14 +174,7 @@ def assign_workers_hhmm(jobs):
     return assign_workers([
         (hhmm_to_minutes(start_hhmm), duration)
         for start_hhmm, duration in jobs
-    ])
-
-assert assign_workers([
-    (60, 30), (70, 10), (90, 15), (60, 5)
-]) == (2, [0, 1, 0, 1])
-assert assign_workers([]) == (0, [])
-assert assign_workers([(0, 10), (10, 5)]) == (1, [0, 0])
-assert assign_workers_hhmm([(1030, 30), (1100, 15)]) == (1, [0, 0])</code></pre></details><p class="muted">公开候选人面经：<a href="https://www.screna.ai/experience/0126f904-5c3e-4d1d-975b-9a71a840f3f3">Screna Apr 2026</a>；<a href="https://www.inbyte.org/interview/lyft?category=coding">Inbyte 2026</a>。第三方记录，非官方确认原题。</p></section><section id="q9"><h3><span class="tag">P0</span>9. Nested Transaction KV + COUNT(value)</h3><p>扩展现有 Transactional KV：额外支持 COUNT(value)、重复 SET、DELETE、嵌套 BEGIN/ROLLBACK/COMMIT。此版本的 COMMIT 只提交最内层 savepoint；外层 ROLLBACK 仍可撤销它。面试时务必先澄清 COMMIT 是否应一次提交所有层。</p><p class="muted">GET/SET/DELETE/COUNT 平均 O(1)；BEGIN 复制全部数据和计数 O(n)，ROLLBACK/COMMIT O(1)（忽略对象释放成本）。值需可 hash。</p><details><summary>展开完整 Python 实现 + assert 测试</summary><button class="btn" data-copy="code8">复制代码</button><pre><code id="code8">from collections import Counter
+    ])</code></pre></details><p class="muted">公开候选人面经：<a href="https://www.screna.ai/experience/0126f904-5c3e-4d1d-975b-9a71a840f3f3">Screna Apr 2026</a>；<a href="https://www.inbyte.org/interview/lyft?category=coding">Inbyte 2026</a>。第三方记录，非官方确认原题。</p></section><section id="q9"><h3><span class="tag">P0</span>9. Nested Transaction KV + COUNT(value)</h3><p><strong>重要数据结构：</strong>Hash Map（dict）、Counter、Stack；<strong>核心算法：</strong>Nested Transactions、Snapshot、Frequency Counting</p><p>扩展现有 Transactional KV：额外支持 COUNT(value)、重复 SET、DELETE、嵌套 BEGIN/ROLLBACK/COMMIT。此版本的 COMMIT 只提交最内层 savepoint；外层 ROLLBACK 仍可撤销它。面试时务必先澄清 COMMIT 是否应一次提交所有层。</p><p class="muted">GET/SET/DELETE/COUNT 平均 O(1)；BEGIN 复制全部数据和计数 O(n)，ROLLBACK/COMMIT O(1)（忽略对象释放成本）。值需可 hash。</p><details><summary>展开 Python 实现</summary><button class="btn" data-copy="code8">复制代码</button><pre><code id="code8">from collections import Counter
 
 class TransactionalKV:
     def __init__(self):
@@ -272,23 +215,7 @@ class TransactionalKV:
     def commit(self):
         if not self.snapshots:
             raise RuntimeError("No active transaction")
-        self.snapshots.pop()  # Commit only the innermost savepoint
-
-db = TransactionalKV()
-db.set("a", "red")
-db.set("b", "red")
-assert db.count("red") == 2
-db.begin()
-db.set("a", "blue")
-assert db.count("red") == 1
-db.begin()
-db.delete("b")
-db.commit()
-assert db.count("red") == 0
-db.rollback()  # Outer rollback undoes inner commit too
-assert (db.get("a"), db.get("b"), db.count("red")) == ("red", "red", 2)
-db.delete("missing")
-assert db.count("blue") == 0</code></pre></details></section><section id="q10"><h3><span class="tag">P0</span>10. Stateful Pagination — Fetch N Across Calls</h3><p>实现 fetch_n(n)：跨调用保存 cursor、未消费的 buffer、去重 seen_ids 和 exhausted 标志；不能因为本次只需要 1 条，就丢掉同一页的其他结果。支持空页但有 next cursor 的情况。</p><p class="muted">每条记录入队/出队摊还 O(1)；总工作量与访问页数和扫描记录数成正比；额外空间 O(已见 ID 数 + 缓冲记录数 + cursor 数)。</p><details><summary>展开完整 Python 实现 + assert 测试</summary><button class="btn" data-copy="code9">复制代码</button><pre><code id="code9">from collections import deque
+        self.snapshots.pop()  # Commit only the innermost savepoint</code></pre></details></section><section id="q10"><h3><span class="tag">P0</span>10. Stateful Pagination — Fetch N Across Calls</h3><p><strong>重要数据结构：</strong>Deque、Hash Set、Cursor、Buffer；<strong>核心算法：</strong>State Machine、Pagination、Deduplication、Amortized Queue</p><p>实现 fetch_n(n)：跨调用保存 cursor、未消费的 buffer、去重 seen_ids 和 exhausted 标志；不能因为本次只需要 1 条，就丢掉同一页的其他结果。支持空页但有 next cursor 的情况。</p><p class="muted">每条记录入队/出队摊还 O(1)；总工作量与访问页数和扫描记录数成正比；额外空间 O(已见 ID 数 + 缓冲记录数 + cursor 数)。</p><details><summary>展开 Python 实现</summary><button class="btn" data-copy="code9">复制代码</button><pre><code id="code9">from collections import deque
 
 class PaginatedFetcher:
     def __init__(self, fetch_page):
@@ -325,19 +252,7 @@ class PaginatedFetcher:
                     raise ValueError("Repeated pagination cursor")
                 self.seen_cursors.add(next_cursor)
                 self.cursor = next_cursor
-        return result
-
-pages = {
-    None: {"items": [{"id": 1}, {"id": 2}], "next": "p2"},
-    "p2": {"items": [{"id": 2}, {"id": 3}], "next": "p3"},
-    "p3": {"items": [{"id": 4}], "next": None},
-}
-f = PaginatedFetcher(lambda cursor: pages[cursor])
-assert [x["id"] for x in f.fetch_n(1)] == [1]
-assert [x["id"] for x in f.fetch_n(2)] == [2, 3]
-assert [x["id"] for x in f.fetch_n(10)] == [4]
-assert f.fetch_n(1) == []
-assert f.fetch_n(0) == []</code></pre></details></section></div>
+        return result</code></pre></details></section></div>
 <div class="card" id="lyft-reported-gaps"><h2>公开 Lyft 面经：尚未纳入完整代码的题目</h2><p>以下是额外备考候选，来源为第三方面经汇总，<strong>不代表 AI Entity 第二轮的确定考题</strong>。优先级是针对 90 分钟 Python Laptop Exercise 的备考判断。</p><ol><li><strong>P0 · Nested Transaction KV Store + COUNT：</strong>已新增完整代码（第 9 题），包括计数维护及嵌套事务。</li><li><strong>P0 · Stateful Paginated Fetch N：</strong>已新增完整代码（第 10 题），包括跨调用 cursor、buffer 和 exhausted 状态。</li><li><strong>P1 · Minimum Window Substring：</strong>Sliding Window + Counter；公开技术面出现，较偏算法题。</li><li><strong>P1 · Rotten Oranges / Grid Infection：</strong>多源 BFS + deque；公开 OA/Phone/Onsite 面经。</li><li><strong>P1 · Log Parsing + Corrupted Lines：</strong>读取文件、跳过或报告坏行、聚合指标并写输出；与 Laptop Exercise 的 I/O 模式相关。</li><li><strong>P2 · Min Stack / Max Stack、Car Pooling、BST Validation：</strong>适合补足常见 DS&A 模板。</li><li><strong>视岗位而定 · K-Means / One-Hot Encoding：</strong>偏 ML Engineer，不宜在 AI Entity SWE 备考中排到最前。</li></ol><p class="muted">参考：<a href="https://www.inbyte.org/interview/lyft?category=coding">Inbyte</a>、<a href="https://www.fastprep.io/lyft-interview">FastPrep</a>、<a href="https://www.jointaro.com/interviews/companies/lyft/experiences/software-development-engineer-sde-canada-july-29-2025-no-offer-neutral-00d1f8da/">Jointaro Canada</a>、<a href="https://eng.lyft.com/interviewing-with-lyft-engineering-7d3dd65b2001">Lyft Engineering（历史说明）</a>。</p></div>
 <div class="card"><h2>面试前最后 15 分钟速记</h2><label class="check"><input type="checkbox"> dict / set 平均 O(1)；heap push/pop O(log n)</label><label class="check"><input type="checkbox"> bisect_right：在排序数据中找到右侧插入位置，O(log n)</label><label class="check"><input type="checkbox"> sorted(..., key=...)；lambda；enumerate；zip</label><label class="check"><input type="checkbox"> try/except；raise ValueError；with open；json.load / json.dump</label><label class="check"><input type="checkbox"> 空列表、缺失 key、重复输入、非法数据、事务边界</label><label class="check"><input type="checkbox"> 能讲清 trade-offs：snapshot vs change-log，heap vs sort</label></div>
 <div class="card"><h2>90 分钟模拟考法</h2><p><strong>第一关（30分钟）：</strong>不看答案实现 Key-Value Store，包含事务。<strong>第二关（30分钟）：</strong>实现 Scheduler 或 Pagination API。<strong>第三关（20分钟）：</strong>自行写 assert、覆盖异常情况。<strong>最后（10分钟）：</strong>解释复杂度和改进方案。</p><p>额外挑战：实现嵌套事务；任务取消；分页 API 失败重试；JSON schema 校验。它们属于进阶扩展，不是上面模板已经实现的功能。</p></div>
