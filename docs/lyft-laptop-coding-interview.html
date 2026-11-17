@@ -3,7 +3,7 @@
 <title>Lyft AI Entity — 90分钟 Laptop Coding Exercise Python 面试指南</title>
 <style>:root{color-scheme:light dark;--bg:#f5f7fb;--card:#fff;--text:#182436;--muted:#566478;--line:#dce3ed;--accent:#2563eb}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}header{background:#13233d;color:#fff;padding:38px max(18px,calc((100vw - 1000px)/2))}header p{color:#d0def3}main{max-width:1000px;margin:auto;padding:24px 16px 70px}.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin:16px 0}h1{line-height:1.2}h2{margin-top:0}nav a{display:inline-block;margin:5px 12px 5px 0;color:var(--accent)}details{border-top:1px solid var(--line);padding:15px 0}summary{font-weight:700;cursor:pointer}pre{overflow:auto;background:#0e1726;color:#e8f0ff;padding:18px;border-radius:10px;font-size:13px;line-height:1.5;tab-size:4}code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.tag{display:inline-block;background:#dbeafe;color:#1d4ed8;padding:2px 8px;border-radius:99px;font-size:12px;margin-right:8px}.muted{color:var(--muted)}.btn{border:0;background:#2563eb;color:white;padding:9px 14px;border-radius:8px;cursor:pointer}.check{display:block;padding:5px 0}footer{color:var(--muted);font-size:13px;margin-top:30px}@media(prefers-color-scheme:dark){:root{--bg:#0e1522;--card:#182437;--text:#edf3ff;--muted:#afbdd0;--line:#33445a;--accent:#93c5fd}.tag{background:#1e3a5f;color:#bfdbfe}}</style></head><body>
 <header><h1>Lyft AI Entity · Python Laptop Coding Exercise</h1><p>第二轮 Onsite · 90分钟 · 中文讲解 + 英文技术术语 · 更新于 2026-11-17</p><p>独立专项备考指南｜可折叠答案、必背代码、测试与模拟流程</p></header>
-<main><div class="card"><h2>考试定位</h2><p>这份指南针对你描述的 <strong>90-minute Laptop Coding Exercise</strong>。题型来自公开 Lyft SWE 面试经验及工程类实战练习的归纳，<strong>不代表 Lyft AI Entity 团队确认会考这些题</strong>。重点是完整可运行实现，而非只背 LeetCode 答案。</p><p><strong>时间安排：</strong>0–10 分钟确认需求；10–25 分钟数据结构与接口；25–65 分钟实现；65–80 分钟测试；80–90 分钟解释复杂度和改进。</p><nav><a href="#q1">1. Transactional Key-Value Store</a><a href="#q2">2. Priority Job Scheduler</a><a href="#q3">3. Pagination API Wrapper</a><a href="#q4">4. Time-Based Key-Value Store</a><a href="#q5">5. Command Parser + JSON File I/O</a><a href="#q6">6. Merge Intervals</a><a href="#q7">7. Two Heaps Median</a><a href="#q8">8. IPO / Capital</a></nav></div>
+<main><div class="card"><h2>考试定位</h2><p>这份指南针对你描述的 <strong>90-minute Laptop Coding Exercise</strong>。题型来自公开 Lyft SWE 面试经验及工程类实战练习的归纳，<strong>不代表 Lyft AI Entity 团队确认会考这些题</strong>。重点是完整可运行实现，而非只背 LeetCode 答案。</p><p><strong>时间安排：</strong>0–10 分钟确认需求；10–25 分钟数据结构与接口；25–65 分钟实现；65–80 分钟测试；80–90 分钟解释复杂度和改进。</p><nav><a href="#q1">1. Transactional Key-Value Store</a><a href="#q2">2. Priority Job Scheduler</a><a href="#q3">3. Pagination API Wrapper</a><a href="#q4">4. Time-Based Key-Value Store</a><a href="#q5">5. Command Parser + JSON File I/O</a><a href="#q6">6. Merge Intervals</a><a href="#q7">7. Two Heaps Median</a><a href="#q8">8. Lyft Minimum Workers</a></nav></div>
 <div class="card"><h2>8 道必背 Python 实现</h2><p class="muted">建议先自己在 IDE 写出来，再展开参考答案。P0 优先于 P1。每题至少写 3 个测试：正常输入、空输入、异常/边界。</p><section id="q1"><h3><span class="tag">P0</span>1. Transactional Key-Value Store</h3><p>写出 set/get/delete/begin/rollback/commit；解释 snapshot 的 O(n) 复制成本。</p><p class="muted">关键语法：dict · snapshots · transactions</p><details><summary>展开 Python 参考实现 + assert 测试</summary><button class="btn" data-copy="code0">复制代码</button><pre><code id="code0">class Database:
     def __init__(self):
         self.data = {}
@@ -184,26 +184,55 @@ class MedianFinder:
 m = MedianFinder()
 for x, expected in [(1, 1), (5, 3), (2, 2), (10, 3.5)]:
     m.add_num(x)
-    assert m.find_median() == expected</code></pre></details></section><section id="q8"><h3><span class="tag">P1</span>8. IPO / Maximize Capital — Two Heaps</h3><p>从最多 k 个项目中挑选可负担且利润最高的项目。一个 Min Heap 按 required capital，另一个负数 Heap 按最大利润。</p><p class="muted">初始化 heapify O(n)，项目入堆/出堆总体 O(n log n)，循环最多 k 次。</p><details><summary>展开 Python 实现 + assert 测试</summary><button class="btn" data-copy="code7">复制代码</button><pre><code id="code7">import heapq
+    assert m.find_median() == expected</code></pre></details></section><section id="q8"><h3><span class="tag">P0</span>8. Lyft Minimum Workers with Assignment History — Two Min Heaps</h3><p><strong>候选人面经相关：</strong>输入每个 Job 的开始时间与持续时间；最少 Worker 覆盖所有 Job，返回按原始输入顺序排列的 Worker ID。空闲 Worker 多于一个时，优先使用最小 ID。任务结束时间等于新任务开始时间时允许复用。</p><p><strong>两个 Min Heap：</strong>busy 保存 (end_time, worker_id)，available 保存 worker_id。先释放所有 end_time ≤ start 的 Worker，再复用最小 ID，否则创建新 Worker。<strong>关键：</strong>排序时保留原始 index；HHMM 必须先转分钟，不能直接做整数加法。</p><p class="muted">排序与堆操作总体 O(n log n) 时间；O(n) 空间。下方包括分钟版与 HHMM 输入适配版。要求 duration &gt; 0，跨午夜任务以绝对分钟表示或单独约定。</p><details><summary>展开 Lyft Worker Assignment Python 实现 + 测试</summary><button class="btn" data-copy="code7">复制代码</button><pre><code id="code7">import heapq
 
-def maximize_capital(k, initial_capital, profits, capital):
-    # Min heap by required capital; profit heap uses negatives
-    locked = list(zip(capital, profits))
-    heapq.heapify(locked)
-    available = []
-    money = initial_capital
+def assign_workers(jobs):
+    # jobs[i] = (start_minute, duration_minute)
+    busy = []       # min heap: (end_time, worker_id)
+    available = []  # min heap: worker_id
+    assignment = [0] * len(jobs)
+    next_worker_id = 0
 
-    for _ in range(k):
-        while locked and locked[0][0] &lt;= money:
-            required, profit = heapq.heappop(locked)
-            heapq.heappush(available, -profit)
-        if not available or -available[0] &lt;= 0:
-            break
-        money += -heapq.heappop(available)
-    return money
+    order = sorted(range(len(jobs)), key=lambda i: (jobs[i][0], i))
+    for i in order:
+        start, duration = jobs[i]
+        if duration &lt;= 0:
+            raise ValueError("Duration must be positive")
 
-assert maximize_capital(2, 0, [1, 2, 3], [0, 1, 1]) == 4
-assert maximize_capital(2, 0, [5], [10]) == 0</code></pre></details></section></div>
+        while busy and busy[0][0] &lt;= start:
+            _, worker_id = heapq.heappop(busy)
+            heapq.heappush(available, worker_id)
+
+        if available:
+            worker_id = heapq.heappop(available)
+        else:
+            worker_id = next_worker_id
+            next_worker_id += 1
+
+        assignment[i] = worker_id
+        heapq.heappush(busy, (start + duration, worker_id))
+
+    return next_worker_id, assignment
+
+def hhmm_to_minutes(hhmm):
+    hours, minutes = divmod(hhmm, 100)
+    if not (0 &lt;= hours &lt; 24 and 0 &lt;= minutes &lt; 60):
+        raise ValueError("Invalid HHMM")
+    return hours * 60 + minutes
+
+def assign_workers_hhmm(jobs):
+    return assign_workers([
+        (hhmm_to_minutes(start_hhmm), duration)
+        for start_hhmm, duration in jobs
+    ])
+
+assert assign_workers([
+    (60, 30), (70, 10), (90, 15), (60, 5)
+]) == (2, [0, 1, 0, 1])
+assert assign_workers([]) == (0, [])
+assert assign_workers([(0, 10), (10, 5)]) == (1, [0, 0])
+assert assign_workers_hhmm([(1030, 30), (1100, 15)]) == (1, [0, 0])</code></pre></details><p class="muted">公开候选人面经：<a href="https://www.screna.ai/experience/0126f904-5c3e-4d1d-975b-9a71a840f3f3">Screna Apr 2026</a>；<a href="https://www.inbyte.org/interview/lyft?category=coding">Inbyte 2026</a>。第三方记录，非官方确认原题。</p></section></div>
+<div class="card" id="lyft-reported-gaps"><h2>公开 Lyft 面经：尚未纳入完整代码的题目</h2><p>以下是额外备考候选，来源为第三方面经汇总，<strong>不代表 AI Entity 第二轮的确定考题</strong>。优先级是针对 90 分钟 Python Laptop Exercise 的备考判断。</p><ol><li><strong>P0 · Nested Transaction KV Store + COUNT / Value Counts：</strong>现有事务模板未实现 COUNT(value)、嵌套 commit/rollback 的完整语义；建议优先补充。</li><li><strong>P0 · Stateful Paginated Fetch N：</strong>现有 Pagination Wrapper 是一次性 fetch_all；额外练习跨多次调用保持 cursor、buffer 和 exhausted 状态。</li><li><strong>P1 · Minimum Window Substring：</strong>Sliding Window + Counter；公开技术面出现，较偏算法题。</li><li><strong>P1 · Rotten Oranges / Grid Infection：</strong>多源 BFS + deque；公开 OA/Phone/Onsite 面经。</li><li><strong>P1 · Log Parsing + Corrupted Lines：</strong>读取文件、跳过或报告坏行、聚合指标并写输出；与 Laptop Exercise 的 I/O 模式相关。</li><li><strong>P2 · Min Stack / Max Stack、Car Pooling、BST Validation：</strong>适合补足常见 DS&A 模板。</li><li><strong>视岗位而定 · K-Means / One-Hot Encoding：</strong>偏 ML Engineer，不宜在 AI Entity SWE 备考中排到最前。</li></ol><p class="muted">参考：<a href="https://www.inbyte.org/interview/lyft?category=coding">Inbyte</a>、<a href="https://www.fastprep.io/lyft-interview">FastPrep</a>、<a href="https://www.jointaro.com/interviews/companies/lyft/experiences/software-development-engineer-sde-canada-july-29-2025-no-offer-neutral-00d1f8da/">Jointaro Canada</a>、<a href="https://eng.lyft.com/interviewing-with-lyft-engineering-7d3dd65b2001">Lyft Engineering（历史说明）</a>。</p></div>
 <div class="card"><h2>面试前最后 15 分钟速记</h2><label class="check"><input type="checkbox"> dict / set 平均 O(1)；heap push/pop O(log n)</label><label class="check"><input type="checkbox"> bisect_right：在排序数据中找到右侧插入位置，O(log n)</label><label class="check"><input type="checkbox"> sorted(..., key=...)；lambda；enumerate；zip</label><label class="check"><input type="checkbox"> try/except；raise ValueError；with open；json.load / json.dump</label><label class="check"><input type="checkbox"> 空列表、缺失 key、重复输入、非法数据、事务边界</label><label class="check"><input type="checkbox"> 能讲清 trade-offs：snapshot vs change-log，heap vs sort</label></div>
 <div class="card"><h2>90 分钟模拟考法</h2><p><strong>第一关（30分钟）：</strong>不看答案实现 Key-Value Store，包含事务。<strong>第二关（30分钟）：</strong>实现 Scheduler 或 Pagination API。<strong>第三关（20分钟）：</strong>自行写 assert、覆盖异常情况。<strong>最后（10分钟）：</strong>解释复杂度和改进方案。</p><p>额外挑战：实现嵌套事务；任务取消；分页 API 失败重试；JSON schema 校验。它们属于进阶扩展，不是上面模板已经实现的功能。</p></div>
 <footer>学习用途。内容为练习模板，不保证与实际面试题一致。<a href="python-data-structures-and-algortihm.html">返回原 Python 算法指南</a>。</footer></main>
